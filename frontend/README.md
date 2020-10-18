@@ -1,3 +1,14 @@
+# From developer
+
+Thanks for:
+[react](reactjs.org) for this project
+[react-html5-camera-photo](https://www.npmjs.com/package/react-html5-camera-photo) for handling camera. 
+[axios](https://www.npmjs.com/package/axios) for interface transmission. 
+[this](https://docs.qq.com/scenario/link.html?url=https%3A%2F%2Fwww.howtoing.com%2Fhow-to-build-a-modern-web-application-to-manage-customer-information-with-django-and-react-on-ubuntu-18-04&pid=300000000$AhjHJyFiQlaR&cid=144115213471797152) taught me how to build a front-end framework. 
+[this](https://www.geeksforgeeks.org/file-uploading-in-react-js/) helps me upload file.
+
+# From init
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
