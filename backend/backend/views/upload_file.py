@@ -2,7 +2,6 @@ from django.shortcuts import HttpResponse
 import os.path as path
 import os
 import matplotlib.pyplot as plt
-import o
 
 idx = 0
 save_folder = "../file_pict"
