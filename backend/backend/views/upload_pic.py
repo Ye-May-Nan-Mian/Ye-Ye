@@ -4,7 +4,7 @@ import numpy as np
 import random
 
 def upload_pic(request):
-	address = request.GET.get("address")
+	address = request.POST.get("address")
 
 	img = Image.open(address)
 	img = np.array(img)

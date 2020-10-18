@@ -25,3 +25,4 @@ yarn-error.log*
 *.pyc
 .vscode
 db.sqlite3
+file_pict

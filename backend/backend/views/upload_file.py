@@ -2,6 +2,7 @@ from django.shortcuts import HttpResponse
 import os.path as path
 import os
 import matplotlib.pyplot as plt
+from .base import allow_acess
 
 idx = 0
 save_folder = "../file_pict"
@@ -9,7 +10,7 @@ save_folder = "../file_pict"
 def upload_file(request):
 	global idx
 
-	address = request.GET.get("address")
+	address = request.POST.get("address")
 
 	os.makedirs(save_folder , exist_ok = True)
 
@@ -19,7 +20,7 @@ def upload_file(request):
 
 	plt.savefig(save_address)
 
-	return HttpResponse("1")
+	return allow_acess(HttpResponse("1"))
 
 
 
