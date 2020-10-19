@@ -1,34 +1,49 @@
 import React, { Component } from "react";
-import CustomersService from "./CustomersService";
+import Service from "../Service";
 import Camera, { IMAGE_TYPES } from "react-html5-camera-photo";
 
-const customersService = new CustomersService();
-
+const service = new Service();
 class Video extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            opened: (Boolean = false),
-            buttonText: (String = "开启摄像头")
+            cameraOpened: false,
+            buttonText: "开启摄像头"
         };
         this.switchCamera = this.switchCamera.bind(this);
+        this.uploadPic = this.uploadPic.bind(this);
     }
 
     switchCamera() {
-        const check = this.state.opened === false;
+        // console.log(this.state.cameraOpened);
+        const check = this.state.cameraOpened === false ? true : false;
         this.setState({
-            opened: check,
+            cameraOpened: check,
             buttonText: check ? "已开启摄像头" : "开启摄像头"
         });
     }
 
+    uploadPic() {
+        service.uploadPic("");
+    }
+    // upload pictures
+    record() {
+        // TODO
+        return null;
+    }
+
+    stopRecord() {
+        // TODO
+        return null;
+    }
+
     render() {
         return (
-            <div className="customers--list">
+            <div>
                 <button className="btn btn-primary" onClick={this.switchCamera}>
                     {this.state.buttonText}
                 </button>
-                {this.state.opened ? (
+                {this.state.cameraOpened ? (
                     <Camera
                         onTakePhoto={(dataUri) => {}}
                         onCameraError={(error) => {}}
@@ -40,6 +55,11 @@ class Video extends Component {
                         onCameraStop={() => {}}
                     />
                 ) : null}
+                {/* {console.log("log in video render")} */}
+                {this.props.fileUploaded === true &&
+                this.state.cameraOpened === true
+                    ? this.record
+                    : this.stopRecord}
             </div>
         );
     }
