@@ -28,12 +28,9 @@ class UploadFile extends Component {
         const formData = new FormData();
 
         // Update the formData object
-        formData.append(
-            "sheet",
-            this.state.selectedFile,
-            this.state.selectedFile.name
-        );
-
+        formData.append( "name", this.state.selectedFile.name);
+        formData.append( "address", "???");
+        
         // Details of the uploaded file
         // console.log(this.state.selectedFile);
 

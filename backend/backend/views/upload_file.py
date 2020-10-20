@@ -10,15 +10,19 @@ save_folder = "../file_pict"
 def upload_file(request):
 	global idx
 
+	print (request.POST)
+
 	address = request.POST.get("address")
 
-	os.makedirs(save_folder , exist_ok = True)
+	print ("I've got the address %s" % address)
 
-	save_address = path.join("../file_pict" , str(idx) + ".jpg")
-	plt.figure(figsize = (32 , 32))
-	plt.title(str(idx))
-
-	plt.savefig(save_address)
+	# os.makedirs(save_folder , exist_ok = True)
+	# 
+	# save_address = path.join("../frontend/file_pict" , str(idx) + ".jpg")
+	# plt.figure(figsize = (32 , 32))
+	# plt.title(str(idx))
+	# 
+	# plt.savefig(save_address)
 
 	return allow_acess(HttpResponse("1"))
 

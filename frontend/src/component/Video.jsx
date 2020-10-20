@@ -49,8 +49,9 @@ class Video extends Component {
         // I don't have a better way to get webcam...
         // TODO: replace refs with a better way
         this.capture = this.refs.webcam.getScreenshot();
-        console.log(this.capture);
+        //console.log(this.capture);
         const turnPage = service.uploadPic(this.capture);
+        
         // turn page up/down
         // 0: page up?
         // 1: don't page up/down
