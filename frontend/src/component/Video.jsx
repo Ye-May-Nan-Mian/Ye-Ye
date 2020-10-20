@@ -1,65 +1,79 @@
 import React, { Component } from "react";
 import Service from "../Service";
-import Camera, { IMAGE_TYPES } from "react-html5-camera-photo";
-
+import Webcam from "react-webcam";
 const service = new Service();
 class Video extends Component {
+    cameraOpened = false;
+    capture = "";
     constructor(props) {
         super(props);
+        // console.log(props.fileUploaded);
         this.state = {
-            cameraOpened: false,
             buttonText: "开启摄像头"
         };
         this.switchCamera = this.switchCamera.bind(this);
         this.uploadPic = this.uploadPic.bind(this);
     }
 
+    componentDidMount() {
+        this.interval = setInterval(() => this.uploadPic(), 3000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
+
     switchCamera() {
         // console.log(this.state.cameraOpened);
-        const check = this.state.cameraOpened === false ? true : false;
+        this.cameraOpened = this.cameraOpened === false ? true : false;
         this.setState({
-            cameraOpened: check,
-            buttonText: check ? "已开启摄像头" : "开启摄像头"
+            buttonText: this.cameraOpened ? "已开启摄像头" : "开启摄像头"
         });
     }
 
-    uploadPic() {
-        service.uploadPic("");
-    }
     // upload pictures
-    record() {
-        // TODO
-        return null;
-    }
-
-    stopRecord() {
-        // TODO
-        return null;
+    uploadPic() {
+        console.log(
+            "uploadPic...this.cameraOpened:",
+            this.cameraOpened,
+            ", this.props.fileUploaded:",
+            this.props.fileUploaded
+        );
+        if (!this.cameraOpened || !this.props.fileUploaded) {
+            return;
+        }
+        // I don't have a better way to get webcam...
+        // TODO: replace refs with a better way
+        this.capture = this.refs.webcam.getScreenshot();
+        // console.log(this.capture);
+        service.uploadPic(this.capture);
     }
 
     render() {
         return (
             <div>
-                <button className="btn btn-primary" onClick={this.switchCamera}>
+                <button
+                    className="btn btn-primary"
+                    onClick={this.switchCamera}
+                    style={{ width: "100%" }}
+                >
                     {this.state.buttonText}
                 </button>
-                {this.state.cameraOpened ? (
-                    <Camera
-                        onTakePhoto={(dataUri) => {}}
-                        onCameraError={(error) => {}}
-                        idealResolution={{ width: 320, height: 240 }}
-                        imageCompression={0.5}
-                        imageType={IMAGE_TYPES.JPG}
-                        isImageMirror={true}
-                        onCameraStart={(stream) => {}}
-                        onCameraStop={() => {}}
+                {this.cameraOpened && (
+                    <Webcam
+                        audio={false}
+                        height={240}
+                        mirrored={true}
+                        ref="webcam"
+                        width={320}
+                        videoConstraints={{
+                            height: 240,
+                            width: 320,
+                            facingMode: "user"
+                        }}
+                        style={{ width: "100%" }}
                     />
-                ) : null}
-                {/* {console.log("log in video render")} */}
-                {this.props.fileUploaded === true &&
-                this.state.cameraOpened === true
-                    ? this.record
-                    : this.stopRecord}
+                )}
             </div>
         );
     }

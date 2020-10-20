@@ -1,16 +1,27 @@
 # From developer (PaJir)
 
-Thanks for:
+## Thanks for:
 
 [react](reactjs.org) for this project
 
-[react-html5-camera-photo](https://www.npmjs.com/package/react-html5-camera-photo) for handling camera. 
 
 [axios](https://www.npmjs.com/package/axios) for interface transmission. 
+
+[react-webcam](https://github.com/mozmorris/react-webcam) for camera.
+
+[React Webcam - Take Screenshot Issues](https://stackoverflow.com/questions/39312341/react-webcam-take-screenshot-issues) for snapshot. 
 
 [this](https://docs.qq.com/scenario/link.html?url=https%3A%2F%2Fwww.howtoing.com%2Fhow-to-build-a-modern-web-application-to-manage-customer-information-with-django-and-react-on-ubuntu-18-04&pid=300000000$AhjHJyFiQlaR&cid=144115213471797152) taught me how to build a front-end framework. 
 
 [this](https://www.geeksforgeeks.org/file-uploading-in-react-js/) helps me upload file.
+
+## Maybe not work:
+
+[react-html5-camera-photo](https://www.npmjs.com/package/react-html5-camera-photo) for handling camera. 
+
+[html2canvas](https://github.com/niklasvh/html2canvas/) for screenshot. 
+
+HOOK
 
 ```
 /src/:.

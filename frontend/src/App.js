@@ -1,20 +1,22 @@
 import React, { Component } from "react";
 import { BrowserRouter } from "react-router-dom";
 // import { Route } from "react-router-dom";
-import Video from "./component/Video";
+import Page from "./component/Page";
 import UploadFile from "./component/UploadFile";
+import Video from "./component/Video";
 import "./App.css";
-
 class App extends Component {
+    // fileUploaded = false;
     constructor(props) {
         super(props);
         this.state = {
-            fileUploaded: false
+            fileUploaded: true
         };
     }
     // if the file uploaded successfully, then the variable "fileUploaded"
     // will be modified to "true", then "Video" can record face
     changeFileUploaded() {
+        // this.fileUploaded = true;
         this.setState({
             fileUploaded: true
         });
@@ -57,10 +59,9 @@ class App extends Component {
                         {/* <Route path="/" exact component={Video} /> */}
                         {/* <Route path="/file" exact component={UploadFile} /> */}
                     </div>
-                    <Video props={{ fileUploaded: this.state.fileUploaded }} />
-                    <UploadFile
-                        props={{ changeFileUploaded: this.changeFileUploaded }}
-                    />
+                    <Video fileUploaded={this.state.fileUploaded} />
+                    <UploadFile callback={this.changeFileUploaded} />
+                    <Page />
                 </div>
             </BrowserRouter>
         );

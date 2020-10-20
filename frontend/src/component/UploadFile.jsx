@@ -12,13 +12,13 @@ class UploadFile extends Component {
     }
 
     // On file select (from the pop up)
-    onFileChange = (event) => {
+    onFileChange(event) {
         // Update the state
         this.setState({ selectedFile: event.target.files[0] });
-    };
+    }
 
     // On file upload (click the upload button)
-    onFileUpload = () => {
+    onFileUpload() {
         if (this.state.selectedFile === null) {
             return;
         }
@@ -40,9 +40,9 @@ class UploadFile extends Component {
 
         const status = service.uploadFile(formData);
         if (status === "1") {
-            this.props.changeFileUploaded();
+            this.props.callback();
         }
-    };
+    }
 
     render() {
         return (

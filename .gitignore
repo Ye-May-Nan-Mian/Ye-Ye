@@ -25,4 +25,6 @@ yarn-error.log*
 *.pyc
 .vscode
 db.sqlite3
+# pictures form backend to frontend
 file_pict
+debug.log
