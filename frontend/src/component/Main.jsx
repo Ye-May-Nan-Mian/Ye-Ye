@@ -46,7 +46,7 @@ class Main extends Component {
     render() {
         return (
             <div className="main">
-                <div classNme="videofile">
+                <div className="videofile">
                     <Video
                         fileUploaded={this.state.fileUploaded}
                         pageUp={this.pageUp}
