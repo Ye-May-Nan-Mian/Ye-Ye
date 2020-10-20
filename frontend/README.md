@@ -11,9 +11,15 @@
 
 [React Webcam - Take Screenshot Issues](https://stackoverflow.com/questions/39312341/react-webcam-take-screenshot-issues) for snapshot. 
 
+[The create-react-app imports restriction outside of src directory](https://stackoverflow.com/questions/44114436/the-create-react-app-imports-restriction-outside-of-src-directory)
+
+[React 引入大量本地图片](https://segmentfault.com/q/1010000009641349)
+
 [this](https://docs.qq.com/scenario/link.html?url=https%3A%2F%2Fwww.howtoing.com%2Fhow-to-build-a-modern-web-application-to-manage-customer-information-with-django-and-react-on-ubuntu-18-04&pid=300000000$AhjHJyFiQlaR&cid=144115213471797152) taught me how to build a front-end framework. 
 
 [this](https://www.geeksforgeeks.org/file-uploading-in-react-js/) helps me upload file.
+
+[Flex 布局教程：语法篇 阮一峰](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
 
 ## Maybe not work:
 

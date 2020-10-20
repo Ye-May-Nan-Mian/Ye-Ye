@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Service from "../Service";
+import "../App.css";
 
 const service = new Service();
 
@@ -15,6 +16,7 @@ class UploadFile extends Component {
     onFileChange(event) {
         // Update the state
         this.setState({ selectedFile: event.target.files[0] });
+        this.props.callback(false);
     }
 
     // On file upload (click the upload button)
@@ -35,26 +37,21 @@ class UploadFile extends Component {
         // Details of the uploaded file
         // console.log(this.state.selectedFile);
 
-        // Request made to the backend api
-        // Send formData object
-
+        // Request to the backend
         const status = service.uploadFile(formData);
         if (status === "1") {
-            this.props.callback();
+            this.props.callback(true);
+        } else {
+            this.props.callback(false);
+            console.error("Upload/Handle file failed");
         }
     }
 
     render() {
         return (
-            <div>
-                <input
-                    type="file"
-                    onChange={this.onFileChange}
-                    style={{ height: 100 }}
-                />
-                <button onClick={this.onFileUpload} style={{ height: 100 }}>
-                    {"上传曲谱"}
-                </button>
+            <div className="uploadfile">
+                <input type="file" onChange={this.onFileChange} />
+                <button onClick={this.onFileUpload}>{"上传曲谱"}</button>
             </div>
         );
     }

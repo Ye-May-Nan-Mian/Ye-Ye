@@ -1,33 +1,16 @@
 import React, { Component } from "react";
-import { BrowserRouter } from "react-router-dom";
-// import { Route } from "react-router-dom";
-import Page from "./component/Page";
-import UploadFile from "./component/UploadFile";
-import Video from "./component/Video";
+import { BrowserRouter, Route } from "react-router-dom";
+import Introduce from "./component/Introduce";
+import Main from "./component/Main";
 import "./App.css";
 class App extends Component {
-    // fileUploaded = false;
-    constructor(props) {
-        super(props);
-        this.state = {
-            fileUploaded: true
-        };
-    }
-    // if the file uploaded successfully, then the variable "fileUploaded"
-    // will be modified to "true", then "Video" can record face
-    changeFileUploaded() {
-        // this.fileUploaded = true;
-        this.setState({
-            fileUploaded: true
-        });
-    }
-
+    backgroundColor = "#88aacc";
     render() {
         return (
             <BrowserRouter>
                 <div className="container-fluid">
                     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                        <a className="navbar-brand" href="#">
+                        <a className="navbar-brand" href="/">
                             页页
                         </a>
                         <button
@@ -55,13 +38,15 @@ class App extends Component {
                             </div>
                         </div>
                     </nav>
-                    <div className="content">
-                        {/* <Route path="/" exact component={Video} /> */}
-                        {/* <Route path="/file" exact component={UploadFile} /> */}
+                    <div
+                        className="content App"
+                        style={{
+                            background: this.backgroundColor
+                        }}
+                    >
+                        <Route path="/" exact component={Main} />
+                        <Route path="/introduce/" exact component={Introduce} />
                     </div>
-                    <Video fileUploaded={this.state.fileUploaded} />
-                    <UploadFile callback={this.changeFileUploaded} />
-                    <Page />
                 </div>
             </BrowserRouter>
         );

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Service from "../Service";
 import Webcam from "react-webcam";
+import "../App.css";
 const service = new Service();
 class Video extends Component {
     cameraOpened = false;
@@ -29,6 +30,9 @@ class Video extends Component {
         this.setState({
             buttonText: this.cameraOpened ? "已开启摄像头" : "开启摄像头"
         });
+        // Uncomment the following line, you can see the demo of
+        // page turning with pressing the camera switch
+        // this.props.pageDown();
     }
 
     // upload pictures
@@ -45,18 +49,23 @@ class Video extends Component {
         // I don't have a better way to get webcam...
         // TODO: replace refs with a better way
         this.capture = this.refs.webcam.getScreenshot();
-        // console.log(this.capture);
-        service.uploadPic(this.capture);
+        console.log(this.capture);
+        const turnPage = service.uploadPic(this.capture);
+        // turn page up/down
+        // 0: page up?
+        // 1: don't page up/down
+        // 2: page down?
+        if (turnPage === "0") {
+            this.props.pageUp();
+        } else if (turnPage === "2") {
+            this.props.pageDown();
+        }
     }
 
     render() {
         return (
-            <div>
-                <button
-                    className="btn btn-primary"
-                    onClick={this.switchCamera}
-                    style={{ width: "100%" }}
-                >
+            <div className="video">
+                <button className="btn btn-primary" onClick={this.switchCamera}>
                     {this.state.buttonText}
                 </button>
                 {this.cameraOpened && (
@@ -66,6 +75,8 @@ class Video extends Component {
                         mirrored={true}
                         ref="webcam"
                         width={320}
+                        screenshotFormat={"image/jpeg"}
+                        screenshotQuality={0.8}
                         videoConstraints={{
                             height: 240,
                             width: 320,

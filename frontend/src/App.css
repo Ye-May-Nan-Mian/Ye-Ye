@@ -2,6 +2,7 @@
 
 .App {
     text-align: center;
+    height: "100%";
 }
 
 .App-logo {
@@ -37,4 +38,80 @@
     to {
         transform: rotate(360deg);
     }
+}
+
+.main {
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.videofile {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.video {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+}
+
+.uploadfile {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.page-main {
+    display: flex;
+    flex: 5;
+    flex-direction: column;
+    align-items: center;
+    height: 90vh;
+    padding: 10px;
+}
+
+.page-mainimg {
+    height: 100%;
+    width: 100%;
+}
+
+.page-imgs {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-items: right;
+    align-items: flex-start;
+    height: 90vh;
+    width: 300px;
+    margin: 10px;
+    padding-left: 50px;
+    padding-top: 0px;
+    padding-right: 0%;
+    padding-bottom: 2px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    /* background-color: #ff0000; */
+}
+
+.page-img {
+    padding-left: 2px;
+    padding-top: 2px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    width: 200px;
 }
