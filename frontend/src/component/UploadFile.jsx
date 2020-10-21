@@ -38,7 +38,7 @@ class UploadFile extends Component {
         const status = service.uploadFile(formData);
 
         let me = this
-        status.then(function(v){
+        status.then((v) => {
 
             if (v == "1") {
                 me.props.callback(true);

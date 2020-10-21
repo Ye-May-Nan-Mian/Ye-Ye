@@ -53,7 +53,7 @@ class Video extends Component {
         const turnPage = service.uploadPic(this.capture);
 
         let me = this;
-        turnPage.then(function(v){
+        turnPage.then((v) => {
 
             // turn page up/down
             // 0: page up?
