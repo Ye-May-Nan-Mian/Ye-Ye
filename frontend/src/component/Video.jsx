@@ -54,17 +54,17 @@ class Video extends Component {
 
         let me = this;
         turnPage.then((v) => {
-
             // turn page up/down
             // 0: page up?
             // 1: don't page up/down
             // 2: page down?
-            if (v == "0") {
+            console.log("turn page? ", v);
+            if (v.toString() === "0") {
                 me.props.pageUp();
-            } else if (v == "2") {
+            } else if (v.toString() === "2") {
                 me.props.pageDown();
             }
-        })
+        });
     }
 
     render() {

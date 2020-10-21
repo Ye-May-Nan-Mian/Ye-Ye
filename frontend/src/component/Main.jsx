@@ -5,11 +5,10 @@ import Video from "./Video";
 import "../App.css";
 
 class Main extends Component {
-    // fileUploaded = false;
     constructor(props) {
         super(props);
         this.state = {
-            fileUploaded: true
+            fileUploaded: false
         };
         this.changeFileUploaded = this.changeFileUploaded.bind(this);
         this.pageUp = this.pageUp.bind(this);
@@ -18,7 +17,6 @@ class Main extends Component {
     // if the file uploaded successfully, then the variable "fileUploaded"
     // will be modified to "true", then "Video" can record face
     changeFileUploaded(flag) {
-        // this.fileUploaded = true;
         this.setState({
             fileUploaded: flag
         });

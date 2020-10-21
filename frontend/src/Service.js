@@ -10,7 +10,6 @@ export default class Service {
     uploadFile(file) {
         const url = `${API_URL}/file/`;
         console.log("already upload file");
-        console.log(file);
         return axios.post(url, file).then((response) => response.data);
     }
     uploadPic(pic) {

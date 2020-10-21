@@ -17,6 +17,7 @@ class UploadFile extends Component {
         // Update the state
         this.setState({ selectedFile: event.target.files[0] });
         this.props.callback(false);
+        console.log(event.target.files[0]);
     }
 
     // On file upload (click the upload button)
@@ -28,31 +29,33 @@ class UploadFile extends Component {
         const formData = new FormData();
 
         // Update the formData object
-        formData.append( "name", this.state.selectedFile.name);
-        formData.append( "address", "???");
-        
+        formData.append("file", this.state.selectedFile);
+
         // Details of the uploaded file
-        // console.log(this.state.selectedFile);
+        // console.log("selected file is ", this.state.selectedFile, "address is ", formData.get("address"));
 
         // Request to the backend
         const status = service.uploadFile(formData);
 
-        let me = this
+        let me = this;
         status.then((v) => {
-
-            if (v == "1") {
+            if (v.toString() === "1") {
                 me.props.callback(true);
             } else {
                 me.props.callback(false);
                 console.error("Upload/Handle file failed");
             }
-        })
+        });
     }
 
     render() {
         return (
             <div className="uploadfile">
-                <input type="file" onChange={this.onFileChange} />
+                <input
+                    type="file"
+                    multiple={false}
+                    onChange={this.onFileChange}
+                />
                 <button onClick={this.onFileUpload}>{"上传曲谱"}</button>
             </div>
         );

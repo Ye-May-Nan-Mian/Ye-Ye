@@ -17,6 +17,10 @@
 
 [this](https://docs.qq.com/scenario/link.html?url=https%3A%2F%2Fwww.howtoing.com%2Fhow-to-build-a-modern-web-application-to-manage-customer-information-with-django-and-react-on-ubuntu-18-04&pid=300000000$AhjHJyFiQlaR&cid=144115213471797152) taught me how to build a front-end framework. 
 
+[No way to get fill path of selected file](https://stackoverflow.com/questions/15201071/how-to-get-full-path-of-selected-file-on-change-of-input-type-file-using-jav)
+
+[Preview an image before it is uploaded](https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded) using FileReader. 
+
 [this](https://www.geeksforgeeks.org/file-uploading-in-react-js/) helps me upload file.
 
 [Flex 布局教程：语法篇 阮一峰](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
