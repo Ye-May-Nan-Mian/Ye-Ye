@@ -36,12 +36,17 @@ class UploadFile extends Component {
 
         // Request to the backend
         const status = service.uploadFile(formData);
-        if (status === "1") {
-            this.props.callback(true);
-        } else {
-            this.props.callback(false);
-            console.error("Upload/Handle file failed");
-        }
+
+        let me = this
+        status.then(function(v){
+
+            if (v == "1") {
+                me.props.callback(true);
+            } else {
+                me.props.callback(false);
+                console.error("Upload/Handle file failed");
+            }
+        })
     }
 
     render() {

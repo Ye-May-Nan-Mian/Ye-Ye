@@ -51,16 +51,20 @@ class Video extends Component {
         this.capture = this.refs.webcam.getScreenshot();
         //console.log(this.capture);
         const turnPage = service.uploadPic(this.capture);
-        
-        // turn page up/down
-        // 0: page up?
-        // 1: don't page up/down
-        // 2: page down?
-        if (turnPage === "0") {
-            this.props.pageUp();
-        } else if (turnPage === "2") {
-            this.props.pageDown();
-        }
+
+        let me = this;
+        turnPage.then(function(v){
+
+            // turn page up/down
+            // 0: page up?
+            // 1: don't page up/down
+            // 2: page down?
+            if (v == "0") {
+                me.props.pageUp();
+            } else if (v == "2") {
+                me.props.pageDown();
+            }
+        })
     }
 
     render() {
