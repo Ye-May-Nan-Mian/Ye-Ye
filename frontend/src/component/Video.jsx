@@ -12,6 +12,8 @@ class Video extends Component {
         this.state = {
             buttonText: "开启摄像头"
         };
+        // a ref to Webcam component
+        this.webcam = React.createRef();
         this.switchCamera = this.switchCamera.bind(this);
         this.uploadPic = this.uploadPic.bind(this);
     }
@@ -46,10 +48,8 @@ class Video extends Component {
         if (!this.cameraOpened || !this.props.fileUploaded) {
             return;
         }
-        // I don't have a better way to get webcam...
-        // TODO: replace refs with a better way
-        this.capture = this.refs.webcam.getScreenshot();
-        //console.log(this.capture);
+        this.capture = this.webcam.current.getScreenshot();
+        // console.log(this.capture);
         const turnPage = service.uploadPic(this.capture);
 
         let me = this;
@@ -70,24 +70,20 @@ class Video extends Component {
     render() {
         return (
             <div className="video">
-                <button className="btn btn-primary" onClick={this.switchCamera}>
+                <button className="mybtn" onClick={this.switchCamera}>
                     {this.state.buttonText}
                 </button>
                 {this.cameraOpened && (
                     <Webcam
+                        className="video-webcam"
                         audio={false}
-                        height={240}
                         mirrored={true}
-                        ref="webcam"
-                        width={320}
+                        ref={this.webcam}
                         screenshotFormat={"image/jpeg"}
                         screenshotQuality={0.8}
                         videoConstraints={{
-                            height: 240,
-                            width: 320,
                             facingMode: "user"
                         }}
-                        style={{ width: "100%" }}
                     />
                 )}
             </div>

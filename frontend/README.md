@@ -4,7 +4,6 @@
 
 [react](reactjs.org) for this project
 
-
 [axios](https://www.npmjs.com/package/axios) for interface transmission. 
 
 [react-webcam](https://github.com/mozmorris/react-webcam) for camera.
@@ -25,7 +24,9 @@
 
 [Flex 布局教程：语法篇 阮一峰](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
 
-## Maybe not work:
+## Maybe work but I don't use:
+
+[Bootstrap](https://getbootstrap.com/) for some styles. 
 
 [react-html5-camera-photo](https://www.npmjs.com/package/react-html5-camera-photo) for handling camera. 
 

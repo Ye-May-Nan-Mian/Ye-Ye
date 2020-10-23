@@ -10,6 +10,8 @@ class Main extends Component {
         this.state = {
             fileUploaded: false
         };
+        // a ref to Page component
+        this.page = React.createRef();
         this.changeFileUploaded = this.changeFileUploaded.bind(this);
         this.pageUp = this.pageUp.bind(this);
         this.pageDown = this.pageDown.bind(this);
@@ -23,19 +25,17 @@ class Main extends Component {
     }
 
     pageUp() {
-        // TODO: replace refs with a better way.
-        const selectedImg = this.refs.page.state.selectedImg;
-        this.refs.page.setState({
+        const selectedImg = this.page.current.state.selectedImg;
+        this.page.current.setState({
             selectedImg: selectedImg === 0 ? selectedImg : selectedImg - 1
         });
     }
 
     pageDown() {
-        // TODO: replace refs with a better way.
-        const selectedImg = this.refs.page.state.selectedImg;
-        this.refs.page.setState({
+        const selectedImg = this.page.current.state.selectedImg;
+        this.page.current.setState({
             selectedImg:
-                selectedImg + 1 === this.refs.page.pageSize
+                selectedImg + 1 === this.page.current.pageSize
                     ? selectedImg
                     : selectedImg + 1
         });
@@ -45,14 +45,14 @@ class Main extends Component {
         return (
             <div className="main">
                 <div className="videofile">
+                    <UploadFile callback={this.changeFileUploaded} />
                     <Video
                         fileUploaded={this.state.fileUploaded}
                         pageUp={this.pageUp}
                         pageDown={this.pageDown}
                     />
-                    <UploadFile callback={this.changeFileUploaded} />
                 </div>
-                <Page ref="page" fileUploaded={this.state.fileUploaded} />
+                <Page ref={this.page} fileUploaded={this.state.fileUploaded} />
             </div>
         );
     }
