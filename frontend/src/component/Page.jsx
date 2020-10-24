@@ -26,7 +26,7 @@ class Page extends Component {
         const requireContext = require.context(
             "file_pict",
             true,
-            /^\.\/.*\.jpg$/
+            /^\.\/.*\.png$/
         );
         const images = requireContext.keys().map(requireContext);
 

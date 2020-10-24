@@ -1,28 +1,48 @@
 from django.shortcuts import HttpResponse
-import os.path as path
+import os.path as P
 import os
 import matplotlib.pyplot as plt
 from .base import allow_acess
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
+import shutil
+import sys, fitz
+import pdb
 
 idx = 0
-save_folder = "../file_pict"
+save_folder = "../frontend/src/file_pict/"
+
+def pdf2image(pdf_path, image_folder):
+
+	for files in os.listdir(save_folder):
+		os.remove(os.path.join(save_folder, files))
+
+	pdf_file = fitz.open(pdf_path)
+	for page_idx in range(pdf_file.pageCount):
+		page = pdf_file[page_idx]
+
+		# 默认大小：(792 , 612)，放缩后：(1056 , 816)
+		mat = fitz.Matrix(1.33, 1.33).preRotate(0)
+		pix = page.getPixmap(matrix = mat, alpha = False)
+		
+		img_name = "%d.png" % page_idx
+				
+		pix.writePNG(img_name)#将图片写入指定的文件夹内
+		shutil.move(img_name , P.abspath(image_folder))
+		
 
 def upload_file(request):
 	global idx
 
-	print (request.POST)
+	files = request.FILES.getlist("file", None)
+	file_path = default_storage.save("_.pdf", ContentFile(files[0].read()))
 
-	address = request.POST.get("address")
+	pdf2image(file_path , save_folder)
+	print (file_path)
 
-	print ("I've got the address %s" % address)
+	os.remove(file_path)
 
-	# os.makedirs(save_folder , exist_ok = True)
-	# 
-	# save_address = path.join("../frontend/file_pict" , str(idx) + ".jpg")
-	# plt.figure(figsize = (32 , 32))
-	# plt.title(str(idx))
-	# 
-	# plt.savefig(save_address)
+	print ("pdf saved!")
 
 	return allow_acess(HttpResponse("1"))
 

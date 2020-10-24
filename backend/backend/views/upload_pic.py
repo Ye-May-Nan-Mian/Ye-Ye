@@ -23,7 +23,7 @@ def upload_pic(request):
 			content = x.replace(" " , "+")
 
 	if head is not None and content is not None:
-		print ("I've got the image!")
+		print ("\t\t\t\t\t\t\t\tI've got the image!")
 
 	result = random.randint(0,2)
 	return allow_acess(HttpResponse(str(result)))
