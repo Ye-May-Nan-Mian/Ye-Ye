@@ -45,7 +45,7 @@ class Video extends Component {
             ", this.props.fileUploaded:",
             this.props.fileUploaded
         );
-        if (!this.cameraOpened || !this.props.fileUploaded) {
+        if (!this.cameraOpened) {
             return;
         }
         this.capture = this.webcam.current.getScreenshot();

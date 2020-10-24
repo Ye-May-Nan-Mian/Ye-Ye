@@ -25,7 +25,7 @@ def pdf2image(pdf_path, image_folder):
 		mat = fitz.Matrix(1.33, 1.33).preRotate(0)
 		pix = page.getPixmap(matrix = mat, alpha = False)
 		
-		img_name = "%d.png" % page_idx
+		img_name = "%05d.png" % page_idx
 				
 		pix.writePNG(img_name)#将图片写入指定的文件夹内
 		shutil.move(img_name , P.abspath(image_folder))
