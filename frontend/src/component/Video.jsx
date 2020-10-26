@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Slider } from "antd";
 import Service from "../Service";
 import Webcam from "react-webcam";
 import "../App.css";
@@ -8,22 +9,27 @@ class Video extends Component {
     capture = "";
     constructor(props) {
         super(props);
-        // console.log(props.fileUploaded);
         this.state = {
             buttonText: "开启摄像头"
         };
         // a ref to Webcam component
         this.webcam = React.createRef();
+        this.changeInterval = this.changeInterval.bind(this);
         this.switchCamera = this.switchCamera.bind(this);
         this.uploadPic = this.uploadPic.bind(this);
     }
 
     componentDidMount() {
-        this.interval = setInterval(() => this.uploadPic(), 3000);
+        this.interval = setInterval(() => this.uploadPic(), 320);
     }
 
     componentWillUnmount() {
         clearInterval(this.interval);
+    }
+
+    changeInterval(t) {
+        clearInterval(this.interval);
+        this.interval = setInterval(() => this.uploadPic(), t);
     }
 
     switchCamera() {
@@ -39,12 +45,7 @@ class Video extends Component {
 
     // upload pictures
     uploadPic() {
-        console.log(
-            "uploadPic...this.cameraOpened:",
-            this.cameraOpened,
-            ", this.props.fileUploaded:",
-            this.props.fileUploaded
-        );
+        // console.log("uploadPic...this.cameraOpened:", this.cameraOpened);
         if (!this.cameraOpened) {
             return;
         }
@@ -73,6 +74,19 @@ class Video extends Component {
                 <button className="mybtn" onClick={this.switchCamera}>
                     {this.state.buttonText}
                 </button>
+                <Slider
+                    range={false}
+                    defaultValue={320}
+                    min={50}
+                    max={600}
+                    step={10}
+                    onChange={(t) => this.changeInterval(t)}
+                    tipFormatter={() => {
+                        return "往左移动，人脸识别更快哦";
+                    }}
+                    tooltipPlacement={"bottom"}
+                    style={{ width: "75%" }}
+                />
                 {this.cameraOpened && (
                     <Webcam
                         className="video-webcam"

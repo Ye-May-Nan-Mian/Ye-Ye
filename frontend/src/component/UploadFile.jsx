@@ -22,10 +22,6 @@ class UploadFile extends Component {
 
     // On file upload (click the upload button)
     onFileUpload() {
-        if (this.selectedFile === null) {
-            this.props.callback(false);
-            return;
-        }
         // Create an object of formData
         const formData = new FormData();
 
@@ -38,14 +34,11 @@ class UploadFile extends Component {
         // Request to the backend
         const status = service.uploadFile(formData);
 
-        let me = this;
         status
             .then((v) => {
                 if (v.toString() === "1") {
-                    me.props.callback(true);
                     console.log("Upload file successfully");
                 } else {
-                    me.props.callback(false);
                     console.error("Upload/Handle file failed");
                 }
             })
