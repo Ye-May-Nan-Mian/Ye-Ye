@@ -23,8 +23,10 @@ yarn-debug.log*
 yarn-error.log*
 
 *.pyc
+__pycache__
 .vscode
 db.sqlite3
 # pictures from backend to frontend
 file_pict
 debug.log
+shape_predictor_68_face_landmarks.dat

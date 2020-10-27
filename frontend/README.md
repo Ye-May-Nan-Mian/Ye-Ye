@@ -16,7 +16,7 @@
 
 [React 引入大量本地图片](https://segmentfault.com/q/1010000009641349)
 
-[this](https://docs.qq.com/scenario/link.html?url=https%3A%2F%2Fwww.howtoing.com%2Fhow-to-build-a-modern-web-application-to-manage-customer-information-with-django-and-react-on-ubuntu-18-04&pid=300000000$AhjHJyFiQlaR&cid=144115213471797152) taught me how to build a front-end framework. 
+[this](https://www.howtoing.com/how-to-build-a-modern-web-application-to-manage-customer-information-with-django-and-react-on-ubuntu-18-04) taught me how to build a front-end framework. 
 
 [No way to get fill path of selected file](https://stackoverflow.com/questions/15201071/how-to-get-full-path-of-selected-file-on-change-of-input-type-file-using-jav)
 

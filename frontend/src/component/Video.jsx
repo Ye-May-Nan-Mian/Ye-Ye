@@ -76,9 +76,9 @@ class Video extends Component {
                 </button>
                 <Slider
                     range={false}
-                    defaultValue={320}
-                    min={50}
-                    max={600}
+                    defaultValue={400}
+                    min={150}
+                    max={1000}
                     step={10}
                     onChange={(t) => this.changeInterval(t)}
                     tipFormatter={() => {
