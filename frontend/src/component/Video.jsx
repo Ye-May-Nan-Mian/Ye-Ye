@@ -19,7 +19,7 @@ class Video extends Component {
     }
 
     componentDidMount() {
-        this.interval = setInterval(() => this.uploadPic(), 3000);
+        this.interval = setInterval(() => this.uploadPic(), 50);
     }
 
     componentWillUnmount() {
