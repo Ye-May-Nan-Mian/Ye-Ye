@@ -124,6 +124,7 @@ a:active {
     margin-top: 5px;
     margin-bottom: 5px;
     width: 24vw;
+    min-width: 130px;
     max-width: 320px;
 }
 
@@ -141,6 +142,7 @@ a:active {
     flex: 1;
     flex-direction: column;
     width: 24vw;
+    min-width: 130px;
     max-width: 320px;
 }
 
@@ -208,10 +210,10 @@ a:active {
 }
 
 .video-webcam {
-    height: 18vw;
-    width: 24vw;
+    height: 20vw;
+    width: 75%;
     max-height: 240px;
-    max-width: 320px;
+    max-width: 240px;
     margin-top: 5px;
     margin-bottom: 5px;
 }

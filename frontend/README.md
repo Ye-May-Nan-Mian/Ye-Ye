@@ -10,6 +10,8 @@
 
 [React Webcam - Take Screenshot Issues](https://stackoverflow.com/questions/39312341/react-webcam-take-screenshot-issues) for snapshot. 
 
+[react-webcam (npm package) video sizing](https://stackoverflow.com/questions/55920961/react-webcam-npm-package-video-sizing)
+
 [The create-react-app imports restriction outside of src directory](https://stackoverflow.com/questions/44114436/the-create-react-app-imports-restriction-outside-of-src-directory)
 
 [React 引入大量本地图片](https://segmentfault.com/q/1010000009641349)

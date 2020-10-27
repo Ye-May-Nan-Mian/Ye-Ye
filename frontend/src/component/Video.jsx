@@ -94,8 +94,12 @@ class Video extends Component {
                         mirrored={true}
                         ref={this.webcam}
                         screenshotFormat={"image/jpeg"}
-                        screenshotQuality={0.8}
+                        screenshotQuality={1}
+                        minScreenshotHeight={300}
+                        minScreenshotWidth={300}
                         videoConstraints={{
+                            height: 300,
+                            width: 300,
                             facingMode: "user"
                         }}
                     />
