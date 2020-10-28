@@ -3,9 +3,10 @@ import random
 from .base import allow_acess
 import base64
 from io import BytesIO
-import sys
 from skimage import io
 from .detect_face import detect_face
+
+last_result = 1
 
 def base64_to_image(base64_str):
     base64_data = base64_str[23:] + "=="
@@ -15,6 +16,7 @@ def base64_to_image(base64_str):
     return img
 
 def upload_pic(request):
+	global last_result
 	# address = request.POST.get("address")
 	head = ""
 	content = ""
@@ -26,7 +28,10 @@ def upload_pic(request):
 			content = x.replace(" ", "+")
 
 	encoded = head + ";" + content  
-	detect_face(base64_to_image(encoded))
-
-	result = random.randint(0,2)
+	result= 1
+	tmp = detect_face(base64_to_image(encoded))
+	if tmp != -1:
+		if last_result == 1:
+			result = tmp
+		last_result = tmp
 	return allow_acess(HttpResponse(str(result)))
