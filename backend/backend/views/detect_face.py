@@ -1,5 +1,6 @@
 import dlib
 import os.path
+from .utils import *
 
 debug__ = True
 
@@ -14,6 +15,7 @@ win = None
 if debug__:
     win = dlib.image_window()
 
+
 def find_main_face(dets):
     result = 0
     max_width = 0
@@ -22,6 +24,7 @@ def find_main_face(dets):
             max_width = d.right() - d.left()
             result = i
     return result
+
 
 def detect_face(img):
     global detector
@@ -38,26 +41,29 @@ def detect_face(img):
 
     # 没识别到人脸就算了
     if len(dets) == 0:
-        return -1
+        return NO_FACE
 
     # 53--(48)--101---(81)---182    3:5
     main_face = dets[find_main_face(dets)]
 
     # 使用predictor进行人脸关键点识别，shape 为返回的结果
     shape = predictor(img, main_face)
-    nose = shape.part(30)    
-    # 获取鼻子中心的坐标
-    # print("Detection {}, Part {}: {}".format(main_face, 30, nose))
-    if nose.x * 26 <= main_face.left() * 15 + main_face.right() * 11: 
-        return 0
-    elif nose.x * 26 >= main_face.left() * 11 + main_face.right() * 15:
-        return 2
+    # nose = shape.part(30)
+    # nose2 = shape.part(33)
 
-    # 绘制特征点
+    # 返回比例
+    bili = ((shape.part(30).x + shape.part(33).x)/2.0 -
+            main_face.left()) / (main_face.right() - main_face.left())
+    # 绘制特征点和人脸框
     if debug__:
         win.add_overlay(shape)
-
-    # 绘制人脸框
-    if debug__:
         win.add_overlay(dets)
-    return 1
+    print(bili)
+    if bili < 0.41:
+        return LEFT_FACE
+    elif bili > 0.57:
+        return RIGHT_FACE
+    elif 0.48 < bili < 0.52:
+        return CENTER_FACE
+    else:
+        return NO_FACE

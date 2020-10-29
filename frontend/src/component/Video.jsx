@@ -93,6 +93,7 @@ class Video extends Component {
                         audio={false}
                         mirrored={true}
                         ref={this.webcam}
+                        imageSmoothing={true}
                         screenshotFormat={"image/jpeg"}
                         screenshotQuality={1}
                         minScreenshotHeight={300}
