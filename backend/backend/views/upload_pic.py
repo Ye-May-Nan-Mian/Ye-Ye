@@ -18,7 +18,11 @@ def base64_to_image(base64_str):
     base64_data = base64_str[23:] + "=="
     byte_data = base64.b64decode(base64_data)
     image_data = BytesIO(byte_data)
-    img = io.imread(image_data)
+    img = None
+    try:
+        img = io.imread(image_data)
+    except:
+        pass
     return img
 
 
@@ -52,6 +56,9 @@ def upload_pic(request):
             content = x.replace(" ", "+")
 
     encoded = head + ";" + content
-    detect = detect_face(base64_to_image(encoded))
-    result = get_result(detect)
+    img = base64_to_image(encoded)
+    result = CENTER_FACE
+    if img is not None:
+        detect = detect_face(img)
+        result = get_result(detect)
     return allow_acess(HttpResponse(str(result)))
