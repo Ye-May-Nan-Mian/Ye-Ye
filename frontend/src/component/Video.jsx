@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Slider } from "antd";
+import { Slider, Switch } from "antd";
 import Service from "../Service";
 import Webcam from "react-webcam";
 import "../App.css";
@@ -71,14 +71,18 @@ class Video extends Component {
     render() {
         return (
             <div className="video">
-                <button className="mybtn" onClick={this.switchCamera}>
-                    {this.state.buttonText}
-                </button>
+                <Switch
+                    checkedChildren="已开启摄像头"
+                    unCheckedChildren="已关闭摄像头"
+                    defaultChecked={false}
+                    onChange={this.switchCamera}
+                    style={{ margin: 5 }}
+                />
                 <Slider
                     range={false}
-                    defaultValue={400}
-                    min={150}
-                    max={1000}
+                    defaultValue={150}
+                    min={100}
+                    max={330}
                     step={10}
                     onChange={(t) => this.changeInterval(t)}
                     tipFormatter={() => {

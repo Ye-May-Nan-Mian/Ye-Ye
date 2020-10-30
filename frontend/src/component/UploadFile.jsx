@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Button } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 import Service from "../Service";
 import "../App.css";
 
@@ -59,12 +61,13 @@ class UploadFile extends Component {
                     onChange={this.onFileChange}
                     style={{ display: "none" }}
                 />
-                <button
-                    className="mybtn"
+                <Button
+                    icon={<UploadOutlined />}
                     onClick={() => this.fileInputRef.current.click()}
+                    style={{ margin: 5 }}
                 >
-                    {"上传曲谱"}
-                </button>
+                    {"上传PDF曲谱"}
+                </Button>
             </div>
         );
     }

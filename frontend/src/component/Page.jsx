@@ -51,7 +51,11 @@ class Page extends Component {
                             // reader.readAsDataURL(img);
                             return (
                                 <img
-                                    className="page-img"
+                                    className={
+                                        index === this.state.selectedImg
+                                            ? "page-img-select"
+                                            : "page-img"
+                                    }
                                     key={index}
                                     alt={"小君没能加载出文件Orz"}
                                     src={img}
