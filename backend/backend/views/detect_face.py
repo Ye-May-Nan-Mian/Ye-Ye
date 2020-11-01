@@ -4,6 +4,7 @@ from .utils import *
 import cv2
 import math
 
+# 这个开关人脸标记
 debug__ = False
 
 predictor_path = os.path.abspath(
@@ -17,6 +18,7 @@ win = None
 if debug__:
     win = dlib.image_window()
 
+# 记录默认状态时的摇头角度
 default_yaw = 0
 
 
@@ -112,6 +114,7 @@ def get_euler_angle(rotation_vector):
 
 def get_pose_estimation(image_points):
     # 3D model points.
+    # TODO：这个研究一下
     model_points = np.array([
         (0.0, 0.0, 0.0),           # Nose tip
         (0.0, -330.0, -65.0),      # Chin
@@ -134,17 +137,29 @@ def get_pose_estimation(image_points):
     (success, rotation_vector, translation_vector) = cv2.solvePnP(model_points,
                                                                   image_points, camera_matrix, dist_coeffs, flags=cv2.SOLVEPNP_ITERATIVE)
 
+    # pitch 是上下摇头，上：(140) < pitch < 180；下：(-160) > pitch > -180
+    # yaw 是左右摇头，左：(-40) < yaw < 0；右：0 < yaw < (40)
+    # roll 是旋转头，没用处
     pitch, yaw, roll = get_euler_angle(rotation_vector)
     # euler_angle_str = 'Y:{}, X:{}, Z:{}'.format(pitch, yaw, roll)
-    # print(euler_angle_str)
-    return yaw
+    print(pitch)
+    return pitch, yaw
 
 
 def get_cv_face(shape):
     global default_yaw
-    yaw = get_pose_estimation(get_image_points_from_landmark_shape(shape))
+    pitch, yaw = get_pose_estimation(
+        get_image_points_from_landmark_shape(shape))
+
+    # 修正 defalut_yaw
     if -10 < default_yaw - yaw < 10:
         default_yaw = default_yaw * 0.9 + yaw * 0.1
+
+    # 低头
+    if -175 < pitch < 0:
+        print(DOWN_FACE)
+        return DOWN_FACE
+
     yaw -= default_yaw
 
     # print("default:{}, yaw:{}".format(default_yaw, yaw))
