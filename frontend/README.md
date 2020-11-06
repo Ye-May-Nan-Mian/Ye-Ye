@@ -1,8 +1,20 @@
 # From developer (PaJir)
 
+## From run to package
+
+```
+npm install
+# start without build
+npm run start
+# build and package
+npm run build
+```
+
 ## Thanks for:
 
 [react](reactjs.org) for this project
+
+[electron](electronjs.org) package this project
 
 [axios](https://www.npmjs.com/package/axios) for interface transmission. 
 
@@ -24,9 +36,11 @@
 
 [this](https://www.geeksforgeeks.org/file-uploading-in-react-js/) helps me upload file.
 
-[Flex 布局教程：语法篇 阮一峰](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
+[Flex layout tutorial - Ruan Yifeng](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
 
 [Ant Design](https://ant.design/components/overview-cn/) save my time on design. 
+
+[this(1)](https://segmentfault.com/a/1190000014030465) & [this(2)](https://juejin.im/post/6844903669293400072) help me use electron
 
 ## Maybe work but I don't use:
 
@@ -46,8 +60,7 @@ HOOK
     ├─UploadFile.jsx--------upload your sheet music
     └─Video.jsx-------------open camera and decide whether to turn pages
 ├─App.js--------------------
-├─index.js------------------
-└─serviceWorker.js----------important for axios, but I don't have to know how it works
+└─index.js------------------
 ```
 
 # From React

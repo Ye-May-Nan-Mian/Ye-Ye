@@ -1,0 +1,9 @@
+{
+    "name": "Ye-Ye",
+    "version": "0.1.2",
+    "main": "main.js",
+    "author": {
+        "name": "LiuJiapan"
+    },
+    "license": "MIT"
+}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { HashRouter, Route } from "react-router-dom";
 import Introduce from "./component/Introduce";
 import Main from "./component/Main";
 import Navbar from "./component/Navbar";
@@ -21,8 +21,10 @@ class App extends Component {
     }
 
     render() {
+        // HashRouter is better than BrowerRouter &
+        // BrowserRouter not work in electron
         return (
-            <BrowserRouter>
+            <HashRouter>
                 <div className="browser">
                     <Navbar
                         changeBackgroundColor={this.changeBackgroundColor}
@@ -36,7 +38,7 @@ class App extends Component {
                         <Route path="/introduce/" exact component={Introduce} />
                     </div>
                 </div>
-            </BrowserRouter>
+            </HashRouter>
         );
     }
 }
