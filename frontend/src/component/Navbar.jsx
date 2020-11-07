@@ -49,9 +49,9 @@ class Navbar extends Component {
                 >
                     {"介绍"}
                 </a>
-                <div class="mynav-colorgroup">
+                <div className="mynav-colorgroup">
                     <div
-                        class="mynav-color"
+                        className="mynav-color"
                         key="themelightgray"
                         onClick={() =>
                             //          textColor,   navColor,   backgorundColor
@@ -60,7 +60,7 @@ class Navbar extends Component {
                         style={{ background: "#f8f9fa" }}
                     />
                     <div
-                        class="mynav-color"
+                        className="mynav-color"
                         key="themelightblue"
                         onClick={() =>
                             this.changeColor(["#006699", "#e3f2fd", "#f3ffff"])
@@ -68,7 +68,7 @@ class Navbar extends Component {
                         style={{ background: "#e3f2fd" }}
                     />
                     <div
-                        class="mynav-color"
+                        className="mynav-color"
                         key="themesilkgold"
                         onClick={() =>
                             this.changeColor(["#c0b283", "#dcd0c0", "#f7f5e6"])
@@ -76,7 +76,7 @@ class Navbar extends Component {
                         style={{ background: "#dcd0c0" }}
                     />
                     <div
-                        class="mynav-color"
+                        className="mynav-color"
                         key="themegreenery"
                         onClick={() =>
                             this.changeColor(["#3c413d", "#d9dcd3", "#dbded5"])
@@ -84,7 +84,7 @@ class Navbar extends Component {
                         style={{ background: "#d9ecd3" }}
                     />
                     <div
-                        class="mynav-color"
+                        className="mynav-color"
                         key="themedarkgreen"
                         onClick={() =>
                             this.changeColor(["#f1b24a", "#4d774e", "#9dc88d"])
@@ -92,7 +92,7 @@ class Navbar extends Component {
                         style={{ background: "#4d774e" }}
                     />
                     <div
-                        class="mynav-color"
+                        className="mynav-color"
                         key="themedarkblue"
                         onClick={() =>
                             this.changeColor(["#e8e8e8", "#333a56", "#336699"])
@@ -100,7 +100,7 @@ class Navbar extends Component {
                         style={{ background: "#333a56" }}
                     />
                     <div
-                        class="mynav-color"
+                        className="mynav-color"
                         key="themedark"
                         onClick={() =>
                             this.changeColor(["#c0c0c0", "#0f0f0f", "#1f1f1f"])

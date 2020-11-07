@@ -23,16 +23,8 @@ class Page extends Component {
     }
 
     render() {
-        const requireContext = require.context(
-            "file_pict",
-            true,
-            /^\.\/.*\.png$/
-        );
-        const images = requireContext.keys().map(requireContext);
-
-        this.pageSize = images ? images.length : 0;
-        // console.log(images);
-        return !!this.pageSize ? (
+        // console.log(this.props.fileImgs.length);
+        return this.props.fileImgs.length > 0 ? (
             <div className="page">
                 {/* a big picture */}
                 <div className="page-main">
@@ -40,13 +32,13 @@ class Page extends Component {
                         className="page-mainimg"
                         key={"-1"}
                         alt={"小君没能加载出文件Orz"}
-                        src={images[this.state.selectedImg]}
+                        src={this.props.fileImgs[this.state.selectedImg]}
                     />
                 </div>
                 {/* many some small pictures */}
                 <div className="page-imgscontainer">
                     <div className="page-imgs" key={"pageimgs"}>
-                        {images.map((img, index) => {
+                        {this.props.fileImgs.map((img, index) => {
                             // const reader = new FileReader();
                             // reader.readAsDataURL(img);
                             return (

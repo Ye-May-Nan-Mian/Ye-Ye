@@ -18,7 +18,7 @@ class UploadFile extends Component {
     onFileChange(event) {
         // Update the state
         this.selectedFile = event.target.files[0];
-        console.log(this.selectedFile);
+        // console.log(this.selectedFile);
         this.onFileUpload();
     }
 
@@ -36,16 +36,19 @@ class UploadFile extends Component {
         // Request to the backend
         const status = service.uploadFile(formData);
 
+        let that = this;
         status
             .then((v) => {
-                if (v.toString() === "1") {
-                    console.log("Upload file successfully");
+                if (v && v.imgs && v.imgs.length > 0) {
+                    // console.log("Upload file successfully, I get: ", v);
+                    // send (file to) images to page.jsx
+                    that.props.getFile(v.imgs);
                 } else {
-                    console.error("Upload/Handle file failed");
+                    // console.error("Upload/Handle file failed, I get: ", v);
                 }
             })
-            .catch(() => {
-                console.warn("Confirm whether backend is running");
+            .catch((e) => {
+                console.warn("Confirm whether backend is running %s", e);
             });
     }
 
