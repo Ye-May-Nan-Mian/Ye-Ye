@@ -9,9 +9,7 @@
 /coverage
 
 # production
-build
-release
-dist
+/build
 
 # misc
 .DS_Store
@@ -32,3 +30,7 @@ db.sqlite3
 file_pict
 debug.log
 shape_predictor_68_face_landmarks.dat
+
+YY-Design
+*.bz2
+*.rar

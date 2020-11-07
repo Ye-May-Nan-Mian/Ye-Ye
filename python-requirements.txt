@@ -1,3 +1,5 @@
 django
 fitz
 PyMuPDF
+scikit-image
+dlib
