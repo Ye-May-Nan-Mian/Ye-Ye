@@ -1,3 +1,5 @@
+# -*- mode: python ; coding: utf-8 -*-
+
 import numpy as np
 
 LEFT_FACE = 0

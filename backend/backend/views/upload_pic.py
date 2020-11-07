@@ -1,5 +1,6 @@
+# -*- mode: python ; coding: utf-8 -*-
+
 from django.shortcuts import HttpResponse
-import random
 from .base import allow_acess
 import base64
 from io import BytesIO
