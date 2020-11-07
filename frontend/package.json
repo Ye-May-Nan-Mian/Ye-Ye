@@ -23,7 +23,7 @@
         "start:electron": "wait-on http://localhost:3000 & electron app",
         "build": "npm run build:react && npm run build:copy && npm run build:package",
         "build:react": "react-app-rewired build",
-        "build:copy": "copy .\\app\\main.js .\\build\\main.js && copy .\\app\\package.json .\\build\\package.json",
+        "build:copy": "copy .\\build-electron\\build-main.js .\\build\\main.js && copy .\\build-electron\\build-package.json .\\build\\package.json",
         "build:package": "cd .\\build && electron-packager . Ye-Ye --win --out=release --arch=x64 --app-version=0.1.2 --electron-version=10.1.5 --overwrite --icon=./favicon.ico",
         "test": "react-app-rewired test -env=jsdom"
     },

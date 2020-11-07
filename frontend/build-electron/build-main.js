@@ -1,11 +1,11 @@
-// this index.js is for electron
+// this main.js is for electron build
 
 const { app, BrowserWindow } = require("electron");
 // reference to  window object
 let win;
 
 function createWindow() {
-    win = new BrowserWindow({ width: 1920, height: 1090 });
+    win = new BrowserWindow({ width: 1920, height: 1080 });
     // load index.html
     win.loadURL(`file://${__dirname}/index.html`);
     // developer tool page
