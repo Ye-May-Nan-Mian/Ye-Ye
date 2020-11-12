@@ -9,8 +9,7 @@ import math
 # 这个开关人脸标记
 debug__ = False
 
-predictor_path = os.path.abspath(
-    "../ml") + "/shape_predictor_68_face_landmarks.dat"
+predictor_path = "shape_predictor_68_face_landmarks.dat"
 # 使用dlib自带的frontal_face_detector作为我们的特征提取器
 detector = dlib.get_frontal_face_detector()
 # 使用官方提供的模型构建特征提取器
