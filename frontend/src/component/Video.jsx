@@ -1,26 +1,28 @@
 import React, { Component } from "react";
-import { Slider, Switch } from "antd";
 import Service from "../Service";
 import Webcam from "react-webcam";
 import "../App.css";
+
 const service = new Service();
-class Video extends Component {
-    cameraOpened = false;
+const webcamHeight = 300;
+const webcamWidth = 300;
+
+/* Video
+ * height: 32vh, width: 20vw
+ * background-color: darkerColor
+ */
+export default class Video extends Component {
     capture = "";
     constructor(props) {
         super(props);
-        this.state = {
-            buttonText: "开启摄像头"
-        };
         // a ref to Webcam component
         this.webcam = React.createRef();
         this.changeInterval = this.changeInterval.bind(this);
-        this.switchCamera = this.switchCamera.bind(this);
         this.uploadPic = this.uploadPic.bind(this);
     }
 
     componentDidMount() {
-        this.interval = setInterval(() => this.uploadPic(), 320);
+        this.interval = setInterval(() => this.uploadPic(), 150);
     }
 
     componentWillUnmount() {
@@ -32,21 +34,10 @@ class Video extends Component {
         this.interval = setInterval(() => this.uploadPic(), t);
     }
 
-    switchCamera() {
-        // console.log(this.state.cameraOpened);
-        this.cameraOpened = this.cameraOpened === false ? true : false;
-        this.setState({
-            buttonText: this.cameraOpened ? "已开启摄像头" : "开启摄像头"
-        });
-        // Uncomment the following line, you can see the demo of
-        // page turning with pressing the camera switch
-        // this.props.pageDown();
-    }
-
     // upload pictures
     uploadPic() {
-        // console.log("uploadPic...this.cameraOpened:", this.cameraOpened);
-        if (!this.cameraOpened) {
+        // console.log("uploadPic...this.cameraOpened:", this.props.cameraOpened);
+        if (!this.props.cameraOpened) {
             return;
         }
         this.capture = this.webcam.current.getScreenshot();
@@ -56,42 +47,24 @@ class Video extends Component {
         let me = this;
         turnPage.then((v) => {
             // turn page up/down
-            // 0: page up?
+            // 0: page up
             // 1: don't page up/down
-            // 2: page down?
+            // 2: page down
             console.log("turn page? ", v);
             if (v.toString() === "0") {
-                me.props.pageUp();
+                // scroll up
+                me.props.pageScroll(-1);
             } else if (v.toString() === "2") {
-                me.props.pageDown();
+                // scroll down
+                me.props.pageScroll(1);
             }
         });
     }
 
     render() {
         return (
-            <div className="video">
-                <Switch
-                    checkedChildren="已开启摄像头"
-                    unCheckedChildren="已关闭摄像头"
-                    defaultChecked={false}
-                    onChange={this.switchCamera}
-                    style={{ margin: 5 }}
-                />
-                <Slider
-                    range={false}
-                    defaultValue={150}
-                    min={100}
-                    max={330}
-                    step={10}
-                    onChange={(t) => this.changeInterval(t)}
-                    tipFormatter={() => {
-                        return "往左移动，人脸识别更快哦";
-                    }}
-                    tooltipPlacement={"bottom"}
-                    style={{ width: "75%" }}
-                />
-                {this.cameraOpened && (
+            <div className="video" style={{ background: this.props.color }}>
+                {this.props.cameraOpened && (
                     <Webcam
                         className="video-webcam"
                         audio={false}
@@ -100,11 +73,11 @@ class Video extends Component {
                         imageSmoothing={true}
                         screenshotFormat={"image/jpeg"}
                         screenshotQuality={1}
-                        minScreenshotHeight={300}
-                        minScreenshotWidth={300}
+                        minScreenshotHeight={webcamHeight}
+                        minScreenshotWidth={webcamWidth}
                         videoConstraints={{
-                            height: 300,
-                            width: 300,
+                            height: webcamHeight,
+                            width: webcamWidth,
                             facingMode: "user"
                         }}
                     />
@@ -113,4 +86,3 @@ class Video extends Component {
         );
     }
 }
-export default Video;

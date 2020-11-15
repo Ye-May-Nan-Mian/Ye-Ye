@@ -68,9 +68,7 @@ class UploadFile extends Component {
                     icon={<UploadOutlined />}
                     onClick={() => this.fileInputRef.current.click()}
                     style={{ margin: 5 }}
-                >
-                    {"上传PDF曲谱"}
-                </Button>
+                />
             </div>
         );
     }
