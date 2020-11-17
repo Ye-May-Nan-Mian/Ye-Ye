@@ -10,10 +10,10 @@ export default class Logo extends Component {
     render() {
         return (
             <div
-                className="side-logo"
-                style={{
-                    background: this.props.color
-                }}
+                className="side-logo base-color"
+                // style={{
+                //     background: this.props.color
+                // }}
             >
                 <div className="side-logo-img-div">
                     <Image

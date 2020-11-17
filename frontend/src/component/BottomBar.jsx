@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
+import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 
 // import Service from "../Service";
 import "../App.css";
@@ -14,16 +14,8 @@ export default class BottomBar extends Component {
     constructor(props) {
         super(props);
         this.state = { hoverPlus: false, hoverMinus: false };
-        this.setHoverPlus = this.setHoverPlus.bind(this);
         this.setHoverMinus = this.setHoverMinus.bind(this);
-    }
-
-    // mouse hover PlusOutlined or not, change its color and background
-    setHoverPlus() {
-        const s = this.state.hoverPlus;
-        this.setState(() => {
-            return { hoverPlus: s === true ? false : true };
-        });
+        this.setHoverPlus = this.setHoverPlus.bind(this);
     }
 
     // mouse hover MinusOutlined or not, change its color and background
@@ -31,6 +23,14 @@ export default class BottomBar extends Component {
         const s = this.state.hoverMinus;
         this.setState(() => {
             return { hoverMinus: s === true ? false : true };
+        });
+    }
+
+    // mouse hover PlusOutlined or not, change its color and background
+    setHoverPlus() {
+        const s = this.state.hoverPlus;
+        this.setState(() => {
+            return { hoverPlus: s === true ? false : true };
         });
     }
 
@@ -61,6 +61,7 @@ export default class BottomBar extends Component {
                                   background: this.props.color
                               }
                     }
+                    onClick={this.props.zoomIn}
                     onMouseEnter={this.setHoverPlus}
                     onMouseLeave={this.setHoverPlus}
                 />
@@ -77,8 +78,9 @@ export default class BottomBar extends Component {
                                   background: this.props.color
                               }
                     }
-                    onMouseEnter={this.setHoverMinus}
+                    onClick={this.props.zoomOut}
                     onMouseLeave={this.setHoverMinus}
+                    onMouseEnter={this.setHoverMinus}
                 />
             </div>
         );

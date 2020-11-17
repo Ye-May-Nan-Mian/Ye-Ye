@@ -34,8 +34,13 @@ export default class Main extends Component {
         this.getFile = this.getFile.bind(this);
         this.changeInterval = this.changeInterval.bind(this);
         this.pageScroll = this.pageScroll.bind(this);
+        this.pageZoomIn = this.pageZoomIn.bind(this);
+        this.pageZoomOut = this.pageZoomOut.bind(this);
     }
 
+    // set colors of theme by Tools(user)
+    // must include six colors:
+    // white, light, lighter, base, darker, dark
     changeBackColor(newColor) {
         this.setState(() => {
             return {
@@ -47,9 +52,10 @@ export default class Main extends Component {
                 darkColor: newColor.darkColor
             };
         });
-        console.log(this.state);
+        // console.log(this.state);
     }
 
+    // camera state: opened / closed
     switchCameraState() {
         const cameraOpened = this.state.cameraOpened;
         this.setState(() => {
@@ -57,6 +63,7 @@ export default class Main extends Component {
         });
     }
 
+    // video capture speed = 1000 / t fps
     changeInterval(t) {
         this.video.current.changeInterval(t);
     }
@@ -77,6 +84,17 @@ export default class Main extends Component {
         }
     }
 
+    pageZoomIn() {
+        this.page.current.pageZoomIn();
+    }
+
+    pageZoomOut() {
+        this.page.current.pageZoomOut();
+    }
+
+    // left: side area
+    // right: page view
+    // bottom: bar
     render() {
         return (
             <div
@@ -114,6 +132,8 @@ export default class Main extends Component {
                     color={this.state.darkColor}
                     whiteColor={this.state.whiteColor}
                     fileName={this.state.fileName}
+                    zoomIn={this.pageZoomIn}
+                    zoomOut={this.pageZoomOut}
                 />
             </div>
         );

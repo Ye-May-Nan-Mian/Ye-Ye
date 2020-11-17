@@ -12,8 +12,13 @@ export default class Page extends Component {
     pageSize = 0;
     constructor(props) {
         super(props);
+        this.state = {
+            imgWidth: 100
+        };
         this.pageimg = React.createRef();
         this.scrollPage = this.scrollPage.bind(this);
+        this.pageZoomIn = this.pageZoomIn.bind(this);
+        this.pageZoomOut = this.pageZoomOut.bind(this);
     }
 
     scrollPage(direction = 1) {
@@ -26,6 +31,27 @@ export default class Page extends Component {
             behavior: "smooth"
         });
     }
+
+    pageZoomIn() {
+        let newImgWidth = this.state.imgWidth + 10;
+        newImgWidth = newImgWidth > 200 ? 200 : newImgWidth;
+        this.setState(() => {
+            return {
+                imgWidth: newImgWidth
+            };
+        });
+    }
+
+    pageZoomOut() {
+        let newImgWidth = this.state.imgWidth - 10;
+        newImgWidth = newImgWidth < 50 ? 50 : newImgWidth;
+        this.setState(() => {
+            return {
+                imgWidth: newImgWidth
+            };
+        });
+    }
+
     render() {
         // console.log(this.props.fileImgs.length);
         return this.props.fileImgs.length > 0 ? (
@@ -39,6 +65,7 @@ export default class Page extends Component {
                             alt={"小君没能加载出文件Orz"}
                             src={img}
                             preview={false}
+                            width={(this.state.imgWidth - 22).toString() + "vw"}
                         />
                     );
                 })}
