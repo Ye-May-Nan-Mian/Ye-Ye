@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import Service from "../Service";
-import "../App.css";
 
 const service = new Service();
 
@@ -31,7 +30,7 @@ class UploadFile extends Component {
         formData.append("file", this.selectedFile);
 
         // Details of the uploaded file
-        // console.log("selected file is ", this.state.selectedFile, "address is ", formData.get("address"));
+        console.log("selected file is ", this.selectedFile);
 
         // Request to the backend
         const status = service.uploadFile(formData);
@@ -42,7 +41,10 @@ class UploadFile extends Component {
                 if (v && v.imgs && v.imgs.length > 0) {
                     // console.log("Upload file successfully, I get: ", v);
                     // send (file to) images to page.jsx
-                    that.props.getFile(v.imgs);
+                    that.props.getFile({
+                        imgs: v.imgs,
+                        fileName: this.selectedFile.name
+                    });
                 } else {
                     // console.error("Upload/Handle file failed, I get: ", v);
                 }

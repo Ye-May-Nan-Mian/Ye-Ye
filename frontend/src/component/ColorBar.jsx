@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import Service from "../Service"
-import "../App.css";
+import less from "less";
 
 // const service = new Service();
 
@@ -29,7 +29,14 @@ export default class ColorBar extends Component {
     }
 
     changeColor(newColor) {
-        this.props.changeBackColor(newColor);
+        less.modifyVars({
+            "@white-color": newColor[0],
+            "@light-color": newColor[1],
+            "@lighter-color": newColor[2],
+            "@base-color": newColor[3],
+            "@darker-color": newColor[4],
+            "@dark-color": newColor[5]
+        });
         // service.postTheme(newColor);
     }
 
@@ -41,16 +48,7 @@ export default class ColorBar extends Component {
                         <div
                             className="mynav-color"
                             key={"theme" + index}
-                            onClick={() =>
-                                this.changeColor({
-                                    whiteColor: theme[0],
-                                    lightColor: theme[1],
-                                    lighterColor: theme[2],
-                                    baseColor: theme[3],
-                                    darkerColor: theme[4],
-                                    darkColor: theme[5]
-                                })
-                            }
+                            onClick={() => this.changeColor(theme)}
                             style={{ background: theme[3] }}
                         />
                     );

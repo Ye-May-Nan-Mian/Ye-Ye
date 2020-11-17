@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Image } from "antd";
-import "../App.css";
+// import styles from "../theme.module.less";
 
 /* Logo
  * height: 10vh, width: 20vw
@@ -9,12 +9,7 @@ import "../App.css";
 export default class Logo extends Component {
     render() {
         return (
-            <div
-                className="side-logo base-color"
-                // style={{
-                //     background: this.props.color
-                // }}
-            >
+            <div className={`${"side-logo"} ${"base-background-color"}`}>
                 <div className="side-logo-img-div">
                     <Image
                         className="side-logo-img"

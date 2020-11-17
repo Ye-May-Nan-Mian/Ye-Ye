@@ -3,7 +3,6 @@ import { Switch, Slider } from "antd";
 import UploadFile from "./UploadFile";
 import ColorBar from "./ColorBar";
 // import Service from "../Service";
-import "../App.css";
 
 // const service = new Service();
 
@@ -22,7 +21,7 @@ export default class Tools extends Component {
 
     render() {
         return (
-            <div className="side-tool" style={{ background: this.props.color }}>
+            <div className={`${"side-tool"} ${"base-background-color"}`}>
                 <Switch
                     checkedChildren="已开启摄像头"
                     unCheckedChildren="已关闭摄像头"
@@ -31,7 +30,7 @@ export default class Tools extends Component {
                     style={{ margin: 5 }}
                 />
                 <UploadFile getFile={this.props.getFile} />
-                <ColorBar changeBackColor={this.props.changeBackColor} />
+                <ColorBar />
                 <Slider
                     range={false}
                     defaultValue={150}

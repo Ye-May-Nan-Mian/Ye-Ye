@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Image } from "antd";
-import "../App.css";
 
 /* Page
  * height: 98vh, width: 80vw
@@ -65,7 +64,7 @@ export default class Page extends Component {
                             alt={"小君没能加载出文件Orz"}
                             src={img}
                             preview={false}
-                            width={(this.state.imgWidth - 22).toString() + "vw"}
+                            width={(this.state.imgWidth - 21).toString() + "vw"}
                         />
                     );
                 })}

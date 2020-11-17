@@ -16,3 +16,13 @@ Use more Ant Design
 
 Add Electron to package project, can use "npm run" to build & package. 
 No longer run on the browser, but a separate window. 
+
+# 0.2.0
+
+Refractor: More suitable interface.
+
+# 0.2.1
+
+Using less to control theme-color.
+
+Support zooming in/out, showing file name. 

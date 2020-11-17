@@ -42,6 +42,8 @@ npm run build
 
 [this(1)](https://segmentfault.com/a/1190000014030465) & [this(2)](https://juejin.im/post/6844903669293400072) help me use electron
 
+[Use less in React](https://www.jianshu.com/p/94ac7250ccf0)
+
 ## Maybe work but I don't use:
 
 [Bootstrap](https://getbootstrap.com/) for some styles. 

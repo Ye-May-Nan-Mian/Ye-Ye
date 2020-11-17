@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Service from "../Service";
 import Webcam from "react-webcam";
-import "../App.css";
 
 const service = new Service();
 const webcamHeight = 300;
@@ -63,7 +62,7 @@ export default class Video extends Component {
 
     render() {
         return (
-            <div className="video" style={{ background: this.props.color }}>
+            <div className={`${"video"} ${"darker-background-color"}`}>
                 {this.props.cameraOpened && (
                     <Webcam
                         className="video-webcam"
