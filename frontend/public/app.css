@@ -90,8 +90,21 @@
     width: 20vw;
 }
 
+.tool-icon {
+    justify-content: center;
+    font-size: 4vw;
+    height: 4vw;
+    width: 4vw;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
 .uploadfile {
     align-self: center;
+    height: 5vw;
+    width: 5vw;
 }
 
 .page {
@@ -197,5 +210,4 @@ a:active {
     height: 1.5vh;
     width: 1.5vh;
     margin-right: 10px;
-    /* color: #c1cbe3; */
 }

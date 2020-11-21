@@ -5,6 +5,7 @@
 @darker-color: #081945;
 @dark-color: #010a21;
 
+// scrollbar
 ::-webkit-scrollbar {
     width: 1vw;
     height: 1vw;
@@ -35,6 +36,7 @@
     background-color: @lighter-color;
 }
 
+// six color & background-color
 .white-color {
     color: @white-color;
 }
@@ -83,6 +85,23 @@
     background-color: @dark-color;
 }
 
+// icons of tool area
+.toolIcon {
+    color: @white-color !important;
+    background-color: @base-color;
+}
+
+.toolIcon:hover {
+    color: @base-color !important;
+    background-color: @white-color;
+}
+
+.toolIcon:active {
+    color: @darker-color !important;
+    background-color: @lighter-color;
+}
+
+// plus & minus icons of bottom bar
 .plusMinusIcon {
     color: @white-color !important;
     background-color: @dark-color;

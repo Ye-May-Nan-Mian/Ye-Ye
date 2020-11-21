@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Switch, Slider } from "antd";
+import { Slider, Dropdown } from "antd";
+import { CameraOutlined, DashboardOutlined } from "@ant-design/icons";
 import UploadFile from "./UploadFile";
 import ColorBar from "./ColorBar";
 // import Service from "../Service";
@@ -22,28 +23,38 @@ export default class Tools extends Component {
     render() {
         return (
             <div className={`${"side-tool"} ${"base-background-color"}`}>
-                <Switch
-                    checkedChildren="已开启摄像头"
-                    unCheckedChildren="已关闭摄像头"
-                    defaultChecked={false}
-                    onChange={this.props.switchCameraState}
-                    style={{ margin: 5 }}
+                <CameraOutlined
+                    className={`${"tool-icon"} ${"toolIcon"}`}
+                    onClick={this.props.switchCameraState}
                 />
                 <UploadFile getFile={this.props.getFile} />
                 <ColorBar />
-                <Slider
-                    range={false}
-                    defaultValue={150}
-                    min={100}
-                    max={330}
-                    step={10}
-                    onChange={(t) => this.props.changeInterval(t)}
-                    tipFormatter={() => {
-                        return "往左移动，人脸识别更快哦";
-                    }}
-                    tooltipPlacement={"bottom"}
-                    style={{ width: "75%" }}
-                />
+                <Dropdown
+                    overlay={
+                        // TODO: div's style
+                        <div>
+                            <Slider
+                                range={false}
+                                defaultValue={150}
+                                min={100}
+                                max={330}
+                                step={10}
+                                onChange={(t) => this.props.changeInterval(t)}
+                                tipFormatter={() => {
+                                    return "往左移动，人脸识别更快哦";
+                                }}
+                                tooltipPlacement={"bottom"}
+                                style={{ width: "75%" }}
+                            />
+                        </div>
+                    }
+                    placement={"bottomLeft"}
+                    trigger={["hover"]}
+                >
+                    <DashboardOutlined
+                        className={`${"tool-icon"} ${"toolIcon"}`}
+                    />
+                </Dropdown>
             </div>
         );
     }

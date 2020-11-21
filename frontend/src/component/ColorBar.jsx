@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Dropdown } from "antd";
+import { BulbOutlined } from "@ant-design/icons";
 // import Service from "../Service"
 import less from "less";
 
@@ -42,18 +44,26 @@ export default class ColorBar extends Component {
 
     render() {
         return (
-            <div className="mynav-colorgroup">
-                {this.themes.map((theme, index) => {
-                    return (
-                        <div
-                            className="mynav-color"
-                            key={"theme" + index}
-                            onClick={() => this.changeColor(theme)}
-                            style={{ background: theme[3] }}
-                        />
-                    );
-                })}
-            </div>
+            <Dropdown
+                overlay={
+                    <div className="mynav-colorgroup">
+                        {this.themes.map((theme, index) => {
+                            return (
+                                <div
+                                    className="mynav-color"
+                                    key={"theme" + index}
+                                    onClick={() => this.changeColor(theme)}
+                                    style={{ background: theme[3] }}
+                                />
+                            );
+                        })}
+                    </div>
+                }
+                placement={"bottomLeft"}
+                trigger={["hover"]}
+            >
+                <BulbOutlined className={`${"tool-icon"} ${"toolIcon"}`} />
+            </Dropdown>
         );
     }
 }

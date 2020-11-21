@@ -16,7 +16,8 @@ class UploadFile extends Component {
     // On file select (from the pop up)
     onFileChange(event) {
         // Update the state
-        this.selectedFile = event.target.files[0];
+        this.selectedFile = event.target.files;
+        // Details of the uploaded file
         // console.log(this.selectedFile);
         this.onFileUpload();
     }
@@ -27,10 +28,9 @@ class UploadFile extends Component {
         const formData = new FormData();
 
         // Update the formData object
-        formData.append("file", this.selectedFile);
-
-        // Details of the uploaded file
-        console.log("selected file is ", this.selectedFile);
+        for (const file in this.selectedFile) {
+            formData.append("file", this.selectedFile[file]);
+        }
 
         // Request to the backend
         const status = service.uploadFile(formData);
@@ -58,18 +58,19 @@ class UploadFile extends Component {
         return (
             <div className="uploadfile">
                 <input
-                    type="file"
                     ref={this.fileInputRef}
                     id="inputfile"
                     key={"inputfile"}
-                    multiple={false}
+                    type={"file"}
+                    accept={"application/pdf,image/jpeg,image/jpg,image/png"}
+                    name={"pdf/picture"}
+                    multiple={true}
                     onChange={this.onFileChange}
                     style={{ display: "none" }}
                 />
-                <Button
-                    icon={<UploadOutlined />}
+                <UploadOutlined
+                    className={`${"tool-icon"} ${"toolIcon"}`}
                     onClick={() => this.fileInputRef.current.click()}
-                    style={{ margin: 5 }}
                 />
             </div>
         );
