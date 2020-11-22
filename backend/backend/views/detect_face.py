@@ -45,8 +45,7 @@ def get_ratio_face(main_face, shape):
         return RIGHT_FACE
     elif 0.48 < ratio < 0.52:
         return CENTER_FACE
-    else:
-        return NO_FACE
+    return NO_FACE
 
 
 # 从dlib的检测结果抽取姿态估计需要的点坐标
