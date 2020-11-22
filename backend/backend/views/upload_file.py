@@ -34,17 +34,40 @@ def pdf2image(pdf_path):
         res.append(b64)
     return res
 
+def img2image(path , type):
+
+    with open(path , "rb") as f:
+        b64 = base64.b64encode(f.read())
+    b64 = "data:image/{0};base64,{1}".format( type , str(b64)[2:-1] )
+
+    return [b64]
+
 def upload_file(request):
     global idx
 
     files = request.FILES.getlist("file", None)
-    file_path = default_storage.save("_.pdf", ContentFile(files[0].read()))
 
-    print ("start!")
-    imgs = pdf2image(file_path)
-    print(file_path)
+    print ("got %d files" % len(files))
 
-    os.remove(file_path)
+    imgs = []
+    for file in files:
+
+        filename = str(file)
+        file_path = default_storage.save(filename, ContentFile(file.read()))
+
+        if filename.endswith(".pdf"):
+            imgs += pdf2image(file_path)
+        elif filename.endswith(".jpg") or filename.endswith(".png") or filename.endswith(".jpeg"):
+            if filename.endswith(".jpg"):
+                type = "jpg"
+            elif filename.endswith(".png"):
+                type = "png"
+            elif filename.endswith(".jpeg"):
+                type = "jpeg"
+
+            imgs += img2image(file_path , type)
+        
+        os.remove(file_path)
 
     print("pdf saved!")
 

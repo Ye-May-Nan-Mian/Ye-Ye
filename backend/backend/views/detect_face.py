@@ -143,7 +143,7 @@ def get_pose_estimation(image_points):
     # roll 是旋转头，没用处
     pitch, yaw, roll = get_euler_angle(rotation_vector)
     # euler_angle_str = 'Y:{}, X:{}, Z:{}'.format(pitch, yaw, roll)
-    print(pitch)
+    # print(pitch)
     return pitch, yaw
 
 
