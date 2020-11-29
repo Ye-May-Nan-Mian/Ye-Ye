@@ -89,11 +89,15 @@
 .toolIcon {
     color: @white-color !important;
     background-color: @base-color;
+    border-radius: 0.5vw;
+    border-width: 0px;
+    transition: 500ms ease-out;
 }
 
 .toolIcon:hover {
     color: @base-color !important;
     background-color: @white-color;
+    transition: 500ms ease-in;
 }
 
 .toolIcon:active {
@@ -105,11 +109,13 @@
 .plusMinusIcon {
     color: @white-color !important;
     background-color: @dark-color;
+    transition: 300ms ease-out;
 }
 
 .plusMinusIcon:hover {
     color: @dark-color !important;
     background-color: @white-color;
+    transition: 300ms ease-in;
 }
 
 .plusMinusIcon:active {

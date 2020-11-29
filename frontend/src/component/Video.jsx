@@ -3,8 +3,8 @@ import Service from "../Service";
 import Webcam from "react-webcam";
 
 const service = new Service();
-const webcamHeight = 300;
-const webcamWidth = 300;
+const webcamHeight = 256;
+const webcamWidth = 256;
 
 /* Video
  * height: 32vh, width: 20vw

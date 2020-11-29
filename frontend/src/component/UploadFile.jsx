@@ -43,7 +43,7 @@ class UploadFile extends Component {
                     // send (file to) images to page.jsx
                     that.props.getFile({
                         imgs: v.imgs,
-                        fileName: this.selectedFile.name
+                        fileName: this.selectedFile[0].name
                     });
                 } else {
                     // console.error("Upload/Handle file failed, I get: ", v);
