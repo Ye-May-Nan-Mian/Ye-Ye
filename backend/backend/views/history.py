@@ -14,12 +14,13 @@ def read_hist():
 
 def save_hist(hist):
 	hist_file = "hist.pkl"
+	print ("fuck")
 	with open(hist_file , "wb") as fil:
 		pickle.dump(hist , fil)
 
 def historyall(request):
 	hist = read_hist()
-	ret = [ {"name" : x["name"] , "img" : x["img"][0]} for x in hist ]
+	ret = [ {"name" : x["name"] , "img" : x["imgs"][0]} for x in hist ]
 	return allow_acess(JsonResponse({"files" : ret}))
 
 def historyfile(request):
@@ -32,4 +33,4 @@ def historyfile(request):
 		if x["name"] == req_name:
 			ret = x
 			break
-	return allow_acess(JsonResponse({"imgs" : ret["img"]}))
+	return allow_acess(JsonResponse({"imgs" : ret["imgs"]}))
