@@ -1,5 +1,3 @@
-# -*- mode: python ; coding: utf-8 -*-
-
 from django.http import HttpResponse , JsonResponse
 import os.path as P
 import os
@@ -11,6 +9,8 @@ import sys
 import fitz
 import pdb
 import base64
+import pickle
+from .history import read_hist , save_hist
 
 idx = 0
 
@@ -69,7 +69,13 @@ def upload_file(request):
         
         os.remove(file_path)
 
-    print("pdf saved!")
+    hist = read_hist()
+    hist.append({
+        "name" : len(hist) , 
+        "imgs" : imgs , 
+    })
+    hist = hist[-10:]
+    save_hist(hist)
 
     return allow_acess(JsonResponse({"imgs" : imgs}))
 
