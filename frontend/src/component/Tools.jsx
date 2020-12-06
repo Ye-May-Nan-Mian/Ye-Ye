@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import { Slider, Dropdown } from "antd";
 import {
     CameraOutlined,
     DashboardOutlined,
-    HistoryOutlined
+    HistoryOutlined,
+    UserOutlined
 } from "@ant-design/icons";
 import UploadFile from "./UploadFile";
 import ColorBar from "./ColorBar";
@@ -15,7 +17,7 @@ import ColorBar from "./ColorBar";
  * height: 56vh, width: 20vw
  * background-color: baseColor
  */
-export default class Tools extends Component {
+class Tools extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -27,14 +29,20 @@ export default class Tools extends Component {
     render() {
         return (
             <div className={`${"side-tool"} ${"base-background-color"}`}>
+                {/* Camera Upload Color */}
                 <div className={"side-tool-line"}>
                     <CameraOutlined
+                        id="CameraController"
                         className={`${"tool-icon"} ${"toolIcon"}`}
                         onClick={this.props.switchCameraState}
                     />
-                    <UploadFile getFile={this.props.getFile} />
+                    <UploadFile
+                        id="UploadController"
+                        getFile={this.props.getFile}
+                    />
                     <ColorBar />
                 </div>
+                {/* Speed History Introduce  */}
                 <div className={"side-tool-line"}>
                     <Dropdown
                         overlay={
@@ -62,13 +70,33 @@ export default class Tools extends Component {
                     >
                         <DashboardOutlined
                             className={`${"tool-icon"} ${"toolIcon"}`}
+                            style={{
+                                cursor: "pointer"
+                            }}
                         />
                     </Dropdown>
                     <HistoryOutlined
+                        id="HistoryController"
                         className={`${"tool-icon"} ${"toolIcon"}`}
+                        onClick={() => {
+                            this.props.history.push({
+                                pathname: "/history"
+                            });
+                        }}
+                    />
+                    <UserOutlined
+                        id="UserController"
+                        className={`${"tool-icon"} ${"toolIcon"}`}
+                        onClick={() => {
+                            this.props.history.push({
+                                pathname: "/introduce"
+                            });
+                        }}
                     />
                 </div>
             </div>
         );
     }
 }
+
+export default withRouter(Tools);

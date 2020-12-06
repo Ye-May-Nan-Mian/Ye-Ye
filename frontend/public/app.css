@@ -3,11 +3,8 @@
     width: 100vw;
 }
 
+/* MAIN */
 .main {
-    align-items: flex-start;
-    display: flex;
-    flex: 1;
-    flex-direction: column;
     overflow: hidden;
     height: 100vh;
     width: 100vw;
@@ -34,6 +31,7 @@
     width: 100vw;
 }
 
+/* SIDE */
 .side-area {
     align-items: flex-start;
     /* background-color: aqua; */
@@ -123,7 +121,7 @@
     width: 5vw;
 }
 
-.mynav-colorgroup {
+.color-group {
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -135,7 +133,7 @@
     margin-right: 0.5vw;
 }
 
-.mynav-color {
+.color-one {
     align-self: center;
     border-radius: 1vw;
     border-color: #cccccc;
@@ -150,6 +148,7 @@
     width: 8vw;
 }
 
+/* PAGE */
 .page {
     align-items: center;
     /* background-color: #ff0000; */
@@ -175,6 +174,7 @@
     margin-right: 2px;
 }
 
+/* BOTTOM */
 .bottombar {
     align-items: center;
     align-content: center;

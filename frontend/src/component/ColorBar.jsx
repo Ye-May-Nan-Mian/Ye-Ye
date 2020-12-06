@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Dropdown } from "antd";
 import { BulbOutlined } from "@ant-design/icons";
-// import Service from "../Service"
+import Service from "../Service";
 import less from "less";
 
-// const service = new Service();
+const service = new Service();
 
 export default class ColorBar extends Component {
     themes = [
@@ -18,19 +18,19 @@ export default class ColorBar extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            textColor: "#989899",
-            navColor: "#f8f9fa"
-        };
         this.changeColor = this.changeColor.bind(this);
     }
 
     componentDidMount() {
         // TODO: Can remember the last theme selected by the user
-        // service.getTheme().then((newColor)=>this.changeColor(newColor));
+        service.getTheme().then((newColor) => {
+            if (newColor.length > 0) {
+                this.changeColor(newColor, 0);
+            }
+        });
     }
 
-    changeColor(newColor) {
+    changeColor(newColor, toPost = 1) {
         less.modifyVars({
             "@white-color": newColor[0],
             "@light-color": newColor[1],
@@ -39,21 +39,26 @@ export default class ColorBar extends Component {
             "@darker-color": newColor[4],
             "@dark-color": newColor[5]
         });
-        // service.postTheme(newColor);
+        if (toPost) {
+            service.postTheme(newColor);
+        }
     }
 
     render() {
         return (
             <Dropdown
                 overlay={
-                    <div className="mynav-colorgroup">
+                    <div className="color-group">
                         {this.themes.map((theme, index) => {
                             return (
                                 <div
-                                    className="mynav-color"
+                                    className="color-one"
                                     key={"theme" + index}
                                     onClick={() => this.changeColor(theme)}
-                                    style={{ background: theme[3] }}
+                                    style={{
+                                        background: theme[3],
+                                        cursor: "pointer"
+                                    }}
                                 />
                             );
                         })}
@@ -62,7 +67,12 @@ export default class ColorBar extends Component {
                 placement={"bottomCenter"}
                 trigger={["hover"]}
             >
-                <BulbOutlined className={`${"tool-icon"} ${"toolIcon"}`} />
+                <BulbOutlined
+                    className={`${"tool-icon"} ${"toolIcon"}`}
+                    style={{
+                        cursor: "pointer"
+                    }}
+                />
             </Dropdown>
         );
     }

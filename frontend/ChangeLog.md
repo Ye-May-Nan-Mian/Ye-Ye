@@ -12,7 +12,7 @@ We use Ant Design for a more advanced and concise design.
 
 # 0.1.2
 
-Use more Ant Design
+Use more Ant Design.
 
 Add Electron to package project, can use "npm run" to build & package. 
 No longer run on the browser, but a separate window. 
@@ -26,3 +26,15 @@ Refractor: More suitable interface.
 Using less to control theme-color.
 
 Support zooming in/out, showing file name. 
+
+# 0.2.2
+
+Support upload pictures.
+
+Put all tools in icons.
+
+# 0.2.3
+
+Support history and introduce pages.
+
+Display window's Menu.

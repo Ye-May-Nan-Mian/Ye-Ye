@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import Service from "../Service";
 
@@ -13,17 +12,13 @@ class UploadFile extends Component {
         this.onFileUpload = this.onFileUpload.bind(this);
     }
 
-    // On file select (from the pop up)
+    // On file select
     onFileChange(event) {
         // Update the state
         this.selectedFile = event.target.files;
         // Details of the uploaded file
         // console.log(this.selectedFile);
-        this.onFileUpload();
-    }
 
-    // On file upload (click the upload button)
-    onFileUpload() {
         // Create an object of formData
         const formData = new FormData();
 
@@ -32,6 +27,11 @@ class UploadFile extends Component {
             formData.append("file", this.selectedFile[file]);
         }
 
+        this.onFileUpload(formData);
+    }
+
+    // On file upload
+    onFileUpload(formData) {
         // Request to the backend
         const status = service.uploadFile(formData);
 

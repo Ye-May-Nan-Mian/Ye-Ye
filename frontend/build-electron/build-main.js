@@ -1,10 +1,12 @@
 // this main.js is for electron build
 
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, Menu } = require("electron");
 // reference to  window object
 let win;
 
 function createWindow() {
+    // display menu
+    Menu.setApplicationMenu(null);
     win = new BrowserWindow({ width: 1920, height: 1080 });
     // load index.html
     win.loadURL(`file://${__dirname}/index.html`);

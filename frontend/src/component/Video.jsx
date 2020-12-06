@@ -49,7 +49,7 @@ export default class Video extends Component {
             // 0: page up
             // 1: don't page up/down
             // 2: page down
-            console.log("turn page? ", v);
+            // console.log("turn page? ", v);
             if (v.toString() === "0") {
                 // scroll up
                 me.props.pageScroll(-1);

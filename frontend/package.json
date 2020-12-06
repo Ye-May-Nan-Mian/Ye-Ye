@@ -1,6 +1,6 @@
 {
     "name": "frontend",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "private": true,
     "homepage": "./",
     "main": "app/index.js",
@@ -28,7 +28,7 @@
         "build": "npm run build:react && npm run build:copy && npm run build:package",
         "build:react": "react-app-rewired build",
         "build:copy": "copy .\\build-electron\\build-main.js .\\build\\main.js && copy .\\build-electron\\build-package.json .\\build\\package.json",
-        "build:package": "cd .\\build && electron-packager . Ye-Ye --win --out=release --arch=x64 --app-version=0.2.2 --electron-version=10.1.5 --overwrite --icon=./favicon.ico",
+        "build:package": "cd .\\build && electron-packager . Ye-Ye --win --out=release --arch=x64 --app-version=0.2.3 --electron-version=10.1.5 --overwrite --icon=./favicon.ico",
         "test": "react-app-rewired test -env=jsdom",
         "eject": "react-app-rewired eject"
     },
