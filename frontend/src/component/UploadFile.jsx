@@ -52,7 +52,6 @@ class UploadFile extends Component {
         service
             .uploadFile(formData)
             .then((v) => {
-                console.log(v);
                 if (v && v.imgs && v.imgs.length > 0) {
                     // send (file to) images to page.jsx
                     this.updatePage({

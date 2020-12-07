@@ -2,8 +2,12 @@ import React, { Component } from "react";
 import { List, Image, Drawer } from "antd";
 import store from "../store";
 import Service from "../Service";
-import { changeHistory } from "store/actionCreators";
-import { switchHistoryPage } from "store/actionCreators";
+import {
+    switchHistoryPage,
+    changeFile,
+    changeFileName,
+    chagneImgWidth
+} from "store/actionCreators";
 
 const service = new Service();
 
@@ -13,6 +17,7 @@ class History extends Component {
         this.state = store.getState();
         this.storageChange = this.storageChange.bind(this);
         this.onClose = this.onClose.bind(this);
+        this.getFile = this.getFile.bind(this);
     }
 
     storageChange() {
@@ -21,15 +26,23 @@ class History extends Component {
 
     componentDidMount() {
         store.subscribe(this.storageChange);
-        service.getHistoryall().then((data) => {
-            const action = changeHistory(data);
-            store.dispatch(action);
-        });
     }
 
     onClose() {
         const action = switchHistoryPage(false);
         store.dispatch(action);
+    }
+
+    getFile(name) {
+        service.getHistoryfile(name).then((data) => {
+            const action1 = changeFile(data.imgs);
+            store.dispatch(action1);
+            const action2 = changeFileName(name);
+            store.dispatch(action2);
+            const action3 = chagneImgWidth(90);
+            store.dispatch(action3);
+        });
+        this.onClose();
     }
 
     render() {
@@ -71,16 +84,19 @@ class History extends Component {
                         renderItem={(item) => (
                             <List.Item
                                 className={`${"white-color"}`}
-                                onClick={() => {
-                                    // service.getHistoryfile()
-                                    this.onClose();
-                                }}
                                 style={{
                                     cursor: "pointer"
                                 }}
                             >
+                                {/* TODO: style */}
                                 <Image src={item.img} />
-                                {item.name}
+                                <p
+                                    onClick={() => {
+                                        this.getFile(item.name);
+                                    }}
+                                >
+                                    {item.name}
+                                </p>
                             </List.Item>
                         )}
                     />

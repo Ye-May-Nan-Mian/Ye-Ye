@@ -9,11 +9,15 @@ import {
 import UploadFile from "./UploadFile";
 import ColorBar from "./ColorBar";
 import store from "../store";
-import { switchCameraState, switchHistoryPage } from "store/actionCreators";
-import { switchIntroPage } from "store/actionCreators";
-// import Service from "../Service";
+import {
+    switchCameraState,
+    switchHistoryPage,
+    switchIntroPage,
+    changeHistory
+} from "store/actionCreators";
+import Service from "../Service";
 
-// const service = new Service();
+const service = new Service();
 
 /* Tools
  * height: 56vh, width: 20vw
@@ -46,8 +50,15 @@ class Tools extends Component {
 
     // history page state: display / hide
     switchHistoryPage() {
-        const action = switchHistoryPage(true);
+        // display history page
+        const value = this.state.introShow ? false : true;
+        const action = switchHistoryPage(value);
         store.dispatch(action);
+        // get history from backend
+        service.getHistoryall().then((data) => {
+            const action = changeHistory(data.files);
+            store.dispatch(action);
+        });
     }
 
     // introduce page state: display / hide
