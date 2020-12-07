@@ -38,3 +38,7 @@ Put all tools in icons.
 Support history and introduce pages.
 
 Display window's Menu.
+
+# 0.2.4
+
+Using Redux, delete Router & React.StrictMode

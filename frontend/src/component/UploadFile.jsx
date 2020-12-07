@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import { UploadOutlined } from "@ant-design/icons";
 import Service from "../Service";
+import store from "../store";
+import {
+    changeFile,
+    changeFileName,
+    chagneImgWidth
+} from "store/actionCreators";
 
 const service = new Service();
 
@@ -8,8 +14,18 @@ class UploadFile extends Component {
     constructor(props) {
         super(props);
         this.fileInputRef = React.createRef();
+        this.updatePage = this.updatePage.bind(this);
         this.onFileChange = this.onFileChange.bind(this);
         this.onFileUpload = this.onFileUpload.bind(this);
+    }
+
+    updatePage(data) {
+        const action1 = changeFile(data.imgs);
+        store.dispatch(action1);
+        const action2 = changeFileName(data.fileName);
+        store.dispatch(action2);
+        const action3 = chagneImgWidth(data.imgWidth);
+        store.dispatch(action3);
     }
 
     // On file select
@@ -33,17 +49,16 @@ class UploadFile extends Component {
     // On file upload
     onFileUpload(formData) {
         // Request to the backend
-        const status = service.uploadFile(formData);
-
-        let that = this;
-        status
+        service
+            .uploadFile(formData)
             .then((v) => {
+                console.log(v);
                 if (v && v.imgs && v.imgs.length > 0) {
-                    // console.log("Upload file successfully, I get: ", v);
                     // send (file to) images to page.jsx
-                    that.props.getFile({
+                    this.updatePage({
                         imgs: v.imgs,
-                        fileName: this.selectedFile[0].name
+                        fileName: this.selectedFile[0].name,
+                        imgWidth: 90
                     });
                 } else {
                     // console.error("Upload/Handle file failed, I get: ", v);

@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "http://localhost:34215";
+const API_URL = "http://127.0.0.1:34215";
 
 export default class Service {
     // constructor() {}
@@ -18,9 +18,14 @@ export default class Service {
         // console.log("alread upload picture");
         return axios.post(url, pic).then((response) => response.data);
     }
-    // get history files
-    async getHistory() {
-        const url = `${API_URL}/history/`;
+    // get all history files' name
+    async getHistoryall() {
+        const url = `${API_URL}/historyall/`;
+        return axios.get(url).then((response) => response.data);
+    }
+    // get a history file
+    async getHistoryfile() {
+        const url = `${API_URL}/historyfile/`;
         return axios.get(url).then((response) => response.data);
     }
     // post current theme

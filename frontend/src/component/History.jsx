@@ -1,67 +1,93 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { Divider, List } from "antd";
+import { List, Image, Drawer } from "antd";
+import store from "../store";
 import Service from "../Service";
+import { changeHistory } from "store/actionCreators";
+import { switchHistoryPage } from "store/actionCreators";
 
 const service = new Service();
 
 class History extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            history: ["暂无历史记录"]
-        };
+        this.state = store.getState();
+        this.storageChange = this.storageChange.bind(this);
+        this.onClose = this.onClose.bind(this);
+    }
 
-        service.getHistory().then((data) => {
-            this.setState(() => {
-                return { history: data };
-            });
+    storageChange() {
+        this.setState(store.getState());
+    }
+
+    componentDidMount() {
+        store.subscribe(this.storageChange);
+        service.getHistoryall().then((data) => {
+            const action = changeHistory(data);
+            store.dispatch(action);
         });
+    }
+
+    onClose() {
+        const action = switchHistoryPage(false);
+        store.dispatch(action);
     }
 
     render() {
         return (
-            <div className={`${"main"} ${"lighter-background-color"}`}>
-                <Divider className={`${"dark-color"}`} orientation="left">
-                    {"历史记录"}
-                </Divider>
-                <List
-                    className={`${"dark-color"}`}
-                    footer={
-                        <div
-                            className={`${"dark-color"}`}
-                            onClick={() => {
-                                this.props.history.goBack();
-                            }}
+            <>
+                <Drawer
+                    title={
+                        <p
                             style={{
-                                cursor: "pointer"
+                                margin: 0,
+                                color: this.state.colors[0],
+                                fontWeight: 500
                             }}
                         >
-                            {"<返回"}
-                        </div>
+                            {"历史记录"}
+                        </p>
                     }
-                    bordered
-                    dataSource={this.state.history}
-                    renderItem={(item) => (
-                        <List.Item
-                            className={`${"dark-color"}`}
-                            onClick={() => {
-                                this.props.history.goBack({ data: item });
-                            }}
-                            style={{
-                                marginLeft: "5vw",
-                                marginRight: "5vw",
-                                cursor: "pointer"
-                            }}
-                        >
-                            {item}
-                        </List.Item>
-                    )}
-                    style={{ marginLeft: "10vw", marginRight: "10vw" }}
-                />
-            </div>
+                    placement={"left"}
+                    closable={false}
+                    onClose={this.onClose}
+                    visible={this.state.historyShow}
+                    key={"leftHistory"}
+                    mask={true}
+                    maskClosable={true}
+                    width={"18vw"}
+                    getContainer={document.getElementById("main-main")}
+                    style={{
+                        position: "absolute"
+                    }}
+                    headerStyle={{
+                        backgroundColor: this.state.colors[4]
+                    }}
+                    bodyStyle={{ backgroundColor: this.state.colors[4] }}
+                >
+                    <List
+                        className={`${"white-color"}`}
+                        bordered
+                        dataSource={this.state.history}
+                        renderItem={(item) => (
+                            <List.Item
+                                className={`${"white-color"}`}
+                                onClick={() => {
+                                    // service.getHistoryfile()
+                                    this.onClose();
+                                }}
+                                style={{
+                                    cursor: "pointer"
+                                }}
+                            >
+                                <Image src={item.img} />
+                                {item.name}
+                            </List.Item>
+                        )}
+                    />
+                </Drawer>
+            </>
         );
     }
 }
 
-export default withRouter(History);
+export default History;

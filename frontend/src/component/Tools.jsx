@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
 import { Slider, Dropdown } from "antd";
 import {
     CameraOutlined,
@@ -9,6 +8,9 @@ import {
 } from "@ant-design/icons";
 import UploadFile from "./UploadFile";
 import ColorBar from "./ColorBar";
+import store from "../store";
+import { switchCameraState, switchHistoryPage } from "store/actionCreators";
+import { switchIntroPage } from "store/actionCreators";
 // import Service from "../Service";
 
 // const service = new Service();
@@ -20,10 +22,39 @@ import ColorBar from "./ColorBar";
 class Tools extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            textColor: "#989899",
-            navColor: "#f8f9fa"
-        };
+        this.state = store.getState();
+        this.storageChange = this.storageChange.bind(this);
+        this.switchCameraState = this.switchCameraState.bind(this);
+        this.switchHistoryPage = this.switchHistoryPage.bind(this);
+        this.switchIntroPage = this.switchIntroPage.bind(this);
+    }
+
+    storageChange() {
+        this.setState(store.getState());
+    }
+
+    componentDidMount() {
+        store.subscribe(this.storageChange);
+    }
+
+    // camera state: opened / closed
+    switchCameraState() {
+        const value = this.state.cameraOpened ? false : true;
+        const action = switchCameraState(value);
+        store.dispatch(action);
+    }
+
+    // history page state: display / hide
+    switchHistoryPage() {
+        const action = switchHistoryPage(true);
+        store.dispatch(action);
+    }
+
+    // introduce page state: display / hide
+    switchIntroPage() {
+        const value = this.state.introShow ? false : true;
+        const action = switchIntroPage(value);
+        store.dispatch(action);
     }
 
     render() {
@@ -34,12 +65,9 @@ class Tools extends Component {
                     <CameraOutlined
                         id="CameraController"
                         className={`${"tool-icon"} ${"toolIcon"}`}
-                        onClick={this.props.switchCameraState}
+                        onClick={this.switchCameraState}
                     />
-                    <UploadFile
-                        id="UploadController"
-                        getFile={this.props.getFile}
-                    />
+                    <UploadFile id="UploadController" />
                     <ColorBar />
                 </div>
                 {/* Speed History Introduce  */}
@@ -79,18 +107,14 @@ class Tools extends Component {
                         id="HistoryController"
                         className={`${"tool-icon"} ${"toolIcon"}`}
                         onClick={() => {
-                            this.props.history.push({
-                                pathname: "/history"
-                            });
+                            this.switchHistoryPage();
                         }}
                     />
                     <UserOutlined
                         id="UserController"
                         className={`${"tool-icon"} ${"toolIcon"}`}
                         onClick={() => {
-                            this.props.history.push({
-                                pathname: "/introduce"
-                            });
+                            this.switchIntroPage();
                         }}
                     />
                 </div>
@@ -99,4 +123,4 @@ class Tools extends Component {
     }
 }
 
-export default withRouter(Tools);
+export default Tools;

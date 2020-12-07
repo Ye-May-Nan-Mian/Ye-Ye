@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Dropdown } from "antd";
 import { BulbOutlined } from "@ant-design/icons";
+import store from "../store";
 import Service from "../Service";
 import less from "less";
+import { changeColor } from "store/actionCreators";
 
 const service = new Service();
 
@@ -39,6 +41,8 @@ export default class ColorBar extends Component {
             "@darker-color": newColor[4],
             "@dark-color": newColor[5]
         });
+        const action = changeColor(newColor);
+        store.dispatch(action);
         if (toPost) {
             service.postTheme(newColor);
         }

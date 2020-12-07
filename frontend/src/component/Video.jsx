@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Service from "../Service";
 import Webcam from "react-webcam";
+import store from "../store";
 
 const service = new Service();
 const webcamHeight = 256;
@@ -14,13 +15,20 @@ export default class Video extends Component {
     capture = "";
     constructor(props) {
         super(props);
+        this.state = store.getState();
         // a ref to Webcam component
         this.webcam = React.createRef();
+        this.storageChange = this.storageChange.bind(this);
         this.changeInterval = this.changeInterval.bind(this);
         this.uploadPic = this.uploadPic.bind(this);
     }
 
+    storageChange() {
+        this.setState(store.getState());
+    }
+
     componentDidMount() {
+        store.subscribe(this.storageChange);
         this.interval = setInterval(() => this.uploadPic(), 150);
     }
 
@@ -35,8 +43,7 @@ export default class Video extends Component {
 
     // upload pictures
     uploadPic() {
-        // console.log("uploadPic...this.cameraOpened:", this.props.cameraOpened);
-        if (!this.props.cameraOpened) {
+        if (!this.state.cameraOpened) {
             return;
         }
         this.capture = this.webcam.current.getScreenshot();
@@ -63,7 +70,7 @@ export default class Video extends Component {
     render() {
         return (
             <div className={`${"video"} ${"darker-background-color"}`}>
-                {this.props.cameraOpened && (
+                {this.state.cameraOpened && (
                     <Webcam
                         className="video-webcam"
                         audio={false}

@@ -44,6 +44,10 @@ npm run build
 
 [Use less in React](https://www.jianshu.com/p/94ac7250ccf0)
 
+[redux](https://redux.js.org/)
+
+[How to user Redux in React](https://juejin.cn/post/6844903942371934215)
+
 ## Maybe work but I don't use:
 
 [Bootstrap](https://getbootstrap.com/) for some styles. 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Image } from "antd";
+import store from "../store";
 
 /* Page
  * height: 98vh, width: 80vw
@@ -11,13 +12,18 @@ export default class Page extends Component {
     pageSize = 0;
     constructor(props) {
         super(props);
-        this.state = {
-            imgWidth: 100
-        };
+        this.state = store.getState();
         this.pageimg = React.createRef();
+        this.storageChange = this.storageChange.bind(this);
         this.scrollPage = this.scrollPage.bind(this);
-        this.pageZoomIn = this.pageZoomIn.bind(this);
-        this.pageZoomOut = this.pageZoomOut.bind(this);
+    }
+
+    storageChange() {
+        this.setState(store.getState());
+    }
+
+    componentDidMount() {
+        store.subscribe(this.storageChange);
     }
 
     scrollPage(direction = 1) {
@@ -31,32 +37,11 @@ export default class Page extends Component {
         });
     }
 
-    pageZoomIn() {
-        let newImgWidth = this.state.imgWidth + 10;
-        newImgWidth = newImgWidth > 200 ? 200 : newImgWidth;
-        this.setState(() => {
-            return {
-                imgWidth: newImgWidth
-            };
-        });
-    }
-
-    pageZoomOut() {
-        let newImgWidth = this.state.imgWidth - 10;
-        newImgWidth = newImgWidth < 50 ? 50 : newImgWidth;
-        this.setState(() => {
-            return {
-                imgWidth: newImgWidth
-            };
-        });
-    }
-
     render() {
-        // console.log(this.props.fileImgs.length);
-        return this.props.fileImgs.length > 0 ? (
+        return this.state.fileImgs.length > 0 ? (
             <div className="page" key={"pageimgs"} ref={this.pageimg}>
                 {/* some small pictures */}
-                {this.props.fileImgs.map((img, index) => {
+                {this.state.fileImgs.map((img, index) => {
                     return (
                         <Image
                             className="page-img"

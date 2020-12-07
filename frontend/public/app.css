@@ -19,6 +19,7 @@
     justify-content: space-between;
     height: 98vh;
     width: 100vw;
+    overflow: hidden;
 }
 
 .main-bar {
@@ -200,4 +201,8 @@
     height: 1.5vh;
     width: 1.5vh;
     margin-right: 10px;
+}
+
+.history-page {
+    /* display: inline; */
 }
