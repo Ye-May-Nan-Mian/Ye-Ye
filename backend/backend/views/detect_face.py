@@ -1,5 +1,3 @@
-# -*- mode: python ; coding: utf-8 -*-
-
 import dlib
 import os.path
 from .utils import *

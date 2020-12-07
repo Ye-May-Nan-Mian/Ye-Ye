@@ -41,3 +41,4 @@ _.png
 _.pdf
 backend/inner-python/*
 manage.spec
+hist.pkl

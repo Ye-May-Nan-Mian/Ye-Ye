@@ -1,4 +1,4 @@
-from django.http import HttpResponse , JsonResponse
+from django.http import HttpResponse, JsonResponse
 import os.path as P
 import os
 # import matplotlib.pyplot as plt
@@ -10,9 +10,10 @@ import fitz
 import pdb
 import base64
 import pickle
-from .history import read_hist , save_hist
+from .history import read_hist, save_hist
 
 idx = 0
+
 
 def pdf2image(pdf_path):
 
@@ -27,27 +28,29 @@ def pdf2image(pdf_path):
 
         pix.writePNG("_.png")  # 将图片写入指定的文件夹内
 
-        with open("_.png" , "rb") as fil:
+        with open("_.png", "rb") as fil:
             b64 = base64.b64encode(fil.read())
 
         b64 = "data:image/png;base64," + str(b64)[2:-1]
         res.append(b64)
     return res
 
-def img2image(path , type):
 
-    with open(path , "rb") as f:
+def img2image(path, type):
+
+    with open(path, "rb") as f:
         b64 = base64.b64encode(f.read())
-    b64 = "data:image/{0};base64,{1}".format( type , str(b64)[2:-1] )
+    b64 = "data:image/{0};base64,{1}".format(type, str(b64)[2:-1])
 
     return [b64]
+
 
 def upload_file(request):
     global idx
 
     files = request.FILES.getlist("file", None)
 
-    print ("got %d files" % len(files))
+    print("got %d files" % len(files))
 
     imgs = []
     for file in files:
@@ -65,17 +68,16 @@ def upload_file(request):
             elif filename.endswith(".jpeg"):
                 type = "jpeg"
 
-            imgs += img2image(file_path , type)
-        
+            imgs += img2image(file_path, type)
+
         os.remove(file_path)
 
     hist = read_hist()
     hist.append({
-        "name" : len(hist) , 
-        "imgs" : imgs , 
+        "name": len(hist),
+        "imgs": imgs,
     })
     hist = hist[-10:]
     save_hist(hist)
 
-    return allow_acess(JsonResponse({"imgs" : imgs}))
-
+    return allow_acess(JsonResponse({"imgs": imgs}))

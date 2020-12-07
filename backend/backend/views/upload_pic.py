@@ -1,5 +1,3 @@
-# -*- mode: python ; coding: utf-8 -*-
-
 from django.shortcuts import HttpResponse
 from .base import allow_acess
 import base64

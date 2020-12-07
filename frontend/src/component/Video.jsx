@@ -51,20 +51,24 @@ export default class Video extends Component {
         const turnPage = service.uploadPic(this.capture);
 
         let me = this;
-        turnPage.then((v) => {
-            // turn page up/down
-            // 0: page up
-            // 1: don't page up/down
-            // 2: page down
-            // console.log("turn page? ", v);
-            if (v.toString() === "0") {
-                // scroll up
-                me.props.pageScroll(-1);
-            } else if (v.toString() === "2") {
-                // scroll down
-                me.props.pageScroll(1);
-            }
-        });
+        turnPage
+            .then((v) => {
+                // turn page up/down
+                // 0: page up
+                // 1: don't page up/down
+                // 2: page down
+                // console.log("turn page? ", v);
+                if (v.toString() === "0") {
+                    // scroll up
+                    me.props.pageScroll(-1);
+                } else if (v.toString() === "2") {
+                    // scroll down
+                    me.props.pageScroll(1);
+                }
+            })
+            .catch((e) => {
+                console.warn("can't turn page in Video.jsx", e);
+            });
     }
 
     render() {
