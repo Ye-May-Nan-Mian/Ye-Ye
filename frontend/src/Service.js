@@ -24,9 +24,16 @@ export default class Service {
         return axios.get(url).then((response) => response.data);
     }
     // get a history file
-    async getHistoryfile() {
+    async getHistoryfile(value) {
         const url = `${API_URL}/historyfile/`;
-        return axios.get(url).then((response) => response.data);
+        return axios
+            .get(url, { params: value })
+            .then((response) => response.data);
+    }
+    // delete a history file
+    async delHistoryfile(value) {
+        const url = `${API_URL}/historyfile/`;
+        return axios.delete(url, { params: value });
     }
     // post current theme
     async postTheme(theme) {

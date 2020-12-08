@@ -35,4 +35,6 @@ def historyfile(request):
         if x["name"] == req_name:
             ret = x
             break
+    if ret is None:
+        ret = {"imgs": []}
     return allow_acess(JsonResponse({"imgs": ret["imgs"]}))
