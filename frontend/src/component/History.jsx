@@ -18,6 +18,7 @@ class History extends Component {
         this.storageChange = this.storageChange.bind(this);
         this.onClose = this.onClose.bind(this);
         this.getFile = this.getFile.bind(this);
+        this.delFile = this.delFile.bind(this);
     }
 
     storageChange() {
@@ -33,16 +34,20 @@ class History extends Component {
         store.dispatch(action);
     }
 
-    getFile(name) {
-        service.getHistoryfile(name).then((data) => {
+    getFile(value) {
+        service.getHistoryfile({ name: value }).then((data) => {
             const action1 = changeFile(data.imgs);
             store.dispatch(action1);
-            const action2 = changeFileName(name);
+            const action2 = changeFileName(value);
             store.dispatch(action2);
             const action3 = chagneImgWidth(90);
             store.dispatch(action3);
         });
         this.onClose();
+    }
+
+    delFile(value) {
+        service.delHistoryfile({ name: value });
     }
 
     render() {
@@ -96,6 +101,13 @@ class History extends Component {
                                     }}
                                 >
                                     {item.name}
+                                </p>
+                                <p
+                                    onClick={() => {
+                                        this.delFile(item.name);
+                                    }}
+                                >
+                                    {"  删除"}
                                 </p>
                             </List.Item>
                         )}
