@@ -2,7 +2,7 @@ import django
 from .upload_file import upload_file
 from .upload_pic import upload_pic
 from .base import allow_acess
-from .history import historyall
+from .history import historyall , historyfile
 from django.http import HttpResponse , JsonResponse
 
 def get_csrf(request):
