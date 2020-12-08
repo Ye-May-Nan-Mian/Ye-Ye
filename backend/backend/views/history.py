@@ -27,12 +27,24 @@ def historyall(request):
 
 
 def historyfile(request):
-    req_name = request.GET.get("name")
+
+    flag = "get"
+    name = None
+    if request.GET.get("name"):
+        flag = "get"
+        name = request.GET.get("name")
+
+    elif request.GET.get("delete_name"):
+        flag = "del"
+        name = request.GET.get("delete_name")
 
     hist = read_hist()
-    ret = None
-    for x in hist:
-        if x["name"] == req_name:
-            ret = x
-            break
-    return allow_acess(JsonResponse({"imgs": ret["imgs"]}))
+
+    if flag == "get":
+        ret = [x for x in hist if x["name"] == name][0]
+        return allow_acess(JsonResponse({"imgs": ret["imgs"]}))
+
+    if hist.get(name):
+        hist.pop(name)
+    save_hist(hist)
+    return allow_acess(JsonResponse({}))
