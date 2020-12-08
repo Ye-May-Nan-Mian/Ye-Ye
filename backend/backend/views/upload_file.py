@@ -53,9 +53,12 @@ def upload_file(request):
     print("got %d files" % len(files))
 
     imgs = []
+    name = None
     for file in files:
 
         filename = str(file)
+        if name == None:
+            name = filename
         file_path = default_storage.save(filename, ContentFile(file.read()))
 
         if filename.endswith(".pdf"):
@@ -72,9 +75,12 @@ def upload_file(request):
 
         os.remove(file_path)
 
+    if len(files) > 1:
+        name = name + " 等"
+
     hist = read_hist()
     hist.append({
-        "name": len(hist),
+        "name": name,
         "imgs": imgs,
     })
     hist = hist[-10:]

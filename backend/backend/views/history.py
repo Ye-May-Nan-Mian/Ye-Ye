@@ -15,7 +15,7 @@ def read_hist():
 
 def save_hist(hist):
     hist_file = "hist.pkl"
-    print("fuck")
+
     with open(hist_file, "wb") as fil:
         pickle.dump(hist, fil)
 
@@ -27,7 +27,7 @@ def historyall(request):
 
 
 def historyfile(request):
-    req_name = request.GET["name"]
+    req_name = request.GET.get("name")
 
     hist = read_hist()
     ret = None
