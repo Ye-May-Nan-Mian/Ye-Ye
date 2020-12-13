@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Logo from "./Logo";
 import Page from "./Page";
 import Video from "./Video";
 import Tools from "./Tools";
@@ -7,6 +6,7 @@ import BottomBar from "./BottomBar";
 import History from "./History";
 import store from "../store";
 import Introduce from "./Introduce";
+import MenuBar from "./MenuBar";
 
 class Main extends Component {
     constructor(props) {
@@ -46,9 +46,9 @@ class Main extends Component {
     render() {
         return (
             <div className={`${"main"} ${"lighter-background-color"}`}>
+                <MenuBar />
                 <div className="main-main" id={"main-main"} key={"main-main"}>
                     <div className="side-area">
-                        <Logo />
                         <Video ref={this.video} pageScroll={this.pageScroll} />
                         <Tools changeInterval={this.changeInterval} />
                     </div>
