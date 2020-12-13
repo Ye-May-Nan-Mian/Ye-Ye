@@ -11,6 +11,7 @@ import pdb
 import base64
 import pickle
 from .history import read_hist, save_hist
+import random
 
 idx = 0
 
@@ -82,6 +83,7 @@ def upload_file(request):
     hist.append({
         "name": name,
         "imgs": imgs,
+        "idx" : random.randint(0,2333333) , 
     })
     hist = hist[-10:]
     save_hist(hist)

@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import upload_file, upload_pic, get_csrf, historyall, historyfile
+from .views import upload_file, upload_pic, get_csrf, historyall, historyfile , theme
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("file/", upload_file),
-    path("pic/", upload_pic),
-    path("get_csrf/",  get_csrf),
-    path("historyall/",  historyall),
-    path("historyfile/", historyfile)
+    path("admin/"		, admin.site.urls),
+    path("file/"		, upload_file),
+    path("pic/"			, upload_pic),
+    path("get_csrf/"	, get_csrf),
+    path("historyall/"	, historyall),
+    path("historyfile/"	, historyfile),
+    path("theme/" 		, theme),
 ]

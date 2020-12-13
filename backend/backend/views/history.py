@@ -22,29 +22,46 @@ def save_hist(hist):
 
 def historyall(request):
     hist = read_hist()
-    ret = [{"name": x["name"], "img": x["imgs"][0]} for x in hist]
+
+    ret = [{
+        "name": x["name"] , 
+        "img" : None if len(x["imgs"]) == 0 else x["imgs"][0] , 
+        "idx" : x["idx" ] , 
+    } for x in hist]
+
     return allow_acess(JsonResponse({"files": ret}))
 
 
 def historyfile(request):
 
     flag = "get"
-    name = None
-    if request.GET.get("name"):
+    idx = None
+    if request.GET.get("idx"):
         flag = "get"
-        name = request.GET.get("name")
+        idx = request.GET.get("idx")
 
-    elif request.GET.get("delete_name"):
+    elif request.GET.get("delete_idx"):
         flag = "del"
-        name = request.GET.get("delete_name")
+        idx = request.GET.get("delete_idx")
 
     hist = read_hist()
     
     if flag == "get":
-        ret = [x for x in hist if x["name"] == name][0]
-        return allow_acess(JsonResponse({"imgs": ret["imgs"]}))
+        ret = [x for x in hist if int(x["idx"]) == int(idx)]
+        if len(ret) == 0:
+            ret = None
+        else:
+            ret = ret[0]["imgs"]
+        return allow_acess(JsonResponse({"imgs": ret}))
 
-    if hist.get(name):
-        hist.pop(name)
+    # else if flag == "del"
+
+    to_del_pos = [i for i in range(len(hist)) if int(hist[i]["idx"]) == int(idx)]
+
+    if len(to_del_pos) > 0:
+        x = to_del_pos[0]
+        hist.pop(x)
+
     save_hist(hist)
+
     return allow_acess(JsonResponse({}))
