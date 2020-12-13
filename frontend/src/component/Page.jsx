@@ -38,22 +38,34 @@ export default class Page extends Component {
     }
 
     render() {
-        return this.state.fileImgs.length > 0 ? (
-            <div className="page" key={"pageimgs"} ref={this.pageimg}>
-                {/* some small pictures */}
-                {this.state.fileImgs.map((img, index) => {
-                    return (
-                        <Image
-                            className="page-img"
-                            key={"fileimg" + index}
-                            alt={"小君没能加载出文件Orz"}
-                            src={img}
-                            preview={false}
-                            width={(this.state.imgWidth - 21).toString() + "vw"}
-                        />
-                    );
-                })}
+        return (
+            <div
+                className={`${"page"} ${"dark-border"}`}
+                key={"pageimgs"}
+                ref={this.pageimg}
+            >
+                {
+                    this.state.fileImgs.length > 0
+                        ? /* some small pictures */
+                          this.state.fileImgs.map((img, index) => {
+                              return (
+                                  <Image
+                                      className="page-img"
+                                      key={"fileimg" + index}
+                                      alt={"小君没能加载出文件Orz"}
+                                      src={img}
+                                      preview={false}
+                                      width={
+                                          (
+                                              this.state.imgWidth - 21
+                                          ).toString() + "vw"
+                                      }
+                                  />
+                              );
+                          })
+                        : null // TODO: we can add some components to here if we want
+                }
             </div>
-        ) : null; // TODO: we can add some components to here if we want
+        );
     }
 }

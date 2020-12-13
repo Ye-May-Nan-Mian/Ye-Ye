@@ -70,65 +70,61 @@ class Tools extends Component {
 
     render() {
         return (
-            <div className={`${"side-tool"} ${"base-background-color"}`}>
+            <div
+                className={`${"side-tool"} ${"base-background-color"} ${"dark-border"}`}
+            >
                 {/* Camera Upload Color */}
-                <div className={"side-tool-line"}>
-                    <CameraOutlined
-                        id="CameraController"
-                        className={`${"tool-icon"} ${"toolIcon"}`}
-                        onClick={this.switchCameraState}
-                    />
-                    <UploadFile id="UploadController" />
-                    <ColorBar />
-                </div>
+                <CameraOutlined
+                    id="CameraController"
+                    className={`${"tool-icon"} ${"toolIcon"}`}
+                    onClick={this.switchCameraState}
+                />
+                <UploadFile id="UploadController" />
+                <ColorBar />
                 {/* Speed History Introduce  */}
-                <div className={"side-tool-line"}>
-                    <Dropdown
-                        overlay={
-                            // TODO: div's style
-                            <div>
-                                <Slider
-                                    className={"speed-slider"}
-                                    range={false}
-                                    defaultValue={150}
-                                    min={100}
-                                    max={330}
-                                    step={10}
-                                    onChange={(t) =>
-                                        this.props.changeInterval(t)
-                                    }
-                                    tipFormatter={() => {
-                                        return "往左移动，人脸识别更快哦";
-                                    }}
-                                    tooltipPlacement={"bottom"}
-                                />
-                            </div>
-                        }
-                        placement={"bottomCenter"}
-                        trigger={["hover"]}
-                    >
-                        <DashboardOutlined
-                            className={`${"tool-icon"} ${"toolIcon"}`}
-                            style={{
-                                cursor: "pointer"
-                            }}
-                        />
-                    </Dropdown>
-                    <HistoryOutlined
-                        id="HistoryController"
+                <Dropdown
+                    overlay={
+                        // TODO: div's style
+                        <div>
+                            <Slider
+                                className={"speed-slider"}
+                                range={false}
+                                defaultValue={150}
+                                min={100}
+                                max={330}
+                                step={10}
+                                onChange={(t) => this.props.changeInterval(t)}
+                                tipFormatter={() => {
+                                    return "往左移动，人脸识别更快哦";
+                                }}
+                                tooltipPlacement={"bottom"}
+                            />
+                        </div>
+                    }
+                    placement={"bottomRight"}
+                    trigger={["hover"]}
+                >
+                    <DashboardOutlined
                         className={`${"tool-icon"} ${"toolIcon"}`}
-                        onClick={() => {
-                            this.switchHistoryPage();
+                        style={{
+                            cursor: "pointer"
                         }}
                     />
-                    <UserOutlined
-                        id="UserController"
-                        className={`${"tool-icon"} ${"toolIcon"}`}
-                        onClick={() => {
-                            this.switchIntroPage();
-                        }}
-                    />
-                </div>
+                </Dropdown>
+                <HistoryOutlined
+                    id="HistoryController"
+                    className={`${"tool-icon"} ${"toolIcon"}`}
+                    onClick={() => {
+                        this.switchHistoryPage();
+                    }}
+                />
+                <UserOutlined
+                    id="UserController"
+                    className={`${"tool-icon"} ${"toolIcon"}`}
+                    onClick={() => {
+                        this.switchIntroPage();
+                    }}
+                />
             </div>
         );
     }

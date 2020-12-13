@@ -16,7 +16,7 @@ const defaultState = {
     // theme colors
     // this can be stored in less
     // but History.Drawer don't support less, so...
-    colors: ["#F5FBFF", "#DCEFFD", "#A7D4F4", "#7AB9E6", "#559FD4", "#3583BB"]
+    colors: ["#FFFFFF", "#373B43", "#72767E", "#535860", "#1D212A", "#141D2F"]
 };
 
 export default (state = defaultState, action) => {

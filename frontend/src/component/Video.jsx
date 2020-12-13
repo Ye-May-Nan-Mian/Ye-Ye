@@ -73,7 +73,9 @@ export default class Video extends Component {
 
     render() {
         return (
-            <div className={`${"video"} ${"darker-background-color"}`}>
+            <div
+                className={`${"video"} ${"darker-background-color"} ${"dark-border"}`}
+            >
                 {this.state.cameraOpened && (
                     <Webcam
                         className="video-webcam"

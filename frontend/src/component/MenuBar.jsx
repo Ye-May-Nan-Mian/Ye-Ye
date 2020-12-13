@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Image } from "antd";
 import {
     MinusOutlined,
     FullscreenOutlined,
     CloseOutlined
 } from "@ant-design/icons";
+import Logo from "./Logo";
 const ipcRenderer = window.ipcRenderer;
 
 // import Service from "../Service";
@@ -38,12 +38,8 @@ class MenuBar extends Component {
     render() {
         return (
             <div className={`${"manubar"} ${"dark-background-color"}`}>
-                <div className="logo-img-div">
-                    <Image
-                        className="logo-img"
-                        src={require("../img/favicon.ico")}
-                        preview={false}
-                    />
+                <div className={`${"logo-img-div"}`}>
+                    <Logo size={"2vh"} />
                 </div>
                 <p className={`${"manubar-name"} ${"white-color"}`}>{"页页"}</p>
                 <MinusOutlined

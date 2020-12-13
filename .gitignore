@@ -42,3 +42,4 @@ _.pdf
 backend/inner-python/*
 manage.spec
 hist.pkl
+backend/themes.pkl

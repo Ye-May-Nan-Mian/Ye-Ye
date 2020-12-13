@@ -6,7 +6,8 @@ import {
     switchHistoryPage,
     changeFile,
     changeFileName,
-    chagneImgWidth
+    chagneImgWidth,
+    changeHistory
 } from "store/actionCreators";
 
 const service = new Service();
@@ -35,7 +36,7 @@ class History extends Component {
     }
 
     getFile(value) {
-        service.getHistoryfile({ name: value }).then((data) => {
+        service.getHistoryfile({ idx: value }).then((data) => {
             const action1 = changeFile(data.imgs);
             store.dispatch(action1);
             const action2 = changeFileName(value);
@@ -47,7 +48,13 @@ class History extends Component {
     }
 
     delFile(value) {
-        service.delHistoryfile({ name: value });
+        service.delHistoryfile({ delete_idx: value }).then(() =>
+            // get new history from backend
+            service.getHistoryall().then((data) => {
+                const action = changeHistory(data.files);
+                store.dispatch(action);
+            })
+        );
     }
 
     render() {
@@ -72,7 +79,7 @@ class History extends Component {
                     key={"leftHistory"}
                     mask={true}
                     maskClosable={true}
-                    width={"18vw"}
+                    width={"36vw"}
                     getContainer={document.getElementById("main-main")}
                     style={{
                         position: "absolute"
@@ -83,28 +90,29 @@ class History extends Component {
                     bodyStyle={{ backgroundColor: this.state.colors[4] }}
                 >
                     <List
-                        className={`${"white-color"}`}
+                        className={`${"history-list"} ${"white-color"}`}
                         bordered
                         dataSource={this.state.history}
                         renderItem={(item) => (
                             <List.Item
-                                className={`${"white-color"}`}
-                                style={{
-                                    cursor: "pointer"
-                                }}
+                                className={`${"history-list-item"} ${"white-color"}`}
                             >
-                                {/* TODO: style */}
-                                <Image src={item.img} />
+                                <Image
+                                    className={`${"history-img"}`}
+                                    src={item.img}
+                                />
                                 <p
+                                    className={`${"history-title"} ${"darker-background-color"}`}
                                     onClick={() => {
-                                        this.getFile(item.name);
+                                        this.getFile(item.idx);
                                     }}
                                 >
                                     {item.name}
                                 </p>
                                 <p
+                                    className={`${"history-delete"}`}
                                     onClick={() => {
-                                        this.delFile(item.name);
+                                        this.delFile(item.idx);
                                     }}
                                 >
                                     {"  删除"}

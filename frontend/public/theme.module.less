@@ -1,9 +1,9 @@
-@white-color: #f5fbff;
-@light-color: #dceffd;
-@lighter-color: #a7d4f4;
-@base-color: #7ab9e6;
-@darker-color: #559fd4;
-@dark-color: #3583bb;
+@white-color: #ffffff;
+@light-color: #373b43;
+@lighter-color: #72767e;
+@base-color: #535860;
+@darker-color: #1d212a;
+@dark-color: #141d2f;
 
 // scrollbar
 ::-webkit-scrollbar {
@@ -85,6 +85,31 @@
     background-color: @dark-color !important;
 }
 
+// logo
+.white-logo {
+    fill: @white-color;
+}
+
+.light-logo {
+    fill: @light-color;
+}
+
+.lighter-logo {
+    fill: @lighter-color;
+}
+
+.base-logo {
+    fill: @base-color;
+}
+
+.darker-logo {
+    fill: @darker-color;
+}
+
+.dark-logo {
+    fill: @dark-color;
+}
+
 // icons of tool area
 .toolIcon {
     color: @white-color !important;
@@ -105,6 +130,24 @@
     background-color: @lighter-color;
 }
 
+// min max &close icons of memu bar
+.menuIcon {
+    color: @white-color !important;
+    background-color: @dark-color;
+    transition: 100ms ease-out;
+}
+
+.menuIcon:hover {
+    color: @dark-color !important;
+    background-color: @white-color;
+    transition: 100ms ease-in;
+}
+
+.menuIcon:active {
+    color: @dark-color !important;
+    background-color: @lighter-color;
+}
+
 // plus & minus icons of bottom bar
 .plusMinusIcon {
     color: @white-color !important;
@@ -121,4 +164,10 @@
 .plusMinusIcon:active {
     color: @dark-color !important;
     background-color: @lighter-color;
+}
+
+.dark-border {
+    border-color: @dark-color;
+    border-width: 1px;
+    border-style: solid;
 }

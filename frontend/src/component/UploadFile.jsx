@@ -70,7 +70,11 @@ class UploadFile extends Component {
 
     render() {
         return (
-            <div className="uploadfile">
+            <div
+                className={`${"tool-icon"} ${"toolIcon"}`}
+                onClick={() => this.fileInputRef.current.click()}
+            >
+                <UploadOutlined className={`${"uploadOutlined"}`} />
                 <input
                     ref={this.fileInputRef}
                     id="inputfile"
@@ -81,10 +85,6 @@ class UploadFile extends Component {
                     multiple={true}
                     onChange={this.onFileChange}
                     style={{ display: "none" }}
-                />
-                <UploadOutlined
-                    className={`${"tool-icon"} ${"toolIcon"}`}
-                    onClick={() => this.fileInputRef.current.click()}
                 />
             </div>
         );
