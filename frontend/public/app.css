@@ -17,7 +17,7 @@
     flex: 1;
     flex-direction: row;
     justify-content: space-between;
-    height: 98vh;
+    height: 95vh;
     width: 100vw;
     overflow: hidden;
 }
@@ -38,35 +38,8 @@
     /* background-color: aqua; */
     display: flex;
     flex-direction: column;
-    height: 98vh;
+    height: 95vh;
     width: 20vw;
-}
-
-.side-logo {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow: hidden;
-    height: 10vh;
-    width: 20vw;
-}
-
-.side-logo-img-div {
-    align-items: center;
-    justify-content: center;
-    border-radius: 1vh;
-    border-width: 0px;
-    height: min(9vh, 18vw);
-    width: min(9vh, 18vw);
-    max-height: 90%;
-    max-width: 90%;
-    overflow: hidden;
-}
-
-.side-logo-img {
-    height: 100%;
-    width: 100%;
 }
 
 .video {
@@ -88,7 +61,7 @@
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    height: 56vh;
+    height: 73vh;
     width: 20vw;
     padding-left: 0.5vw;
     padding-right: 0.5vw;
@@ -157,7 +130,7 @@
     flex-direction: column;
     justify-content: space-between;
     width: 80vw;
-    height: 98vh;
+    height: 95vh;
     overflow-x: auto;
     overflow-y: scroll;
     padding-top: 1px;
@@ -173,6 +146,56 @@
     margin-top: 1px;
     margin-bottom: 1px;
     margin-right: 2px;
+}
+
+/* TOP ManuBar */
+.manubar {
+    align-items: center;
+    align-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 3vh;
+    width: 100vw;
+    /* overflow: hidden; */
+    -webkit-app-region: drag;
+    -webkit-user-select: none;
+}
+
+.logo-img-div {
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5vh;
+    border-width: 0px;
+    height: 2vh;
+    width: 2vh;
+    overflow: hidden;
+    margin-left: 1vh;
+    -webkit-app-region: no-drag;
+}
+
+.logo-img {
+    /* so good! */
+    vertical-align: top;
+    height: 100%;
+    width: 100%;
+}
+
+.manubar-name {
+    align-self: flex-start;
+    flex: 1;
+    font-size: 1.5vh;
+    line-height: 3vh;
+    margin-left: 0.5vh;
+}
+
+.manubar-icon {
+    justify-content: center;
+    font-size: 2vh;
+    height: 2vh;
+    width: 2vh;
+    margin-right: 0.5vh;
+    -webkit-app-region: no-drag;
 }
 
 /* BOTTOM */
@@ -192,7 +215,7 @@
     flex: 1;
     font-size: 1.5vh;
     line-height: 2vh;
-    margin-left: 10px;
+    margin-left: 0.5vh;
 }
 
 .bottombar-icon {
@@ -200,5 +223,5 @@
     font-size: 1.5vh;
     height: 1.5vh;
     width: 1.5vh;
-    margin-right: 10px;
+    margin-right: 0.5vh;
 }
