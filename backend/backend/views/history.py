@@ -24,9 +24,9 @@ def historyall(request):
     hist = read_hist()
 
     ret = [{
-        "name": x["name"] , 
-        "img" : None if len(x["imgs"]) == 0 else x["imgs"][0] , 
-        "idx" : x["idx" ] , 
+        "name": x["name"],
+        "img": None if len(x["imgs"]) == 0 else x["imgs"][0],
+        "idx": x["idx"],
     } for x in hist]
 
     return allow_acess(JsonResponse({"files": ret}))
@@ -45,7 +45,7 @@ def historyfile(request):
         idx = request.GET.get("delete_idx")
 
     hist = read_hist()
-    
+
     if flag == "get":
         ret = [x for x in hist if int(x["idx"]) == int(idx)]
         if len(ret) == 0:
@@ -56,7 +56,8 @@ def historyfile(request):
 
     # else if flag == "del"
 
-    to_del_pos = [i for i in range(len(hist)) if int(hist[i]["idx"]) == int(idx)]
+    to_del_pos = [i for i in range(len(hist)) if int(
+        hist[i]["idx"]) == int(idx)]
 
     if len(to_del_pos) > 0:
         x = to_del_pos[0]

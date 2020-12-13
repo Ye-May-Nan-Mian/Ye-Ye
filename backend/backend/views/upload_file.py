@@ -83,7 +83,7 @@ def upload_file(request):
     hist.append({
         "name": name,
         "imgs": imgs,
-        "idx" : random.randint(0,2333333) , 
+        "idx": random.randint(0, 2333333),
     })
     hist = hist[-10:]
     save_hist(hist)
