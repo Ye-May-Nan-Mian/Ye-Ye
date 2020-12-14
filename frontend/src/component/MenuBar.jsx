@@ -39,7 +39,12 @@ class MenuBar extends Component {
         return (
             <div className={`${"manubar"} ${"dark-background-color"}`}>
                 <div className={`${"logo-img-div"}`}>
-                    <Logo size={"2vh"} />
+                    <Logo
+                        height={"2vh"}
+                        width={"2vh"}
+                        outterColor={"white-logo"}
+                        innerColor={"base-logo"}
+                    />
                 </div>
                 <p className={`${"manubar-name"} ${"white-color"}`}>{"页页"}</p>
                 <MinusOutlined

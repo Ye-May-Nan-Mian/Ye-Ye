@@ -153,6 +153,13 @@
     margin-right: 2px;
 }
 
+.page-close {
+    position: absolute;
+    right: 1.5vw;
+    top: 4vh;
+    font-size: 2vh;
+}
+
 /* TOP ManuBar */
 .manubar {
     align-items: center;
@@ -169,6 +176,7 @@
 
 .logo-img-div {
     align-items: center;
+    display: flex;
     justify-content: center;
     border-radius: 0.5vh;
     border-width: 0px;
@@ -176,7 +184,6 @@
     width: 2vh;
     margin-left: 1vh;
     margin-right: 1vh;
-    overflow: hidden;
     -webkit-app-region: no-drag;
 }
 

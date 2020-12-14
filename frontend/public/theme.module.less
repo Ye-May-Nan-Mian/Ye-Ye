@@ -110,7 +110,7 @@
     fill: @dark-color;
 }
 
-// icons of tool area
+// icons of tool area (buttons)
 .toolIcon {
     color: @white-color !important;
     background-color: @base-color;
@@ -128,6 +128,22 @@
 .toolIcon:active {
     color: @darker-color !important;
     background-color: @lighter-color;
+}
+
+// page close icon (a button)
+.pageCloseIcon {
+    color: @dark-color !important;
+    border-radius: 0.5vh;
+    border-width: 0px;
+    transition: 100ms ease-out;
+}
+
+.pageCloseIcon:hover {
+    color: @darker-color !important;
+}
+
+.pageCloseIcon:active {
+    color: @light-color !important;
 }
 
 // min max &close icons of memu bar

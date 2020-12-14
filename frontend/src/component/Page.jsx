@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Image } from "antd";
 import store from "../store";
+import Logo from "./Logo";
+import { CloseCircleOutlined } from "@ant-design/icons";
+import { changeFile, changeFileName } from "store/actionCreators";
 
 /* Page
  * height: 98vh, width: 80vw
@@ -16,6 +19,7 @@ export default class Page extends Component {
         this.pageimg = React.createRef();
         this.storageChange = this.storageChange.bind(this);
         this.scrollPage = this.scrollPage.bind(this);
+        this.closePage = this.closePage.bind(this);
     }
 
     storageChange() {
@@ -37,6 +41,13 @@ export default class Page extends Component {
         });
     }
 
+    closePage() {
+        const action1 = changeFile([]);
+        store.dispatch(action1);
+        const action2 = changeFileName("");
+        store.dispatch(action2);
+    }
+
     render() {
         return (
             <div
@@ -44,27 +55,36 @@ export default class Page extends Component {
                 key={"pageimgs"}
                 ref={this.pageimg}
             >
-                {
-                    this.state.fileImgs.length > 0
-                        ? /* some small pictures */
-                          this.state.fileImgs.map((img, index) => {
-                              return (
-                                  <Image
-                                      className="page-img"
-                                      key={"fileimg" + index}
-                                      alt={"小君没能加载出文件Orz"}
-                                      src={img}
-                                      preview={false}
-                                      width={
-                                          (
-                                              this.state.imgWidth - 21
-                                          ).toString() + "vw"
-                                      }
-                                  />
-                              );
-                          })
-                        : null // TODO: we can add some components to here if we want
-                }
+                {this.state.fileImgs.length > 0 ? (
+                    /* some pictures */
+                    this.state.fileImgs.map((img, index) => {
+                        return (
+                            <Image
+                                className="page-img"
+                                key={"fileimg" + index}
+                                alt={"小君没能加载出文件Orz"}
+                                src={img}
+                                preview={false}
+                                width={
+                                    (this.state.imgWidth - 21).toString() + "vw"
+                                }
+                            />
+                        );
+                    })
+                ) : (
+                    <Logo
+                        height={"95vh"}
+                        width={"78vw"}
+                        outterColor={"base-logo"}
+                        innerColor={"lighter-logo"}
+                    />
+                )}
+                {this.state.fileImgs.length > 0 ? (
+                    <CloseCircleOutlined
+                        className={`${"page-close"} ${"pageCloseIcon"}`}
+                        onClick={this.closePage}
+                    />
+                ) : null}
             </div>
         );
     }

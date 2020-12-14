@@ -42,3 +42,13 @@ Display window's Menu.
 # 0.2.4
 
 Using Redux, delete Router & React.StrictMode
+
+# 0.2.5
+
+Support history and theme fully.
+
+Adujst interface layout.
+
+# 0.2.6
+
+Add logo background and page's close button. 
