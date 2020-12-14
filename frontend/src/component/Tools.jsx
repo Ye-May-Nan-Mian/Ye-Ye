@@ -20,7 +20,7 @@ import Service from "../Service";
 const service = new Service();
 
 /* Tools
- * height: 56vh, width: 20vw
+ * height: 100vh - 250px, width: 200px
  * background-color: baseColor
  */
 class Tools extends Component {

@@ -52,3 +52,7 @@ Adujst interface layout.
 # 0.2.6
 
 Add logo background and page's close button. 
+
+# 0.3.0
+
+From vh/vw to px, icons/texts' size will not change as the window size changes. 

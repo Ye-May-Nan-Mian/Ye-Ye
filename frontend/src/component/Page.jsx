@@ -6,7 +6,7 @@ import { CloseCircleOutlined } from "@ant-design/icons";
 import { changeFile, changeFileName } from "store/actionCreators";
 
 /* Page
- * height: 98vh, width: 80vw
+ * height: 100vh - 50px, width: 100vw - 200px
  * background-color: lighterColor
  */
 export default class Page extends Component {
@@ -58,6 +58,7 @@ export default class Page extends Component {
                 {this.state.fileImgs.length > 0 ? (
                     /* some pictures */
                     this.state.fileImgs.map((img, index) => {
+                        // TODO: width of images
                         return (
                             <Image
                                 className="page-img"
@@ -73,8 +74,8 @@ export default class Page extends Component {
                     })
                 ) : (
                     <Logo
-                        height={"95vh"}
-                        width={"78vw"}
+                        height={"calc(100vh - 50px)"}
+                        width={"calc(100vw - 202px)"}
                         outterColor={"base-logo"}
                         innerColor={"lighter-logo"}
                     />

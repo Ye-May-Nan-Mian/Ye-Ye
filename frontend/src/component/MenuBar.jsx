@@ -12,7 +12,7 @@ const ipcRenderer = window.ipcRenderer;
 // const service = new Service();
 
 /* BottomBar
- * height: 2vh, width: 100vw
+ * height: 20px, width: 100vw
  * background-color: darkColor
  */
 class MenuBar extends Component {
@@ -37,26 +37,26 @@ class MenuBar extends Component {
 
     render() {
         return (
-            <div className={`${"manubar"} ${"dark-background-color"}`}>
+            <div className={`${"menubar"} ${"dark-background-color"}`}>
                 <div className={`${"logo-img-div"}`}>
                     <Logo
-                        height={"2vh"}
-                        width={"2vh"}
+                        height={"20px"}
+                        width={"20px"}
                         outterColor={"white-logo"}
                         innerColor={"base-logo"}
                     />
                 </div>
-                <p className={`${"manubar-name"} ${"white-color"}`}>{"页页"}</p>
+                <p className={`${"menubar-name"} ${"white-color"}`}>{"页页"}</p>
                 <MinusOutlined
-                    className={`${"manubar-icon"} ${"plusMinusIcon"}`}
+                    className={`${"menubar-icon"} ${"menuIcon"}`}
                     onClick={this.minWin}
                 />
                 <FullscreenOutlined
-                    className={`${"manubar-icon"} ${"plusMinusIcon"}`}
+                    className={`${"menubar-icon"} ${"menuIcon"}`}
                     onClick={this.maxWin}
                 />
                 <CloseOutlined
-                    className={`${"manubar-icon"} ${"plusMinusIcon"}`}
+                    className={`${"menubar-icon"} ${"menuIcon"}`}
                     onClick={this.closeWin}
                 />
             </div>

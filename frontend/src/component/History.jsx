@@ -79,7 +79,7 @@ class History extends Component {
                     key={"leftHistory"}
                     mask={true}
                     maskClosable={true}
-                    width={"36vw"}
+                    width={"300px"}
                     getContainer={document.getElementById("main-main")}
                     style={{
                         position: "absolute"

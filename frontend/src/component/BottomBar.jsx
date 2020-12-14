@@ -8,7 +8,7 @@ import { chagneImgWidth } from "store/actionCreators";
 // const service = new Service();
 
 /* BottomBar
- * height: 2vh, width: 100vw
+ * height: 20px, width: 100vw
  * background-color: darkColor
  */
 export default class BottomBar extends Component {

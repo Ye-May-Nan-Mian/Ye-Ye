@@ -8,7 +8,7 @@ const webcamHeight = 256;
 const webcamWidth = 256;
 
 /* Video
- * height: 32vh, width: 20vw
+ * height: 200px, width: 200px
  * background-color: darkerColor
  */
 export default class Video extends Component {

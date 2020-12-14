@@ -46,7 +46,7 @@ class Introduce extends Component {
                     key={"leftHistory"}
                     mask={true}
                     maskClosable={true}
-                    width={"36vw"}
+                    width={"300px"}
                     getContainer={false}
                     style={{
                         position: "absolute"
