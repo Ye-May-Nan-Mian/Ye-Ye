@@ -28,9 +28,9 @@ class Tools extends Component {
         super(props);
         this.state = store.getState();
         this.storageChange = this.storageChange.bind(this);
-        this.switchCameraState = this.switchCameraState.bind(this);
-        this.switchHistoryPage = this.switchHistoryPage.bind(this);
-        this.switchIntroPage = this.switchIntroPage.bind(this);
+        this.switchCamera = this.switchCamera.bind(this);
+        this.switchHistory = this.switchHistory.bind(this);
+        this.switchIntro = this.switchIntro.bind(this);
     }
 
     storageChange() {
@@ -42,17 +42,16 @@ class Tools extends Component {
     }
 
     // camera state: opened / closed
-    switchCameraState() {
+    switchCamera() {
         const value = this.state.cameraOpened ? false : true;
         const action = switchCameraState(value);
         store.dispatch(action);
     }
 
     // history page state: display / hide
-    switchHistoryPage() {
+    switchHistory() {
         // display history page
-        const value = this.state.introShow ? false : true;
-        const action = switchHistoryPage(value);
+        const action = switchHistoryPage(true);
         store.dispatch(action);
         // get history from backend
         service.getHistoryall().then((data) => {
@@ -62,9 +61,8 @@ class Tools extends Component {
     }
 
     // introduce page state: display / hide
-    switchIntroPage() {
-        const value = this.state.introShow ? false : true;
-        const action = switchIntroPage(value);
+    switchIntro() {
+        const action = switchIntroPage(true);
         store.dispatch(action);
     }
 
@@ -77,7 +75,7 @@ class Tools extends Component {
                 <CameraOutlined
                     id="CameraController"
                     className={`${"tool-icon"} ${"toolIcon"}`}
-                    onClick={this.switchCameraState}
+                    onClick={this.switchCamera}
                 />
                 <UploadFile id="UploadController" />
                 <ColorBar />
@@ -115,14 +113,14 @@ class Tools extends Component {
                     id="HistoryController"
                     className={`${"tool-icon"} ${"toolIcon"}`}
                     onClick={() => {
-                        this.switchHistoryPage();
+                        this.switchHistory();
                     }}
                 />
                 <UserOutlined
                     id="UserController"
                     className={`${"tool-icon"} ${"toolIcon"}`}
                     onClick={() => {
-                        this.switchIntroPage();
+                        this.switchIntro();
                     }}
                 />
             </div>

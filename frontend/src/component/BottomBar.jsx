@@ -11,52 +11,26 @@ import { chagneImgWidth } from "store/actionCreators";
  * height: 20px, width: 100vw
  * background-color: darkColor
  */
-export default class BottomBar extends Component {
-    constructor(props) {
-        super(props);
-        this.state = store.getState();
-        this.storageChange = this.storageChange.bind(this);
-        this.zoomIn = this.zoomIn.bind(this);
-        this.zoomOut = this.zoomOut.bind(this);
-    }
-
-    storageChange() {
-        this.setState(store.getState());
-    }
-
-    componentDidMount() {
-        store.subscribe(this.storageChange);
-    }
-
-    zoomIn() {
-        let newImgWidth = this.state.imgWidth + 10;
-        newImgWidth = newImgWidth > 200 ? 200 : newImgWidth;
-        const action = chagneImgWidth(newImgWidth);
-        store.dispatch(action);
-    }
-
-    zoomOut() {
-        let newImgWidth = this.state.imgWidth - 10;
-        newImgWidth = newImgWidth < 50 ? 50 : newImgWidth;
-        const action = chagneImgWidth(newImgWidth);
+class BottomBar extends Component {
+    zoomInOut(value) {
+        const action = chagneImgWidth(value);
         store.dispatch(action);
     }
 
     render() {
         return (
             <div className={`${"bottombar"} ${"dark-background-color"}`}>
-                <p className={`${"bottombar-name"} ${"white-color"}`}>
-                    {this.state.fileName}
-                </p>
                 <MinusOutlined
                     className={`${"bottombar-icon"} ${"plusMinusIcon"}`}
-                    onClick={this.zoomOut}
+                    onClick={() => this.zoomInOut(-10)}
                 />
                 <PlusOutlined
                     className={`${"bottombar-icon"} ${"plusMinusIcon"}`}
-                    onClick={this.zoomIn}
+                    onClick={() => this.zoomInOut(10)}
                 />
             </div>
         );
     }
 }
+
+export default BottomBar;

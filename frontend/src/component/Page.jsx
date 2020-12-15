@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Image } from "antd";
+import { Image, Tabs } from "antd";
 import store from "../store";
 import Logo from "./Logo";
-import { CloseCircleOutlined } from "@ant-design/icons";
-import { changeFile, changeFileName } from "store/actionCreators";
+import { popPane, changeActivePane } from "store/actionCreators";
+
+const { TabPane } = Tabs;
 
 /* Page
  * height: 100vh - 50px, width: 100vw - 200px
@@ -19,7 +20,9 @@ export default class Page extends Component {
         this.pageimg = React.createRef();
         this.storageChange = this.storageChange.bind(this);
         this.scrollPage = this.scrollPage.bind(this);
-        this.closePage = this.closePage.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.onEdit = this.onEdit.bind(this);
+        this.remove = this.remove.bind(this);
     }
 
     storageChange() {
@@ -41,37 +44,63 @@ export default class Page extends Component {
         });
     }
 
-    closePage() {
-        const action1 = changeFile([]);
-        store.dispatch(action1);
-        const action2 = changeFileName("");
-        store.dispatch(action2);
+    onChange(activePane) {
+        const action = changeActivePane(activePane);
+        store.dispatch(action);
+    }
+
+    onEdit(targetKey, action) {
+        // here, action only contains "remove"
+        this[action](targetKey);
+    }
+
+    remove(targetKey) {
+        const action = popPane(targetKey);
+        store.dispatch(action);
     }
 
     render() {
         return (
-            <div
-                className={`${"page"} ${"dark-border"}`}
-                key={"pageimgs"}
-                ref={this.pageimg}
-            >
-                {this.state.fileImgs.length > 0 ? (
+            <div className={`${"page"} ${"dark-border"}`} key={"pageimgs"}>
+                {this.state.panes.length > 0 ? (
                     /* some pictures */
-                    this.state.fileImgs.map((img, index) => {
-                        // TODO: width of images
-                        return (
-                            <Image
-                                className="page-img"
-                                key={"fileimg" + index}
-                                alt={"小君没能加载出文件Orz"}
-                                src={img}
-                                preview={false}
-                                width={
-                                    (this.state.imgWidth - 21).toString() + "vw"
-                                }
-                            />
-                        );
-                    })
+                    <Tabs
+                        // className="page-tabs"
+                        hideAdd
+                        type="editable-card"
+                        size="small"
+                        onChange={this.onChange}
+                        activeKey={this.state.activePane}
+                        onEdit={this.onEdit}
+                    >
+                        {this.state.panes.map((pane) => (
+                            <TabPane
+                                className="page"
+                                tab={pane.fileName}
+                                key={pane.key}
+                                closable={true}
+                                ref={this.pageimg}
+                            >
+                                {pane.fileImgs.map((img, index) => {
+                                    // TODO: width of images
+                                    return (
+                                        <Image
+                                            className="page-img"
+                                            key={"fileimg" + index}
+                                            alt={"小君没能加载出文件Orz"}
+                                            src={img}
+                                            preview={false}
+                                            width={
+                                                "calc(" +
+                                                this.state.imgWidth.toString() +
+                                                "vw + 10vw - 200px)"
+                                            }
+                                        />
+                                    );
+                                })}
+                            </TabPane>
+                        ))}
+                    </Tabs>
                 ) : (
                     <Logo
                         height={"calc(100vh - 50px)"}
@@ -80,12 +109,6 @@ export default class Page extends Component {
                         innerColor={"lighter-logo"}
                     />
                 )}
-                {this.state.fileImgs.length > 0 ? (
-                    <CloseCircleOutlined
-                        className={`${"page-close"} ${"pageCloseIcon"}`}
-                        onClick={this.closePage}
-                    />
-                ) : null}
             </div>
         );
     }

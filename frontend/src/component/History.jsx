@@ -3,10 +3,8 @@ import { List, Image, Drawer } from "antd";
 import store from "../store";
 import Service from "../Service";
 import {
+    pushPane,
     switchHistoryPage,
-    changeFile,
-    changeFileName,
-    chagneImgWidth,
     changeHistory
 } from "store/actionCreators";
 
@@ -18,8 +16,6 @@ class History extends Component {
         this.state = store.getState();
         this.storageChange = this.storageChange.bind(this);
         this.onClose = this.onClose.bind(this);
-        this.getFile = this.getFile.bind(this);
-        this.delFile = this.delFile.bind(this);
     }
 
     storageChange() {
@@ -30,19 +26,16 @@ class History extends Component {
         store.subscribe(this.storageChange);
     }
 
+    // close history page
     onClose() {
         const action = switchHistoryPage(false);
         store.dispatch(action);
     }
 
-    getFile(value) {
-        service.getHistoryfile({ idx: value }).then((data) => {
-            const action1 = changeFile(data.imgs);
-            store.dispatch(action1);
-            const action2 = changeFileName(value);
-            store.dispatch(action2);
-            const action3 = chagneImgWidth(90);
-            store.dispatch(action3);
+    getFile(item) {
+        service.getHistoryfile({ idx: item.idx }).then((data) => {
+            const action = pushPane({ fileName: item.name, imgs: data.imgs });
+            store.dispatch(action);
         });
         this.onClose();
     }
@@ -104,7 +97,10 @@ class History extends Component {
                                 <p
                                     className={`${"history-title"} ${"darker-background-color"}`}
                                     onClick={() => {
-                                        this.getFile(item.idx);
+                                        this.getFile({
+                                            idx: item.idx,
+                                            name: item.name
+                                        });
                                     }}
                                 >
                                     {item.name}
@@ -115,7 +111,7 @@ class History extends Component {
                                         this.delFile(item.idx);
                                     }}
                                 >
-                                    {"  删除"}
+                                    {"删除"}
                                 </p>
                             </List.Item>
                         )}

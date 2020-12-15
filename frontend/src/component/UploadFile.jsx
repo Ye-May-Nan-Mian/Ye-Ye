@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import { UploadOutlined } from "@ant-design/icons";
 import Service from "../Service";
 import store from "../store";
-import {
-    changeFile,
-    changeFileName,
-    chagneImgWidth
-} from "store/actionCreators";
+import { pushPane } from "store/actionCreators";
 
 const service = new Service();
 
@@ -14,18 +10,12 @@ class UploadFile extends Component {
     constructor(props) {
         super(props);
         this.fileInputRef = React.createRef();
-        this.updatePage = this.updatePage.bind(this);
         this.onFileChange = this.onFileChange.bind(this);
-        this.onFileUpload = this.onFileUpload.bind(this);
     }
 
-    updatePage(data) {
-        const action1 = changeFile(data.imgs);
-        store.dispatch(action1);
-        const action2 = changeFileName(data.fileName);
-        store.dispatch(action2);
-        const action3 = chagneImgWidth(data.imgWidth);
-        store.dispatch(action3);
+    updatePage(pushItem) {
+        const action = pushPane(pushItem);
+        store.dispatch(action);
     }
 
     // On file select
@@ -55,9 +45,8 @@ class UploadFile extends Component {
                 if (v && v.imgs && v.imgs.length > 0) {
                     // send (file to) images to page.jsx
                     this.updatePage({
-                        imgs: v.imgs,
                         fileName: this.selectedFile[0].name,
-                        imgWidth: 90
+                        imgs: v.imgs
                     });
                 } else {
                     // console.error("Upload/Handle file failed, I get: ", v);

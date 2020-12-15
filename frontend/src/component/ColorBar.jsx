@@ -18,15 +18,10 @@ export default class ColorBar extends Component {
         // ["#FFFAF6", "#FFECDA", "#FFDBB7", "#FFCC99", "#BB8855", "#744D27"]
     ];
 
-    constructor(props) {
-        super(props);
-        this.changeColor = this.changeColor.bind(this);
-    }
-
     componentDidMount() {
         // Can remember the last theme selected by the user
         service.getTheme().then((newColor) => {
-            if (newColor.themes.length > 0) {
+            if (newColor.themes && newColor.themes.length > 0) {
                 this.changeColor(JSON.parse(newColor.themes), 0);
             }
         });

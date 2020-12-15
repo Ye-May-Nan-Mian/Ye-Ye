@@ -192,31 +192,16 @@
     margin-right: 2px;
 }
 
-.page-close {
-    position: absolute;
-    right: 20px;
-    top: 40px;
-    font-size: 20px;
-}
-
 /* BOTTOM */
 .bottombar {
     align-items: center;
     align-content: center;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     height: 20px;
     width: 100vw;
     overflow: hidden;
-}
-
-.bottombar-name {
-    align-self: flex-start;
-    flex: 1;
-    font-size: 15px;
-    line-height: 20px;
-    margin-left: 5px;
 }
 
 .bottombar-icon {
@@ -234,7 +219,7 @@
     flex-direction: column;
     justify-content: space-between;
     /* height: 90vh; */
-    width: 32vw;
+    width: 250px;
     overflow-x: hide;
     overflow-y: aoto;
 }
