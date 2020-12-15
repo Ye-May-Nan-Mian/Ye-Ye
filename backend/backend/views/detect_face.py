@@ -169,7 +169,6 @@ def get_cv_face(shape):
         return CENTER_FACE
     else:
         return NO_FACE
-    return
 
 
 def detect_face(img):

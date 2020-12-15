@@ -51,12 +51,12 @@ class Tools extends Component {
     // history page state: display / hide
     switchHistory() {
         // display history page
-        const action = switchHistoryPage(true);
-        store.dispatch(action);
+        const action1 = switchHistoryPage(true);
+        store.dispatch(action1);
         // get history from backend
         service.getHistoryall().then((data) => {
-            const action = changeHistory(data.files);
-            store.dispatch(action);
+            const action2 = changeHistory(data.files);
+            store.dispatch(action2);
         });
     }
 

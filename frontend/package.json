@@ -24,7 +24,7 @@
         "start:electron": "wait-on http://localhost:3000 & electron index.js",
         "build": "npm run build:react && npm run build:copy1 && npm run build:copy2 && npm run build:copy3 && npm run build:package",
         "build:react": "react-app-rewired build",
-        "build:copy1": "copy .\\build-electron\\main.js .\\build\\main.js",
+        "build:copy1": "copy .\\index.js .\\build\\main.js",
         "build:copy2": "copy .\\build-electron\\package.json .\\build\\package.json",
         "build:copy3": "copy .\\preload.js .\\build\\preload.js",
         "build:package": "cd .\\build && electron-packager . Ye-Ye --win --out=release --arch=x64 --app-version=0.3.1 --electron-version=10.2.0 --overwrite --icon=./favicon.ico",

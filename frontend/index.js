@@ -17,6 +17,10 @@ function createWindow() {
         }
     });
     // load index.html
+    // if electron-is-dev can work, I can use isDev, hehe
+    // for product
+    // win.loadURL(`file://${__dirname}/index.html`);
+    // for debug
     win.loadURL("http://localhost:3000");
     console.log(__dirname);
     // developer tool page

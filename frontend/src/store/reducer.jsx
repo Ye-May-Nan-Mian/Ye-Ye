@@ -20,7 +20,7 @@ const defaultState = {
 };
 
 // action = {type: string, value: any}
-export default (state = defaultState, action) => {
+export default (state = defaultState, action = { type: "noneType" }) => {
     let newState = "";
     switch (action.type) {
         // camera open/close

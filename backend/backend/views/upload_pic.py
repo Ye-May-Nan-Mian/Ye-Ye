@@ -21,7 +21,7 @@ def base64_to_image(base64_str):
     try:
         img = io.imread(image_data)
     except:
-        pass
+        return None
     return img
 
 
@@ -44,7 +44,6 @@ def get_result(detect):
 
 
 def upload_pic(request):
-    # address = request.POST.get("address")
     head = ""
     content = ""
 

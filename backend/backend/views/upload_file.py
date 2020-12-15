@@ -1,7 +1,6 @@
 from django.http import HttpResponse, JsonResponse
 import os.path as P
 import os
-# import matplotlib.pyplot as plt
 from .base import allow_acess
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
