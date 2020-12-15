@@ -16,7 +16,9 @@ const defaultState = {
     // theme colors
     // this can be stored in less
     // but History.Drawer don't support less, so...
-    colors: ["#FFFFFF", "#373B43", "#72767E", "#535860", "#1D212A", "#141D2F"]
+    colors: ["#FFFFFF", "#373B43", "#72767E", "#535860", "#1D212A", "#141D2F"],
+    // menu stretch
+    toolCollapsed: true
 };
 
 // action = {type: string, value: any}
@@ -65,6 +67,11 @@ export default (state = defaultState, action = { type: "noneType" }) => {
         case Type.CHANGE_COLOR:
             newState = JSON.parse(JSON.stringify(state));
             newState.colors = action.value;
+            return newState;
+        // menu state
+        case Type.SWITCH_TOOL:
+            newState = JSON.parse(JSON.stringify(state));
+            newState.toolCollapsed = action.value;
             return newState;
         default:
             return state;

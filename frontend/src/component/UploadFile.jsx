@@ -63,7 +63,7 @@ class UploadFile extends Component {
                 className={`${"tool-icon"} ${"toolIcon"}`}
                 onClick={() => this.fileInputRef.current.click()}
             >
-                <UploadOutlined className={`${"uploadOutlined"}`} />
+                <UploadOutlined className={`${"inOutlinedIcon"}`} />
                 <input
                     ref={this.fileInputRef}
                     id="inputfile"

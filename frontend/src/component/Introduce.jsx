@@ -66,7 +66,7 @@ class Introduce extends Component {
                             开发提上日程
                         </Timeline.Item>
                         <Timeline.Item className={`${"white-color"}`}>
-                            2020-11-07 页页 0.1.2 本版正式发布
+                            2020-11-07 页页 0.1.2 版本正式发布
                         </Timeline.Item>
                     </Timeline>
                 </Drawer>

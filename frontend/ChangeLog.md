@@ -62,3 +62,9 @@ From vh/vw to px, icons/texts' size will not change as the window size changes.
 Add pane, can open many files. 
 
 Simplify Redux and "bind.this()" code 
+
+# 0.3.2
+
+Init AutoTuring and metronome
+
+Add Tool collapse effect

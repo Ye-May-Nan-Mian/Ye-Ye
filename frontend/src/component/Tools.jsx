@@ -4,16 +4,21 @@ import {
     CameraOutlined,
     DashboardOutlined,
     HistoryOutlined,
+    MenuFoldOutlined,
+    MenuUnfoldOutlined,
     UserOutlined
 } from "@ant-design/icons";
 import UploadFile from "./UploadFile";
 import ColorBar from "./ColorBar";
+import AutoTurning from "./AutoTurning";
+import Metronome from "./Metronome";
 import store from "../store";
 import {
     switchCameraState,
     switchHistoryPage,
     switchIntroPage,
-    changeHistory
+    changeHistory,
+    switchTool
 } from "store/actionCreators";
 import Service from "../Service";
 
@@ -31,6 +36,7 @@ class Tools extends Component {
         this.switchCamera = this.switchCamera.bind(this);
         this.switchHistory = this.switchHistory.bind(this);
         this.switchIntro = this.switchIntro.bind(this);
+        this.menuStretch = this.menuStretch.bind(this);
     }
 
     storageChange() {
@@ -66,20 +72,36 @@ class Tools extends Component {
         store.dispatch(action);
     }
 
+    menuStretch() {
+        const action = switchTool();
+        store.dispatch(action);
+    }
+
     render() {
         return (
             <div
                 className={`${"side-tool"} ${"base-background-color"} ${"dark-border"}`}
+                style={{ width: this.state.toolCollapsed ? "60px" : "200px" }}
             >
-                {/* Camera Upload Color */}
+                {/* Camera */}
                 <CameraOutlined
                     id="CameraController"
                     className={`${"tool-icon"} ${"toolIcon"}`}
                     onClick={this.switchCamera}
                 />
+                {/* Upload file(s) */}
                 <UploadFile id="UploadController" />
-                <ColorBar />
-                {/* Speed History Introduce  */}
+                {/* Can choose history files */}
+                <HistoryOutlined
+                    id="HistoryController"
+                    className={`${"tool-icon"} ${"toolIcon"}`}
+                    onClick={this.switchHistory}
+                />
+                {/* Metronome is useful for musicians */}
+                <Metronome />
+                {/* Auto page turning */}
+                <AutoTurning />
+                {/* Speed of uploading camera's pictures */}
                 <Dropdown
                     overlay={
                         // TODO: div's style
@@ -100,7 +122,7 @@ class Tools extends Component {
                         </div>
                     }
                     placement={"bottomRight"}
-                    trigger={["hover"]}
+                    trigger={["click"]}
                 >
                     <DashboardOutlined
                         className={`${"tool-icon"} ${"toolIcon"}`}
@@ -109,20 +131,27 @@ class Tools extends Component {
                         }}
                     />
                 </Dropdown>
-                <HistoryOutlined
-                    id="HistoryController"
-                    className={`${"tool-icon"} ${"toolIcon"}`}
-                    onClick={() => {
-                        this.switchHistory();
-                    }}
-                />
+                {/* Can choose some themes */}
+                <ColorBar />
+                {/* Introduce Page */}
                 <UserOutlined
                     id="UserController"
                     className={`${"tool-icon"} ${"toolIcon"}`}
-                    onClick={() => {
-                        this.switchIntro();
-                    }}
+                    onClick={this.switchIntro}
                 />
+                {this.state.toolCollapsed ? (
+                    <MenuUnfoldOutlined
+                        id="MenuStretchUnfold"
+                        className={`${"tool-icon-collapse"} ${"toolIcon"}`}
+                        onClick={this.menuStretch}
+                    />
+                ) : (
+                    <MenuFoldOutlined
+                        id="menuStretchFold"
+                        className={`${"tool-icon-collapse"} ${"toolIcon"}`}
+                        onClick={this.menuStretch}
+                    />
+                )}
             </div>
         );
     }

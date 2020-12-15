@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {
     MinusOutlined,
     FullscreenOutlined,
-    CloseOutlined
+    PoweroffOutlined
 } from "@ant-design/icons";
 import Logo from "./Logo";
 const ipcRenderer = window.ipcRenderer;
@@ -55,7 +55,7 @@ class MenuBar extends Component {
                     className={`${"menubar-icon"} ${"menuIcon"}`}
                     onClick={this.maxWin}
                 />
-                <CloseOutlined
+                <PoweroffOutlined
                     className={`${"menubar-icon"} ${"menuIcon"}`}
                     onClick={this.closeWin}
                 />

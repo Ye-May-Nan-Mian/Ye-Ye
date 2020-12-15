@@ -7,3 +7,4 @@ export const SWITCH_HISTORY_PAGE = "switchHistoryPage";
 export const CHANGE_HISTORY = "changeHistory";
 export const SWITCH_INTRO_PAGE = "switchIntroPage";
 export const CHANGE_COLOR = "changeColor";
+export const SWITCH_TOOL = "switchTool";

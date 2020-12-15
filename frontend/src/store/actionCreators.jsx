@@ -87,3 +87,11 @@ export const changeColor = (value) => ({
     type: Type.CHANGE_COLOR,
     value: value
 });
+
+export const switchTool = () => {
+    const lastState = store.getState().toolCollapsed;
+    return {
+        type: Type.SWITCH_TOOL,
+        value: lastState === true ? false : true
+    };
+};

@@ -64,7 +64,7 @@ export default class ColorBar extends Component {
                     </div>
                 }
                 placement={"bottomRight"}
-                trigger={["hover"]}
+                trigger={["click"]}
             >
                 <BulbOutlined
                     className={`${"tool-icon"} ${"toolIcon"}`}
