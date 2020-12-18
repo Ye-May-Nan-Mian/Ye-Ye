@@ -6,19 +6,21 @@ import {
     HistoryOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
-    UserOutlined
+    UserOutlined,
+    TranslationOutlined
 } from "@ant-design/icons";
-import UploadFile from "./UploadFile";
-import ColorBar from "./ColorBar";
-import AutoTurning from "./AutoTurning";
-import Metronome from "./Metronome";
+import UploadFile from "./tools/UploadFile";
+import ColorBar from "./tools/ColorBar";
+import AutoTurning from "./tools/AutoTurning";
+import Metronome from "./tools/Metronome";
 import store from "../store";
 import {
     switchCameraState,
     switchHistoryPage,
     switchIntroPage,
     changeHistory,
-    switchTool
+    switchTool,
+    switchLanguage
 } from "store/actionCreators";
 import Service from "../Service";
 
@@ -37,6 +39,7 @@ class Tools extends Component {
         this.switchHistory = this.switchHistory.bind(this);
         this.switchIntro = this.switchIntro.bind(this);
         this.menuStretch = this.menuStretch.bind(this);
+        this.switchLanguage = this.switchLanguage.bind(this);
     }
 
     storageChange() {
@@ -77,6 +80,12 @@ class Tools extends Component {
         store.dispatch(action);
     }
 
+    switchLanguage() {
+        // console.log("use English?: ", this.state.useZh);
+        const action = switchLanguage();
+        store.dispatch(action);
+    }
+
     render() {
         return (
             <div
@@ -84,19 +93,45 @@ class Tools extends Component {
                 style={{ width: this.state.toolCollapsed ? "60px" : "200px" }}
             >
                 {/* Camera */}
-                <CameraOutlined
-                    id="CameraController"
-                    className={`${"tool-icon"} ${"toolIcon"}`}
+                <div
+                    className={`${"tool-icon-name"} ${"toolIcon"}`}
                     onClick={this.switchCamera}
-                />
+                    style={{
+                        width: this.state.toolCollapsed ? "40px" : "180px"
+                    }}
+                >
+                    <CameraOutlined
+                        id="CameraController"
+                        className={`${"tool-icon"}`}
+                    />
+                    <p
+                        className={`${"tool-name"}`}
+                        hidden={this.state.toolCollapsed}
+                    >
+                        {this.state.text.camera}
+                    </p>
+                </div>
                 {/* Upload file(s) */}
                 <UploadFile id="UploadController" />
                 {/* Can choose history files */}
-                <HistoryOutlined
-                    id="HistoryController"
-                    className={`${"tool-icon"} ${"toolIcon"}`}
+                <div
+                    className={`${"tool-icon-name"} ${"toolIcon"}`}
                     onClick={this.switchHistory}
-                />
+                    style={{
+                        width: this.state.toolCollapsed ? "40px" : "180px"
+                    }}
+                >
+                    <HistoryOutlined
+                        id="HistoryController"
+                        className={`${"tool-icon"}`}
+                    />
+                    <p
+                        className={`${"tool-name"}`}
+                        hidden={this.state.toolCollapsed}
+                    >
+                        {this.state.text.history}
+                    </p>
+                </div>
                 {/* Metronome is useful for musicians */}
                 <Metronome />
                 {/* Auto page turning */}
@@ -115,7 +150,7 @@ class Tools extends Component {
                                 step={10}
                                 onChange={(t) => this.props.changeInterval(t)}
                                 tipFormatter={() => {
-                                    return "往左移动，人脸识别更快哦";
+                                    return this.state.text.speedInfo;
                                 }}
                                 tooltipPlacement={"bottom"}
                             />
@@ -124,34 +159,90 @@ class Tools extends Component {
                     placement={"bottomRight"}
                     trigger={["click"]}
                 >
-                    <DashboardOutlined
-                        className={`${"tool-icon"} ${"toolIcon"}`}
+                    <div
+                        className={`${"tool-icon-name"} ${"toolIcon"}`}
                         style={{
-                            cursor: "pointer"
+                            width: this.state.toolCollapsed ? "40px" : "180px"
                         }}
-                    />
+                    >
+                        <DashboardOutlined
+                            id="speedController"
+                            className={`${"tool-icon"}`}
+                        />
+                        <p
+                            className={`${"tool-name"}`}
+                            hidden={this.state.toolCollapsed}
+                        >
+                            {this.state.text.speed}
+                        </p>
+                    </div>
                 </Dropdown>
+                {/* choose Chinese or English */}
+                <div
+                    className={`${"tool-icon-name"} ${"toolIcon"}`}
+                    onClick={this.switchLanguage}
+                    style={{
+                        width: this.state.toolCollapsed ? "40px" : "180px"
+                    }}
+                >
+                    <TranslationOutlined
+                        id="netController"
+                        className={`${"tool-icon"}`}
+                    />
+                    <p
+                        className={`${"tool-name"}`}
+                        hidden={this.state.toolCollapsed}
+                    >
+                        {this.state.text.language}
+                    </p>
+                </div>
                 {/* Can choose some themes */}
                 <ColorBar />
                 {/* Introduce Page */}
-                <UserOutlined
-                    id="UserController"
-                    className={`${"tool-icon"} ${"toolIcon"}`}
+                <div
+                    className={`${"tool-icon-name"} ${"toolIcon"}`}
                     onClick={this.switchIntro}
-                />
-                {this.state.toolCollapsed ? (
-                    <MenuUnfoldOutlined
-                        id="MenuStretchUnfold"
-                        className={`${"tool-icon-collapse"} ${"toolIcon"}`}
-                        onClick={this.menuStretch}
+                    style={{
+                        width: this.state.toolCollapsed ? "40px" : "180px"
+                    }}
+                >
+                    <UserOutlined
+                        id="UserController"
+                        className={`${"tool-icon"}`}
                     />
-                ) : (
-                    <MenuFoldOutlined
-                        id="menuStretchFold"
-                        className={`${"tool-icon-collapse"} ${"toolIcon"}`}
-                        onClick={this.menuStretch}
-                    />
-                )}
+                    <p
+                        className={`${"tool-name"}`}
+                        hidden={this.state.toolCollapsed}
+                    >
+                        {this.state.text.about}
+                    </p>
+                </div>
+                {/* collapse button */}
+                <div
+                    className={`${"tool-icon-name-collapse"} ${"toolIcon"}`}
+                    onClick={this.menuStretch}
+                    style={{
+                        width: this.state.toolCollapsed ? "40px" : "180px"
+                    }}
+                >
+                    {this.state.toolCollapsed ? (
+                        <MenuUnfoldOutlined
+                            id="MenuStretchUnfold"
+                            className={`${"tool-icon"}`}
+                        />
+                    ) : (
+                        <MenuFoldOutlined
+                            id="menuStretchFold"
+                            className={`${"tool-icon"}`}
+                        />
+                    )}
+                    <p
+                        className={`${"tool-name"}`}
+                        hidden={this.state.toolCollapsed}
+                    >
+                        {this.state.text.collapse}
+                    </p>
+                </div>
             </div>
         );
     }

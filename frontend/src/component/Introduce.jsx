@@ -36,7 +36,7 @@ class Introduce extends Component {
                                 fontWeight: 500
                             }}
                         >
-                            {"介绍"}
+                            {this.state.text.about}
                         </p>
                     }
                     placement={"left"}

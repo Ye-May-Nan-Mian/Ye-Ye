@@ -20,11 +20,11 @@ function createWindow() {
     // if electron-is-dev can work, I can use isDev, hehe
     // for product
     // win.loadURL(`file://${__dirname}/index.html`);
-    // for debug
+
+    // for debug and developer tool page
     win.loadURL("http://localhost:3000");
-    console.log(__dirname);
-    // developer tool page
     win.webContents.openDevTools();
+
     // callback when window closed
     win.on("closed", () => {
         // dereference

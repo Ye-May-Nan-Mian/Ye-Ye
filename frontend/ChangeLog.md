@@ -68,3 +68,11 @@ Simplify Redux and "bind.this()" code
 Init AutoTuring and metronome
 
 Add Tool collapse effect
+
+# 0.3.3 
+
+Add language, support switch between Chinese and English.
+
+Can collapse tools.
+
+Add tools' title.

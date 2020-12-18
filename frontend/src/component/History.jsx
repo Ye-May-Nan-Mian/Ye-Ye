@@ -62,7 +62,7 @@ class History extends Component {
                                 fontWeight: 500
                             }}
                         >
-                            {"历史记录"}
+                            {this.state.text.history}
                         </p>
                     }
                     placement={"left"}
@@ -111,7 +111,7 @@ class History extends Component {
                                         this.delFile(item.idx);
                                     }}
                                 >
-                                    {"删除"}
+                                    {this.state.text.delete}
                                 </p>
                             </List.Item>
                         )}

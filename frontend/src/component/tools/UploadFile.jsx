@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { UploadOutlined } from "@ant-design/icons";
-import Service from "../Service";
-import store from "../store";
+import Service from "../../Service";
+import store from "../../store";
 import { pushPane } from "store/actionCreators";
 
 const service = new Service();
@@ -9,8 +9,18 @@ const service = new Service();
 class UploadFile extends Component {
     constructor(props) {
         super(props);
+        this.state = store.getState();
+        this.storageChange = this.storageChange.bind(this);
         this.fileInputRef = React.createRef();
         this.onFileChange = this.onFileChange.bind(this);
+    }
+
+    storageChange() {
+        this.setState(store.getState());
+    }
+
+    componentDidMount() {
+        store.subscribe(this.storageChange);
     }
 
     updatePage(pushItem) {
@@ -60,10 +70,13 @@ class UploadFile extends Component {
     render() {
         return (
             <div
-                className={`${"tool-icon"} ${"toolIcon"}`}
+                className={`${"tool-icon-name"} ${"toolIcon"}`}
                 onClick={() => this.fileInputRef.current.click()}
+                style={{
+                    width: this.state.toolCollapsed ? "40px" : "180px"
+                }}
             >
-                <UploadOutlined className={`${"inOutlinedIcon"}`} />
+                <UploadOutlined className={`${"tool-icon"}`} />
                 <input
                     ref={this.fileInputRef}
                     id="inputfile"
@@ -75,6 +88,12 @@ class UploadFile extends Component {
                     onChange={this.onFileChange}
                     style={{ display: "none" }}
                 />
+                <p
+                    className={`${"tool-name"}`}
+                    hidden={this.state.toolCollapsed}
+                >
+                    {this.state.text.upload}
+                </p>
             </div>
         );
     }

@@ -8,3 +8,5 @@ export const CHANGE_HISTORY = "changeHistory";
 export const SWITCH_INTRO_PAGE = "switchIntroPage";
 export const CHANGE_COLOR = "changeColor";
 export const SWITCH_TOOL = "switchTool";
+export const SWITCH_LANGUAGE = "switchLanguage";
+export const FULL_SCREEN = "fullScreen";

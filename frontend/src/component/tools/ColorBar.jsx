@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Dropdown } from "antd";
 import { BulbOutlined } from "@ant-design/icons";
-import store from "../store";
-import Service from "../Service";
+import store from "../../store";
+import Service from "../../Service";
 import less from "less";
 import { changeColor } from "store/actionCreators";
 
@@ -18,7 +18,18 @@ export default class ColorBar extends Component {
         // ["#FFFAF6", "#FFECDA", "#FFDBB7", "#FFCC99", "#BB8855", "#744D27"]
     ];
 
+    constructor(props) {
+        super(props);
+        this.state = store.getState();
+        this.storageChange = this.storageChange.bind(this);
+    }
+
+    storageChange() {
+        this.setState(store.getState());
+    }
+
     componentDidMount() {
+        store.subscribe(this.storageChange);
         // Can remember the last theme selected by the user
         service.getTheme().then((newColor) => {
             if (newColor.themes && newColor.themes.length > 0) {
@@ -66,12 +77,20 @@ export default class ColorBar extends Component {
                 placement={"bottomRight"}
                 trigger={["click"]}
             >
-                <BulbOutlined
-                    className={`${"tool-icon"} ${"toolIcon"}`}
+                <div
+                    className={`${"tool-icon-name"} ${"toolIcon"}`}
                     style={{
-                        cursor: "pointer"
+                        width: this.state.toolCollapsed ? "40px" : "180px"
                     }}
-                />
+                >
+                    <BulbOutlined className={`${"tool-icon"}`} />
+                    <p
+                        className={`${"tool-name"}`}
+                        hidden={this.state.toolCollapsed}
+                    >
+                        {this.state.text.theme}
+                    </p>
+                </div>
             </Dropdown>
         );
     }

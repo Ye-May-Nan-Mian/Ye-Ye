@@ -95,3 +95,19 @@ export const switchTool = () => {
         value: lastState === true ? false : true
     };
 };
+
+export const switchLanguage = () => {
+    const lastState = store.getState().useZh;
+    return {
+        type: Type.SWITCH_LANGUAGE,
+        value: lastState === true ? false : true
+    };
+};
+
+export const fullScreen = () => {
+    const lastState = store.getState().fullScreened;
+    return {
+        type: Type.FULL_SCREEN,
+        value: lastState === true ? false : true
+    };
+};
