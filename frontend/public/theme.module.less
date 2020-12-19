@@ -87,7 +87,7 @@
 
 // logo
 .white-logo {
-    fill: @white-color;
+    fill: @white-color !important;
 }
 
 .light-logo {
@@ -113,6 +113,7 @@
 // icons of tool area (buttons)
 .toolIcon {
     color: @white-color !important;
+    fill: @white-color !important;
     background-color: @base-color;
     border-radius: 5px;
     border-width: 0px;
@@ -122,12 +123,14 @@
 
 .toolIcon:hover {
     color: @base-color !important;
+    fill: @base-color !important;
     background-color: @white-color;
     transition: 100ms ease-in;
 }
 
 .toolIcon:active {
     color: @darker-color !important;
+    fill: @darker-color !important;
     background-color: @lighter-color;
 }
 
@@ -149,20 +152,15 @@
 
 // min max &close icons of memu bar
 .menuIcon {
-    color: @white-color !important;
+    color: @light-color !important;
     background-color: @dark-color;
     transition: 100ms ease-out;
 }
 
 .menuIcon:hover {
     color: @dark-color !important;
-    background-color: @white-color;
+    background-color: @light-color;
     transition: 100ms ease-in;
-}
-
-.menuIcon:active {
-    color: @dark-color !important;
-    background-color: @lighter-color;
 }
 
 // plus & minus icons of bottom bar

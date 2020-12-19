@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Dropdown } from "antd";
-import { BulbOutlined } from "@ant-design/icons";
 import store from "../../store";
 import Service from "../../Service";
 import less from "less";
 import { changeColor } from "store/actionCreators";
+import { Theme } from "../svg";
 
 const service = new Service();
 
@@ -83,7 +83,7 @@ export default class ColorBar extends Component {
                         width: this.state.toolCollapsed ? "40px" : "180px"
                     }}
                 >
-                    <BulbOutlined className={`${"tool-icon"}`} />
+                    <Theme id="themeController" classProps="tool-icon" />
                     <p
                         className={`${"tool-name"}`}
                         hidden={this.state.toolCollapsed}

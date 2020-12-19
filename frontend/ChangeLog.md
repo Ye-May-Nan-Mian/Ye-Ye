@@ -76,3 +76,7 @@ Add language, support switch between Chinese and English.
 Can collapse tools.
 
 Add tools' title.
+
+# 0.3.4
+
+Change a set of icons. 

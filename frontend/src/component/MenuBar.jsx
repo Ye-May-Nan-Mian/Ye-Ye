@@ -5,7 +5,7 @@ import {
     FullscreenExitOutlined,
     PoweroffOutlined
 } from "@ant-design/icons";
-import Logo from "./Logo";
+import { Logo } from "./svg";
 import store from "../store";
 const ipcRenderer = window.ipcRenderer;
 

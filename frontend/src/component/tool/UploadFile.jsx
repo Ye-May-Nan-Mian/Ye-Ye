@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { UploadOutlined } from "@ant-design/icons";
 import Service from "../../Service";
 import store from "../../store";
 import { pushPane } from "store/actionCreators";
+import { Upload } from "../svg";
 
 const service = new Service();
 
@@ -76,7 +76,7 @@ class UploadFile extends Component {
                     width: this.state.toolCollapsed ? "40px" : "180px"
                 }}
             >
-                <UploadOutlined className={`${"tool-icon"}`} />
+                <Upload id="UploadController" classProps="tool-icon" />
                 <input
                     ref={this.fileInputRef}
                     id="inputfile"

@@ -1,18 +1,11 @@
 import React, { Component } from "react";
 import { Slider, Dropdown } from "antd";
 import {
-    CameraOutlined,
-    DashboardOutlined,
-    HistoryOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
-    UserOutlined,
-    TranslationOutlined
+    UserOutlined
 } from "@ant-design/icons";
-import UploadFile from "./tools/UploadFile";
-import ColorBar from "./tools/ColorBar";
-import AutoTurning from "./tools/AutoTurning";
-import Metronome from "./tools/Metronome";
+import { AutoTurning, ColorBar, Metronome, UploadFile } from "./tool";
 import store from "../store";
 import {
     switchCameraState,
@@ -23,6 +16,7 @@ import {
     switchLanguage
 } from "store/actionCreators";
 import Service from "../Service";
+import { Camera, History, Speed, Translation } from "./svg";
 
 const service = new Service();
 
@@ -100,10 +94,7 @@ class Tools extends Component {
                         width: this.state.toolCollapsed ? "40px" : "180px"
                     }}
                 >
-                    <CameraOutlined
-                        id="CameraController"
-                        className={`${"tool-icon"}`}
-                    />
+                    <Camera id="CameraController" classProps="tool-icon" />
                     <p
                         className={`${"tool-name"}`}
                         hidden={this.state.toolCollapsed}
@@ -112,7 +103,7 @@ class Tools extends Component {
                     </p>
                 </div>
                 {/* Upload file(s) */}
-                <UploadFile id="UploadController" />
+                <UploadFile />
                 {/* Can choose history files */}
                 <div
                     className={`${"tool-icon-name"} ${"toolIcon"}`}
@@ -121,10 +112,7 @@ class Tools extends Component {
                         width: this.state.toolCollapsed ? "40px" : "180px"
                     }}
                 >
-                    <HistoryOutlined
-                        id="HistoryController"
-                        className={`${"tool-icon"}`}
-                    />
+                    <History id="HistoryController" classProps="tool-icon" />
                     <p
                         className={`${"tool-name"}`}
                         hidden={this.state.toolCollapsed}
@@ -165,10 +153,7 @@ class Tools extends Component {
                             width: this.state.toolCollapsed ? "40px" : "180px"
                         }}
                     >
-                        <DashboardOutlined
-                            id="speedController"
-                            className={`${"tool-icon"}`}
-                        />
+                        <Speed id="speedController" classProps="tool-icon" />
                         <p
                             className={`${"tool-name"}`}
                             hidden={this.state.toolCollapsed}
@@ -185,9 +170,9 @@ class Tools extends Component {
                         width: this.state.toolCollapsed ? "40px" : "180px"
                     }}
                 >
-                    <TranslationOutlined
-                        id="netController"
-                        className={`${"tool-icon"}`}
+                    <Translation
+                        id="translateController"
+                        classProps="tool-icon"
                     />
                     <p
                         className={`${"tool-name"}`}

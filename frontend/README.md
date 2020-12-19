@@ -48,6 +48,8 @@ npm run build
 
 [How to user Redux in React](https://juejin.cn/post/6844903942371934215)
 
+Icons from [flaticon](https://www.flaticon.com/)
+
 ## Maybe work but I don't use:
 
 [Bootstrap](https://getbootstrap.com/) for some styles. 

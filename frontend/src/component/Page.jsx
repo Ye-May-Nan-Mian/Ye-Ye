@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Image, Tabs } from "antd";
 import store from "../store";
-import Logo from "./Logo";
+import Logo from "./svg/Logo";
 import { popPane, changeActivePane } from "store/actionCreators";
 
 const { TabPane } = Tabs;
@@ -11,9 +11,6 @@ const { TabPane } = Tabs;
  * background-color: lighterColor
  */
 export default class Page extends Component {
-    // Todo: if we want to support deleting some pictures,
-    // maybe we should put "pageSize" in this.state
-    pageSize = 0;
     constructor(props) {
         super(props);
         this.state = store.getState();
@@ -102,8 +99,9 @@ export default class Page extends Component {
                         ))}
                     </Tabs>
                 ) : (
+                    // If there is no file to be displayed, show logo
                     <Logo
-                        height={"calc(100vh - 50px)"}
+                        height={"calc(100vh - 52px)"}
                         width={"calc(100vw - 202px)"}
                         outterColor={"base-logo"}
                         innerColor={"lighter-logo"}
