@@ -13,14 +13,14 @@ export const pushPane = (pushItem) => {
     newPanes.push({
         fileName: pushItem.fileName,
         fileImgs: pushItem.imgs,
-        key: activeKey
+        key: activeKey,
+        width: 100
     });
     return {
         type: Type.PUSH_PANE,
         value: {
             panes: newPanes,
-            activePane: activeKey,
-            imgWidth: 90
+            activePane: activeKey
         }
     };
 };

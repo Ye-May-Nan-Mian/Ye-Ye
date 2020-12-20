@@ -58,6 +58,8 @@ Icons from [flaticon](https://www.flaticon.com/)
 
 [html2canvas](https://github.com/niklasvh/html2canvas/) for screenshot. 
 
+[【React】组件 写一个模仿蓝湖的图片查看器](https://juejin.cn/post/6844903872163479559)
+
 HOOK
 
 ```

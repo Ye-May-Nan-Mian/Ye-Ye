@@ -6,7 +6,7 @@
     "main": "index.js",
     "dependencies": {
         "@ant-design/icons": "^4.3.0",
-        "antd": "^4.7.3",
+        "antd": "^4.9.4",
         "axios": "^0.20.0",
         "babel": "^6.23.0",
         "customize-cra": "^1.0.0",

@@ -24,6 +24,7 @@
     border-radius: 10px;
 }
 
+::-webkit-scrollbar-thumb:focus,
 ::-webkit-scrollbar-thumb:hover {
     background-color: @lighter-color;
 }
@@ -121,6 +122,7 @@
     transition: 100ms ease-out;
 }
 
+.toolIcon:focus,
 .toolIcon:hover {
     color: @base-color !important;
     fill: @base-color !important;
@@ -142,6 +144,7 @@
     transition: 100ms ease-out;
 }
 
+.pageCloseIcon:focus,
 .pageCloseIcon:hover {
     color: @darker-color !important;
 }
@@ -170,6 +173,7 @@
     transition: 100ms ease-out;
 }
 
+.plusMinusIcon:focus,
 .plusMinusIcon:hover {
     color: @dark-color !important;
     background-color: @white-color;
@@ -185,4 +189,151 @@
     border-color: @dark-color;
     border-width: 1px;
     border-style: solid;
+}
+
+.card-container p {
+    margin: 0px;
+}
+
+/* Tabs' all area */
+.card-container > .ant-tabs-card .ant-tabs-content {
+    height: calc(100vh - 52px);
+    width: calc(100vw - 202px);
+    margin-top: -16px;
+    border: 0px;
+}
+
+/* nav tab */
+.card-container > .ant-tabs-card > .ant-tabs-nav {
+    height: 30px;
+    width: calc(100vw - 202px);
+}
+
+.card-container > .ant-tabs-card > .ant-tabs-nav::before {
+    display: none;
+}
+
+/* unselected tab */
+.card-container > .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab {
+    border-color: transparent;
+    background: transparent;
+}
+
+.card-container .ant-tabs-tab-btn,
+.card-container .ant-tabs-tab-remove {
+    color: @darker-color !important;
+    font-weight: 500;
+    -webkit-user-select: none;
+}
+
+.card-container .ant-tabs-tab-btn:focus,
+.card-container .ant-tabs-tab-btn:hover,
+.card-container .ant-tabs-tab-remove:focus,
+.card-container .ant-tabs-tab-remove:hover {
+    color: @white-color !important;
+    transition: 100ms ease-out;
+}
+
+.card-container .ant-tabs-tab-btn:active,
+.card-container .ant-tabs-tab-remove:active {
+    color: @white-color !important;
+    opacity: 0.85;
+    transition: 100ms ease-in;
+}
+
+/* selected tab */
+.card-container > .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab-active {
+    border-color: @dark-color;
+    background-color: @darker-color;
+    border-bottom-color: @light-color;
+}
+
+.card-container
+    > .ant-tabs-card
+    > .ant-tabs-nav
+    .ant-tabs-tab-active
+    .ant-tabs-tab-btn,
+.card-container
+    > .ant-tabs-card
+    > .ant-tabs-nav
+    .ant-tabs-tab-active
+    .ant-tabs-tab-remove {
+    color: @light-color !important;
+    font-weight: 500 !important;
+    -webkit-user-select: none;
+    transition: 100ms ease-out;
+}
+.card-container
+    > .ant-tabs-card
+    > .ant-tabs-nav
+    .ant-tabs-tab-active
+    .ant-tabs-tab-btn:focus,
+.card-container
+    > .ant-tabs-card
+    > .ant-tabs-nav
+    .ant-tabs-tab-active
+    .ant-tabs-tab-remove:focus,
+.card-container
+    > .ant-tabs-card
+    > .ant-tabs-nav
+    .ant-tabs-tab-active
+    .ant-tabs-tab-btn:hover,
+.card-container
+    > .ant-tabs-card
+    > .ant-tabs-nav
+    .ant-tabs-tab-active
+    .ant-tabs-tab-remove:hover {
+    color: @white-color !important;
+    transition: 100ms ease-in;
+}
+
+.card-container
+    > .ant-tabs-card
+    > .ant-tabs-nav
+    .ant-tabs-tab-active
+    .ant-tabs-tab-btn:active,
+.card-container
+    > .ant-tabs-card
+    > .ant-tabs-nav
+    .ant-tabs-tab-active
+    .ant-tabs-tab-remove:active {
+    color: @white-color !important;
+    opacity: 0.85;
+}
+
+/* tab dropdown menu & item */
+.ant-tabs-dropdown,
+.ant-tabs-dropdown-menu {
+    background-color: @lighter-color !important;
+}
+
+.ant-tabs-dropdown-menu-item {
+    color: @darker-color !important;
+    font-weight: 500 !important;
+    -webkit-user-select: none;
+}
+
+.ant-tabs-dropdown-menu-item:focus,
+.ant-tabs-dropdown-menu-item:hover {
+    background-color: @white-color !important;
+    opacity: 0.85;
+}
+
+.ant-tabs-dropdown-menu-item:active {
+    background-color: @white-color !important;
+    opacity: 0.25;
+}
+
+/* TabPane area */
+.card-container > .ant-tabs-card .ant-tabs-content > .ant-tabs-tabpane {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: calc(100vw - 202px);
+    max-width: calc(100vw - 202px);
+    // 82 = 30 MenuBar + 30 Nav + 20 BottomBar + 2 border
+    height: calc(100vh - 82px);
+    overflow-x: auto;
+    overflow-y: auto;
 }

@@ -1,17 +1,19 @@
 const en_US = {
-    softName: "Ye Ye",
+    about: "ABOUT",
     camera: "CAMERA",
-    upload: "UPLOAD",
+    collapse: "COLLAPSE",
+    delete: "DELETE",
+    fileLoadError: "Load file error Orz",
     history: "HISTORY",
+    historyEmpty: "History is empty",
+    language: "LANGUAGE",
     metronome: "BEAT",
-    timer: "ENABLE",
+    softName: "Ye Ye",
     speed: "SPEED",
     speedInfo: "Move to the left, face recognition is faster",
-    language: "LANGUAGE",
     theme: "THEME",
-    about: "ABOUT",
-    collapse: "COLLAPSE",
-    delete: "DELETE"
+    timer: "ENABLE",
+    upload: "UPLOAD"
 };
 
 export default en_US;

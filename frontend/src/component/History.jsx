@@ -82,6 +82,7 @@ class History extends Component {
                     }}
                     bodyStyle={{ backgroundColor: this.state.colors[4] }}
                 >
+                    {/* TODO: modify empty info */}
                     <List
                         className={`${"history-list"} ${"white-color"}`}
                         bordered

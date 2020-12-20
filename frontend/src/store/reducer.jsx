@@ -44,7 +44,6 @@ export default (state = defaultState, action = { type: "noneType" }) => {
             newState = JSON.parse(JSON.stringify(state));
             newState.panes = action.value.panes;
             newState.activePane = action.value.activePane;
-            newState.imgWidth = action.value.imgWidth;
             return newState;
         case Type.POP_PANE:
             newState = JSON.parse(JSON.stringify(state));

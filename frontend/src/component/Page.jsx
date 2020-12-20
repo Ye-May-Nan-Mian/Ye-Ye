@@ -14,7 +14,6 @@ export default class Page extends Component {
     constructor(props) {
         super(props);
         this.state = store.getState();
-        this.pageimg = React.createRef();
         this.storageChange = this.storageChange.bind(this);
         this.scrollPage = this.scrollPage.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -34,13 +33,14 @@ export default class Page extends Component {
         // console.log(increment);
         // TODO: we can let user set "0.4", can be bigger
         const increment = window.innerHeight * direction * 0.4;
-        this.pageimg.current.scrollBy({
+        this.state.pane[0].paneRef.current.scrollBy({
             top: increment,
             left: 0,
             behavior: "smooth"
         });
     }
 
+    // change among files(TabPanes)
     onChange(activePane) {
         const action = changeActivePane(activePane);
         store.dispatch(action);
@@ -58,11 +58,13 @@ export default class Page extends Component {
 
     render() {
         return (
-            <div className={`${"page"} ${"dark-border"}`} key={"pageimgs"}>
+            <div
+                className={`${"page"} ${"card-container"} ${"dark-border"}`}
+                key={"pageimgs"}
+            >
                 {this.state.panes.length > 0 ? (
                     /* some pictures */
                     <Tabs
-                        // className="page-tabs"
                         hideAdd
                         type="editable-card"
                         size="small"
@@ -72,25 +74,25 @@ export default class Page extends Component {
                     >
                         {this.state.panes.map((pane) => (
                             <TabPane
-                                className="page"
                                 tab={pane.fileName}
                                 key={pane.key}
                                 closable={true}
-                                ref={this.pageimg}
+                                ref={pane.paneRef}
                             >
                                 {pane.fileImgs.map((img, index) => {
                                     // TODO: width of images
+                                    // 212 = 200 tools + 2 border + 10 scrollbar
                                     return (
                                         <Image
                                             className="page-img"
-                                            key={"fileimg" + index}
-                                            alt={"小君没能加载出文件Orz"}
+                                            key={pane.key + index}
+                                            alt={this.state.text.fileLoadError}
                                             src={img}
                                             preview={false}
                                             width={
                                                 "calc(" +
                                                 this.state.imgWidth.toString() +
-                                                "vw + 10vw - 200px)"
+                                                "vw - 212px)"
                                             }
                                         />
                                     );
