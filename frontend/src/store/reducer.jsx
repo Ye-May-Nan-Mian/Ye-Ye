@@ -10,8 +10,6 @@ const defaultState = {
     // [{fileName: string, fileImgs: [], key: string}]
     panes: [],
     activePane: "",
-    // page image's width
-    imgWidth: 100,
     // whether the history page is displayed
     historyShow: false,
     history: [],
@@ -53,10 +51,6 @@ export default (state = defaultState, action = { type: "noneType" }) => {
         case Type.CHANGE_ACTIVE_PANE:
             newState = JSON.parse(JSON.stringify(state));
             newState.activePane = action.value;
-            return newState;
-        case Type.CHANGE_IMG_WIDTH:
-            newState = JSON.parse(JSON.stringify(state));
-            newState.imgWidth = action.value;
             return newState;
         // history page
         case Type.SWITCH_HISTORY_PAGE:

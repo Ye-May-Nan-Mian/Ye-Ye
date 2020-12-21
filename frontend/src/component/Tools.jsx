@@ -83,7 +83,7 @@ class Tools extends Component {
     render() {
         return (
             <div
-                className={`${"side-tool"} ${"base-background-color"} ${"dark-border"}`}
+                className={`${"side-tool"} ${"base-background-color"} ${"dark-vertical-border"}`}
                 style={{ width: this.state.toolCollapsed ? "60px" : "200px" }}
             >
                 {/* Camera */}

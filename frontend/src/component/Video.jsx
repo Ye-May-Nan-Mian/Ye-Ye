@@ -20,7 +20,6 @@ export default class Video extends Component {
         this.webcam = React.createRef();
         this.storageChange = this.storageChange.bind(this);
         this.changeInterval = this.changeInterval.bind(this);
-        this.uploadPic = this.uploadPic.bind(this);
     }
 
     storageChange() {
@@ -41,6 +40,29 @@ export default class Video extends Component {
         this.interval = setInterval(() => this.uploadPic(), t);
     }
 
+    findActivePane() {
+        var panes = document.getElementsByClassName("yeye-tabs");
+        var strRegex = this.state.activePane + "$";
+        var re = new RegExp(strRegex);
+        var pane;
+        Array.prototype.forEach.call(panes, function (element) {
+            if (re.test(element.id)) {
+                pane = element;
+            }
+        });
+        return pane;
+    }
+
+    pageScroll(direction) {
+        var pane = this.findActivePane();
+        var increment = window.innerHeight * 0.5 * direction;
+        pane.scrollBy({
+            top: increment,
+            left: 0,
+            behavior: "smooth"
+        });
+    }
+
     // upload pictures
     uploadPic() {
         if (!this.state.cameraOpened) {
@@ -50,7 +72,6 @@ export default class Video extends Component {
         // console.log(this.capture);
         const turnPage = service.uploadPic(this.capture);
 
-        let me = this;
         turnPage
             .then((v) => {
                 // turn page up/down
@@ -60,10 +81,10 @@ export default class Video extends Component {
                 // console.log("turn page? ", v);
                 if (v.toString() === "0") {
                     // scroll up
-                    me.props.pageScroll(-1);
+                    this.pageScroll(-1);
                 } else if (v.toString() === "2") {
                     // scroll down
-                    me.props.pageScroll(1);
+                    this.pageScroll(1);
                 }
             })
             .catch((e) => {

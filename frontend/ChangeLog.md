@@ -80,3 +80,11 @@ Add tools' title.
 # 0.3.4
 
 Change a set of icons. 
+
+# 0.3.5
+
+Support turn up/down page by head/hand.
+
+Fix bug of "actionPane"->"activePane".
+
+Fine-tuning style of dark border.

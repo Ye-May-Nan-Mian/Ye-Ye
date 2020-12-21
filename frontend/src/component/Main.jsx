@@ -12,12 +12,10 @@ class Main extends Component {
     constructor(props) {
         super(props);
         // a ref to Video/Page component
-        this.video = React.createRef();
-        this.page = React.createRef();
+        this.videoRef = React.createRef();
         this.state = store.getState();
         this.storageChange = this.storageChange.bind(this);
         this.changeInterval = this.changeInterval.bind(this);
-        this.pageScroll = this.pageScroll.bind(this);
     }
 
     storageChange() {
@@ -30,14 +28,7 @@ class Main extends Component {
 
     // video capture speed = 1000 / t fps
     changeInterval(t) {
-        this.video.current.changeInterval(t);
-    }
-
-    // Video use pageScroll to turn page
-    pageScroll(direction = 1) {
-        if (this.state.fileImgs.length > 0) {
-            this.page.current.scrollPage(direction);
-        }
+        this.videoRef.current.changeInterval(t);
     }
 
     // left: side area
@@ -49,10 +40,10 @@ class Main extends Component {
                 <MenuBar />
                 <div className="main-main" id={"main-main"} key={"main-main"}>
                     <div className="side-area">
-                        <Video ref={this.video} pageScroll={this.pageScroll} />
+                        <Video ref={this.videoRef} />
                         <Tools changeInterval={this.changeInterval} />
                     </div>
-                    <Page ref={this.page} fileImgs={this.state.fileImgs} />
+                    <Page fileImgs={this.state.fileImgs} />
                     <History />
                     <Introduce />
                 </div>

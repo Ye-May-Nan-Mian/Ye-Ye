@@ -13,8 +13,7 @@ export const pushPane = (pushItem) => {
     newPanes.push({
         fileName: pushItem.fileName,
         fileImgs: pushItem.imgs,
-        key: activeKey,
-        width: 100
+        key: activeKey
     });
     return {
         type: Type.PUSH_PANE,
@@ -26,7 +25,7 @@ export const pushPane = (pushItem) => {
 };
 
 export const popPane = (targetKey) => {
-    let activeKey = store.getState().actionPane;
+    let activeKey = store.getState().activePane;
     let lastIndex = -1;
     store.getState().panes.forEach((pane, i) => {
         if (pane.key === targetKey) {
@@ -56,17 +55,6 @@ export const changeActivePane = (value) => ({
     type: Type.CHANGE_ACTIVE_PANE,
     value: value
 });
-
-// can be smoother
-export const chagneImgWidth = (value) => {
-    let newImgWidth = store.getState().imgWidth + value;
-    newImgWidth = newImgWidth > 200 ? 200 : newImgWidth;
-    newImgWidth = newImgWidth < 50 ? 50 : newImgWidth;
-    return {
-        type: Type.CHANGE_IMG_WIDTH,
-        value: newImgWidth
-    };
-};
 
 export const switchHistoryPage = (value) => ({
     type: Type.SWITCH_HISTORY_PAGE,

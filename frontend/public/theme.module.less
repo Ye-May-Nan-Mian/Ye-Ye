@@ -183,11 +183,21 @@
 .plusMinusIcon:active {
     color: @dark-color !important;
     background-color: @lighter-color;
+    transition: 100ms ease-in;
 }
 
 .dark-border {
     border-color: @dark-color;
     border-width: 1px;
+    border-style: solid;
+}
+
+.dark-vertical-border {
+    border-color: @dark-color;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
     border-style: solid;
 }
 
@@ -197,7 +207,7 @@
 
 /* Tabs' all area */
 .card-container > .ant-tabs-card .ant-tabs-content {
-    height: calc(100vh - 52px);
+    height: calc(100vh - 50px);
     width: calc(100vw - 202px);
     margin-top: -16px;
     border: 0px;
@@ -326,14 +336,15 @@
 
 /* TabPane area */
 .card-container > .ant-tabs-card .ant-tabs-content > .ant-tabs-tabpane {
-    align-items: center;
+    align-items: left;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: calc(100vw - 202px);
-    max-width: calc(100vw - 202px);
-    // 82 = 30 MenuBar + 30 Nav + 20 BottomBar + 2 border
-    height: calc(100vh - 82px);
+    // 80 = 30 MenuBar + 30 Nav + 20 BottomBar
+    height: calc(100vh - 80px);
+    padding-top: 1px;
+    padding-bottom: 1px;
     overflow-x: auto;
     overflow-y: auto;
 }

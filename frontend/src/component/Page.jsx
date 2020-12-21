@@ -15,7 +15,6 @@ export default class Page extends Component {
         super(props);
         this.state = store.getState();
         this.storageChange = this.storageChange.bind(this);
-        this.scrollPage = this.scrollPage.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onEdit = this.onEdit.bind(this);
         this.remove = this.remove.bind(this);
@@ -27,17 +26,6 @@ export default class Page extends Component {
 
     componentDidMount() {
         store.subscribe(this.storageChange);
-    }
-
-    scrollPage(direction = 1) {
-        // console.log(increment);
-        // TODO: we can let user set "0.4", can be bigger
-        const increment = window.innerHeight * direction * 0.4;
-        this.state.pane[0].paneRef.current.scrollBy({
-            top: increment,
-            left: 0,
-            behavior: "smooth"
-        });
     }
 
     // change among files(TabPanes)
@@ -59,7 +47,7 @@ export default class Page extends Component {
     render() {
         return (
             <div
-                className={`${"page"} ${"card-container"} ${"dark-border"}`}
+                className={`${"page"} ${"card-container"} ${"dark-vertical-border"}`}
                 key={"pageimgs"}
             >
                 {this.state.panes.length > 0 ? (
@@ -77,7 +65,8 @@ export default class Page extends Component {
                                 tab={pane.fileName}
                                 key={pane.key}
                                 closable={true}
-                                ref={pane.paneRef}
+                                id={pane.key}
+                                className={"yeye-tabs"}
                             >
                                 {pane.fileImgs.map((img, index) => {
                                     // TODO: width of images
@@ -89,11 +78,7 @@ export default class Page extends Component {
                                             alt={this.state.text.fileLoadError}
                                             src={img}
                                             preview={false}
-                                            width={
-                                                "calc(" +
-                                                this.state.imgWidth.toString() +
-                                                "vw - 212px)"
-                                            }
+                                            width={"100%"}
                                         />
                                     );
                                 })}
@@ -103,7 +88,7 @@ export default class Page extends Component {
                 ) : (
                     // If there is no file to be displayed, show logo
                     <Logo
-                        height={"calc(100vh - 52px)"}
+                        height={"calc(100vh - 50px)"}
                         width={"calc(100vw - 202px)"}
                         outterColor={"base-logo"}
                         innerColor={"lighter-logo"}

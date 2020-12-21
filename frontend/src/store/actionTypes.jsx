@@ -2,7 +2,6 @@ export const SWITCH_CAMERA_STATE = "switchCameraState";
 export const PUSH_PANE = "pushPane";
 export const POP_PANE = "popPane";
 export const CHANGE_ACTIVE_PANE = "changeActivePane";
-export const CHANGE_IMG_WIDTH = "changeImgWidth";
 export const SWITCH_HISTORY_PAGE = "switchHistoryPage";
 export const CHANGE_HISTORY = "changeHistory";
 export const SWITCH_INTRO_PAGE = "switchIntroPage";
