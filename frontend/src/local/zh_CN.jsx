@@ -1,5 +1,6 @@
 const zh_CN = {
     about: "关于我们",
+    bpmInfo: "每分钟拍数",
     camera: "摇头翻页",
     collapse: "收起",
     delete: "删除",
@@ -13,6 +14,8 @@ const zh_CN = {
     speedInfo: "往左移动，人脸识别更快哦",
     theme: "主题切换",
     timer: "自动翻页",
+    turningSpeedInfo: "两次翻页间隔的秒数",
+    turningStepInfo: "一次翻页的长度",
     upload: "上传文件"
 };
 

@@ -221,10 +221,6 @@
     width: 20px;
 }
 
-.speed-slider {
-    width: 180px;
-}
-
 /* PAGE */
 .page {
     align-items: center;
@@ -245,6 +241,8 @@
     border-width: 0px;
     margin-top: 1px;
     margin-bottom: 1px;
+    -webkit-user-select: none;
+    white-space: nowrap;
 }
 
 /* BOTTOM */
@@ -300,6 +298,8 @@
     max-height: 100px;
     max-width: 50px;
     cursor: pointer;
+    -webkit-user-select: none;
+    white-space: nowrap;
 }
 
 .history-title {
@@ -310,9 +310,11 @@
     width: 160px;
     overflow: hidden;
     cursor: pointer;
+    -webkit-user-select: none;
 }
 
 .history-delete {
     width: 18px;
     cursor: pointer;
+    -webkit-user-select: none;
 }

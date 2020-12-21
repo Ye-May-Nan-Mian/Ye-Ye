@@ -88,3 +88,7 @@ Support turn up/down page by head/hand.
 Fix bug of "actionPane"->"activePane".
 
 Fine-tuning style of dark border.
+
+# 0.3.6
+
+Support AutoTuring and Metronome fully. 

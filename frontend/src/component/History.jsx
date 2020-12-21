@@ -87,6 +87,7 @@ class History extends Component {
                         className={`${"history-list"} ${"white-color"}`}
                         bordered
                         dataSource={this.state.history}
+                        locale={{ emptyText: this.state.text.historyEmpty }}
                         renderItem={(item) => (
                             <List.Item
                                 className={`${"history-list-item"} ${"white-color"}`}

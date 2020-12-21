@@ -136,6 +136,61 @@
     background-color: @lighter-color;
 }
 
+.toolIcon-rev {
+    color: @base-color !important;
+    fill: @base-color !important;
+    background-color: @white-color;
+    border-radius: 5px;
+    border-width: 0px;
+    height: 40px;
+    transition: 100ms ease-out;
+}
+
+.toolIcon-rev:active {
+    color: @darker-color !important;
+    fill: @darker-color !important;
+    background-color: @lighter-color;
+}
+
+/* slider */
+.speed-slider {
+    width: 180px;
+}
+
+.speed-slider .ant-slider-rail {
+    background-color: @white-color;
+    opacity: 0.85;
+}
+.speed-slider:hover .ant-slider-rail {
+    background-color: @white-color !important;
+    opacity: 1;
+}
+
+.speed-slider .ant-slider-track {
+    background-color: @darker-color;
+    opacity: 0.85;
+}
+.speed-slider:hover .ant-slider-track {
+    background-color: @darker-color !important;
+    opacity: 1;
+}
+
+.speed-slider .ant-slider-handle {
+    background-color: @white-color;
+    border: solid 2px @darker-color;
+    opacity: 0.85;
+}
+.speed-slider:hover .ant-slider-handle {
+    background-color: @white-color !important;
+    border: solid 2px @darker-color !important;
+    opacity: 1;
+}
+.speed-slider .ant-slider-handle:focus {
+    border-color: @base-color !important;
+    box-shadow: none;
+    opacity: 1;
+}
+
 // page close icon (a button)
 .pageCloseIcon {
     color: @dark-color !important;

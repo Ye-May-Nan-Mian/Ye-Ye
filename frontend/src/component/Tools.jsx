@@ -28,6 +28,7 @@ class Tools extends Component {
     constructor(props) {
         super(props);
         this.state = store.getState();
+        this.cameraRef = React.createRef();
         this.storageChange = this.storageChange.bind(this);
         this.switchCamera = this.switchCamera.bind(this);
         this.switchHistory = this.switchHistory.bind(this);
@@ -49,6 +50,12 @@ class Tools extends Component {
         const value = this.state.cameraOpened ? false : true;
         const action = switchCameraState(value);
         store.dispatch(action);
+        // reverse color while it is turning
+        if (value) {
+            this.cameraRef.current.className = `${"tool-icon-name"} ${"toolIcon-rev"}`;
+        } else {
+            this.cameraRef.current.className = `${"tool-icon-name"} ${"toolIcon"}`;
+        }
     }
 
     // history page state: display / hide
@@ -89,6 +96,7 @@ class Tools extends Component {
                 {/* Camera */}
                 <div
                     className={`${"tool-icon-name"} ${"toolIcon"}`}
+                    ref={this.cameraRef}
                     onClick={this.switchCamera}
                     style={{
                         width: this.state.toolCollapsed ? "40px" : "180px"
@@ -102,6 +110,43 @@ class Tools extends Component {
                         {this.state.text.camera}
                     </p>
                 </div>
+                {/* Speed of uploading camera's pictures */}
+                <Dropdown
+                    overlay={
+                        <>
+                            <Slider
+                                className={"speed-slider"}
+                                range={false}
+                                defaultValue={150}
+                                min={100}
+                                max={330}
+                                step={10}
+                                onChange={(t) => this.props.changeInterval(t)}
+                                tipFormatter={() => {
+                                    return this.state.text.speedInfo;
+                                }}
+                                tooltipPlacement={"bottom"}
+                            />
+                        </>
+                    }
+                    placement={"bottomRight"}
+                    trigger={["click", "contextMenu"]}
+                >
+                    <div
+                        className={`${"tool-icon-name"} ${"toolIcon"}`}
+                        style={{
+                            width: this.state.toolCollapsed ? "40px" : "180px"
+                        }}
+                    >
+                        <Speed id="speedController" classProps="tool-icon" />
+                        <p
+                            className={`${"tool-name"}`}
+                            hidden={this.state.toolCollapsed}
+                        >
+                            {this.state.text.speed}
+                        </p>
+                    </div>
+                </Dropdown>
                 {/* Upload file(s) */}
                 <UploadFile />
                 {/* Can choose history files */}
@@ -124,44 +169,6 @@ class Tools extends Component {
                 <Metronome />
                 {/* Auto page turning */}
                 <AutoTurning />
-                {/* Speed of uploading camera's pictures */}
-                <Dropdown
-                    overlay={
-                        // TODO: div's style
-                        <div>
-                            <Slider
-                                className={"speed-slider"}
-                                range={false}
-                                defaultValue={150}
-                                min={100}
-                                max={330}
-                                step={10}
-                                onChange={(t) => this.props.changeInterval(t)}
-                                tipFormatter={() => {
-                                    return this.state.text.speedInfo;
-                                }}
-                                tooltipPlacement={"bottom"}
-                            />
-                        </div>
-                    }
-                    placement={"bottomRight"}
-                    trigger={["click"]}
-                >
-                    <div
-                        className={`${"tool-icon-name"} ${"toolIcon"}`}
-                        style={{
-                            width: this.state.toolCollapsed ? "40px" : "180px"
-                        }}
-                    >
-                        <Speed id="speedController" classProps="tool-icon" />
-                        <p
-                            className={`${"tool-name"}`}
-                            hidden={this.state.toolCollapsed}
-                        >
-                            {this.state.text.speed}
-                        </p>
-                    </div>
-                </Dropdown>
                 {/* choose Chinese or English */}
                 <div
                     className={`${"tool-icon-name"} ${"toolIcon"}`}

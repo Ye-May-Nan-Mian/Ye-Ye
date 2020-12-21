@@ -75,7 +75,7 @@ export default class ColorBar extends Component {
                     </div>
                 }
                 placement={"bottomRight"}
-                trigger={["click"]}
+                trigger={["click", "contextMenu"]}
             >
                 <div
                     className={`${"tool-icon-name"} ${"toolIcon"}`}

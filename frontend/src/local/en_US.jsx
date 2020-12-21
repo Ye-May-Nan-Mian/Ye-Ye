@@ -1,5 +1,6 @@
 const en_US = {
     about: "ABOUT",
+    bpmInfo: "BPM",
     camera: "CAMERA",
     collapse: "COLLAPSE",
     delete: "DELETE",
@@ -13,6 +14,8 @@ const en_US = {
     speedInfo: "Move to the left, face recognition is faster",
     theme: "THEME",
     timer: "ENABLE",
+    turningSpeedInfo: "The number of seconds between page turns",
+    turningStepInfo: "The length of a page turn",
     upload: "UPLOAD"
 };
 
