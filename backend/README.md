@@ -1,3 +1,10 @@
+## How To Start
+
+May be you need install Django with the help of [this article](https://www.howtoing.com/how-to-build-a-modern-web-application-to-manage-customer-information-with-django-and-react-on-ubuntu-18-04)
+
+Then you can run script `python ./manage.py runserver 127.0.0.1:34215` or double click **start.bat** to run backend. 
+## Problems You May Encounter
+
 ```
                  'django.contrib.admin',
                  'django.contrib.auth',

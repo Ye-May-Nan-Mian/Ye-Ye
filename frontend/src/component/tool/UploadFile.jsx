@@ -32,8 +32,9 @@ class UploadFile extends Component {
     onFileChange(event) {
         // Update the state
         this.selectedFile = event.target.files;
-        // Details of the uploaded file
-        // console.log(this.selectedFile);
+        if (this.selectedFile.length === 0) {
+            return;
+        }
 
         // Create an object of formData
         const formData = new FormData();
