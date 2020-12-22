@@ -36,13 +36,14 @@ def historyfile(request):
 
     flag = "get"
     idx = None
-    if request.GET.get("idx"):
+    if request.GET.get("idx") is not None:
         flag = "get"
         idx = request.GET.get("idx")
-
-    elif request.GET.get("delete_idx"):
+    elif request.GET.get("delete_idx") is not None:
         flag = "del"
         idx = request.GET.get("delete_idx")
+    else:
+        return allow_acess(JsonResponse({}))
 
     hist = read_hist()
 
