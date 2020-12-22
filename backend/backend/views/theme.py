@@ -6,9 +6,8 @@ from django.http import HttpResponse, JsonResponse
 
 def theme(request):
 
-    print(request.GET)
-
-    if request.GET.get("post_themes"):
+    themes = request.GET.get("post_themes")
+    if themes is not None:
         themes = request.GET.get("post_themes")
 
         with open("themes.pkl", "wb") as fil:

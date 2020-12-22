@@ -1,6 +1,6 @@
 import pickle
 import os
-from .base import allow_acess
+from .base import allow_acess , FrontendError
 from django.http import HttpResponse, JsonResponse
 
 
@@ -43,22 +43,32 @@ def historyfile(request):
         flag = "del"
         idx = request.GET.get("delete_idx")
     else:
-        return allow_acess(JsonResponse({}))
+        raise FrontendError("No parameters in GET.")
+
+    try:
+        idx = int(idx)
+    except ValueError:
+        raise FrontendError("GET['idx'] = {0}, which is not a number.".format(idx))
 
     hist = read_hist()
 
     if flag == "get":
+
         ret = [x for x in hist if int(x["idx"]) == int(idx)]
+
         if len(ret) == 0:
             ret = None
         else:
-            ret = ret[0]["imgs"]
+            try:
+              ret = ret[0]["imgs"]
+            except (TypeError , KeyError):
+                raise IOError("history file is not working as expected.")
+
         return allow_acess(JsonResponse({"imgs": ret}))
 
     # else if flag == "del"
 
-    to_del_pos = [i for i in range(len(hist)) if int(
-        hist[i]["idx"]) == int(idx)]
+    to_del_pos = [i for i in range(len(hist)) if int(hist[i]["idx"]) == int(idx)]
 
     if len(to_del_pos) > 0:
         x = to_del_pos[0]
