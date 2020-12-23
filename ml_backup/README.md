@@ -3,3 +3,5 @@ You can download and unzip shape_predictor_68_face_landmarks.dat from [here](htt
 We don't train the neural network ourselves, because there are already good enough open models (e.g. dlib) for us to use, and we don't have enough data to train a good enough network. 
 
 So, this catalog is empty.
+
+OK, [profile_detection(haar cascade)](https://github.com/juan-csv/profile_detection)(haar) is good. So I combine these two algorithms, the result is very amazing! 
