@@ -1,7 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 import os.path as P
 import os
-from .base import allow_acess , FrontendError
+from .base import allow_acess, FrontendError
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 import sys
@@ -72,7 +72,7 @@ def upload_file(request):
                 type = "jpeg"
 
             imgs += img2image(file_path, type)
-        else: # do nothing
+        else:  # do nothing
             pass
 
         os.remove(file_path)

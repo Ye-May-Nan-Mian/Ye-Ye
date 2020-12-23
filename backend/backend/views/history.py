@@ -1,6 +1,6 @@
 import pickle
 import os
-from .base import allow_acess , FrontendError
+from .base import allow_acess, FrontendError
 from django.http import HttpResponse, JsonResponse
 
 
@@ -48,7 +48,8 @@ def historyfile(request):
     try:
         idx = int(idx)
     except ValueError:
-        raise FrontendError("GET['idx'] = {0}, which is not a number.".format(idx))
+        raise FrontendError(
+            "GET['idx'] = {0}, which is not a number.".format(idx))
 
     hist = read_hist()
 
@@ -60,15 +61,16 @@ def historyfile(request):
             ret = None
         else:
             try:
-              ret = ret[0]["imgs"]
-            except (TypeError , KeyError):
+                ret = ret[0]["imgs"]
+            except (TypeError, KeyError):
                 raise IOError("history file is not working as expected.")
 
         return allow_acess(JsonResponse({"imgs": ret}))
 
     # else if flag == "del"
 
-    to_del_pos = [i for i in range(len(hist)) if int(hist[i]["idx"]) == int(idx)]
+    to_del_pos = [i for i in range(len(hist)) if int(
+        hist[i]["idx"]) == int(idx)]
 
     if len(to_del_pos) > 0:
         x = to_del_pos[0]
