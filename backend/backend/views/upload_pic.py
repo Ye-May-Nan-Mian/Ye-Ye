@@ -6,9 +6,9 @@ from skimage import io
 from .detect_face import detect_face
 import time
 import threading
-from .utils import *
+from .utils import CENTER_FACE, NO_FACE, next_state, next_result
 
-last_face = CENTER_FACE
+last_state = 9
 last_time = 0.0
 R = threading.Lock()
 
@@ -26,19 +26,18 @@ def base64_to_image(base64_str):
 
 
 def get_result(detect):
-    global last_face
+    global last_state
     global last_time
-    global next_face
+    global next_state
     global next_result
     global R
     result = CENTER_FACE
     current = time.time()
     R.acquire()
     if current > last_time:
-        # print(detect)
         last_time = current
-        result = next_result[last_face][detect]
-        last_face = next_face[last_face][detect]
+        result = next_result[last_state][detect]
+        last_state = next_state[last_state][detect]
     R.release()
     return result
 
@@ -55,6 +54,7 @@ def upload_pic(request):
 
     encoded = head + ";" + content
     img = base64_to_image(encoded)
+    # result: 0 left, 1 center, 2 right
     result = CENTER_FACE
     if img is not None:
         detect = detect_face(img)

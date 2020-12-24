@@ -3,3 +3,5 @@ You can download and unzip shape_predictor_68_face_landmarks.dat from [here](htt
 We don't train the neural network ourselves, because there are already good enough open models (e.g. dlib) for us to use, and we don't have enough data to train a good enough network. 
 
 So, this catalog is empty.
+
+[FacePoseEstimation](https://github.com/Merle314/FacePoseEstimation)(using dlib) may can be better to calculate 3 degrees of freedom face angle. 

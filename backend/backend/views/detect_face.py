@@ -1,8 +1,9 @@
 import dlib
 import os.path
-from .utils import *
+from .utils import LEFT_FACE, CENTER_FACE, RIGHT_FACE, NO_FACE
 import cv2
 import math
+import numpy as np
 
 # 这个开关人脸标记
 debug__ = False
@@ -31,150 +32,104 @@ def find_main_face(dets):
     return result
 
 
-def get_ratio_face(main_face, shape):
-    # 返回比例
-    ratio = ((shape.part(30).x + shape.part(33).x)/2.0 -
-             main_face.left()) / (main_face.right() - main_face.left())
+def pose_estimation(pt2d, pt3d):
+    # 参照论文Optimum Fiducials Under Weak Perspective Projection，使用弱透视投影
+    # 减均值，排除t，便于求出R
+    # minus mean value of all point so that t=0, we can calculate pure R
+    pt2dm = np.zeros(pt2d.shape)
+    pt3dm = np.zeros(pt3d.shape)
+    pt2dm[0, :] = pt2d[0, :]-np.mean(pt2d[0, :])
+    pt2dm[1, :] = pt2d[1, :]-np.mean(pt2d[1, :])
+    pt3dm[0, :] = pt3d[0, :]-np.mean(pt3d[0, :])
+    pt3dm[1, :] = pt3d[1, :]-np.mean(pt3d[1, :])
+    pt3dm[2, :] = pt3d[2, :]-np.mean(pt3d[2, :])
+    # 最小二乘方法计算R
+    # Calculate R using least squares algorithm
+    R1 = np.dot(np.dot(np.mat(np.dot(pt3dm, pt3dm.T)).I, pt3dm), pt2dm[0, :].T)
+    R2 = np.dot(np.dot(np.mat(np.dot(pt3dm, pt3dm.T)).I, pt3dm), pt2dm[1, :].T)
+    # 计算出f
+    # calculate alpha (is f in this code)
+    f = (math.sqrt(R1[0, 0]**2+R1[0, 1]**2+R1[0, 2]**2) +
+         math.sqrt(R2[0, 0]**2+R2[0, 1]**2+R2[0, 2]**2))/2
+    R1 = R1/f
+    R2 = R2/f
+    R3 = np.cross(R1, R2)
+    # SVD 分解，重构 _ is s
+    U, _, V = np.linalg.svd(np.concatenate(
+        (R1, R2, R3), axis=0), full_matrices=True)
+    R = np.dot(U, V)
+    R1 = R[0, :]
+    R2 = R[1, :]
+    R3 = R[2, :]
+    # 使用旋转矩阵R恢复出旋转角度
+    phi = math.atan(R2[0, 2]/R3[0, 2])
+    gamma = math.atan(-R1[0, 2]/(math.sqrt(R1[0, 0]**2+R1[0, 1]**2)))
+    theta = math.atan(R1[0, 1]/R1[0, 0])
+    # 使用R重新计算旋转平移矩阵，求出t
+    # pt3d = np.row_stack((pt3d, np.ones((1, pt3d.shape[1]))))
+    # R1_orig = np.dot(np.dot(np.mat(np.dot(pt3d, pt3d.T)).I, pt3d), pt2d[0, :].T)
+    # R2_orig = np.dot(np.dot(np.mat(np.dot(pt3d, pt3d.T)).I, pt3d), pt2d[1, :].T)
 
-    # print(ratio)
-    if ratio < 0.43:
-        return LEFT_FACE
-    elif ratio > 0.57:
-        return RIGHT_FACE
-    elif 0.48 < ratio < 0.52:
-        return CENTER_FACE
-    return NO_FACE
-
-
-# 从dlib的检测结果抽取姿态估计需要的点坐标
-def get_image_points_from_landmark_shape(landmark_shape):
-    # 2D image points. If you change the image, you need to change vector
-    image_points = np.array([
-        # Nose tip
-        (landmark_shape.part(30).x, landmark_shape.part(30).y),
-        # Chin
-        (landmark_shape.part(8).x, landmark_shape.part(8).y),
-        # Left eye left corner
-        (landmark_shape.part(36).x, landmark_shape.part(36).y),
-        # Right eye right corne
-        (landmark_shape.part(45).x, landmark_shape.part(45).y),
-        # Left Mouth corner
-        (landmark_shape.part(48).x, landmark_shape.part(48).y),
-        # Right mouth corner
-        (landmark_shape.part(54).x, landmark_shape.part(54).y)
-    ], dtype="double")
-
-    return image_points
-
-
-# 从旋转向量转换为欧拉角
-def get_euler_angle(rotation_vector):
-    # calculate rotation angles
-    theta = cv2.norm(rotation_vector, cv2.NORM_L2)
-
-    # transformed to quaterniond
-    w = math.cos(theta / 2)
-    x = math.sin(theta / 2) * rotation_vector[0][0] / theta
-    y = math.sin(theta / 2) * rotation_vector[1][0] / theta
-    z = math.sin(theta / 2) * rotation_vector[2][0] / theta
-
-    ysqr = y * y
-    # pitch (x-axis rotation)
-    t0 = 2.0 * (w * x + y * z)
-    t1 = 1.0 - 2.0 * (x * x + ysqr)
-    # print('t0:{}, t1:{}'.format(t0, t1))
-    pitch = math.atan2(t0, t1)
-
-    # yaw (y-axis rotation)
-    t2 = 2.0 * (w * y - z * x)
-    if t2 > 1.0:
-        t2 = 1.0
-    if t2 < -1.0:
-        t2 = -1.0
-    yaw = math.asin(t2)
-
-    # roll (z-axis rotation)
-    t3 = 2.0 * (w * z + x * y)
-    t4 = 1.0 - 2.0 * (ysqr + z * z)
-    roll = math.atan2(t3, t4)
-
-    # print('pitch:{}, yaw:{}, roll:{}'.format(pitch, yaw, roll))
-
-    # 单位转换：将弧度转换为度
-    Y = int((pitch/math.pi)*180)
-    X = int((yaw/math.pi)*180)
-    Z = int((roll/math.pi)*180)
-
-    return Y, X, Z
-
-# 获取旋转向量和平移向量
+    # t3d = np.array([R1_orig[0, 3], R2_orig[0, 3], 0]).reshape((3, 1))
+    return(phi, gamma, theta)
 
 
-def get_pose_estimation(image_points):
-    # 3D model points.
-    # TODO：这个研究一下
-    model_points = np.array([
-        (0.0, 0.0, 0.0),           # Nose tip
-        (0.0, -330.0, -65.0),      # Chin
-        (-225.0, 170.0, -135.0),   # Left eye left corner
-        (225.0, 170.0, -135.0),    # Right eye right corne
-        (-150.0, -150.0, -125.0),  # Left Mouth corner
-        (150.0, -150.0, -125.0)    # Right mouth corner
-    ])
+def get_pose_estimation(pt2d):
+    left_vis = np.concatenate(
+        (np.arange(9), np.arange(31)+17, np.array([48, 60, 64, 54])))
+    right_vis = np.concatenate(
+        (np.arange(9)+8, np.arange(31)+17, np.array([48, 60, 64, 54])))
 
-    # Camera internals
-    img_size = (300, 300)
-    focal_length = img_size[1]
-    center = (img_size[1]/2, img_size[0]/2)
-    camera_matrix = np.array(
-        [[focal_length, 0, center[0]],
-         [0, focal_length, center[1]],
-         [0, 0, 1]], dtype="double")
-
-    dist_coeffs = np.zeros((4, 1))  # Assuming no lens distortion
-    (success, rotation_vector, translation_vector) = cv2.solvePnP(model_points,
-                                                                  image_points, camera_matrix, dist_coeffs, flags=cv2.SOLVEPNP_ITERATIVE)
-
-    # pitch 是上下摇头，上：(140) < pitch < 180；下：(-160) > pitch > -180
-    # yaw 是左右摇头，左：(-40) < yaw < 0；右：0 < yaw < (40)
-    # roll 是旋转头，没用处
-    pitch, yaw, roll = get_euler_angle(rotation_vector)
-    # euler_angle_str = 'Y:{}, X:{}, Z:{}'.format(pitch, yaw, roll)
-    # print(pitch)
-    return pitch, yaw
+    pt3d = np.load("pt3d.npy")
+    phil, gammal, thetal = pose_estimation(
+        pt2d[:, left_vis], pt3d[:, left_vis])
+    phir, gammar, thetar = pose_estimation(
+        pt2d[:, right_vis], pt3d[:, right_vis])
+    if abs(gammal) > abs(gammar):
+        phi = phil
+        gamma = gammal
+        theta = thetal
+    else:
+        phi = phir
+        gamma = gammar
+        theta = thetar
+    return(phi, gamma, theta)
 
 
-def get_cv_face(shape):
+# pitch 低头，yaw 摇头
+def get_cv_face(yaw):
     global default_yaw
-    pitch, yaw = get_pose_estimation(
-        get_image_points_from_landmark_shape(shape))
 
     # 修正 defalut_yaw
-    if -10 < default_yaw - yaw < 10:
+    if -6 < default_yaw - yaw < 6:
         default_yaw = default_yaw * 0.9 + yaw * 0.1
-
-    # 低头
-    if -175 < pitch < 0:
-        print(DOWN_FACE)
-        return DOWN_FACE
 
     yaw -= default_yaw
 
     # print("default:{}, yaw:{}".format(default_yaw, yaw))
-    if yaw > 20:
-        return LEFT_FACE
-    elif yaw < -20:
-        return RIGHT_FACE
-    elif -10 < yaw < 10:
+    if -8 < yaw < 8:
         return CENTER_FACE
+    elif yaw > 12:
+        return LEFT_FACE
+    elif yaw < -12:
+        return RIGHT_FACE
     else:
         return NO_FACE
+
+
+def shape_to_np(shape):
+    xy = []
+    for i in range(68):
+        xy.append((shape.part(i).x, shape.part(i).y,))
+    xy = np.asarray(xy, dtype='float32')
+    return xy
 
 
 def detect_face(img):
     global detector
     global predictor
     global win
+    global default_yaw
     # 绘制图片
     if debug__:
         win.clear_overlay()
@@ -192,11 +147,13 @@ def detect_face(img):
 
     # 使用predictor进行人脸关键点识别，shape 为返回的结果
     shape = predictor(img, main_face)
+    lmark = shape_to_np(shape)
+    lmark = lmark[:, :].T
+    _, gamma, _ = get_pose_estimation(lmark)
 
     # 绘制特征点和人脸框
     if debug__:
         win.add_overlay(shape)
         win.add_overlay(dets)
-    return get_cv_face(shape)
-
-    # return get_ratio_face(main_face, shape)
+        print("-_-!!", np.array(gamma)*180/math.pi, default_yaw)
+    return get_cv_face(gamma * 180 / math.pi)
