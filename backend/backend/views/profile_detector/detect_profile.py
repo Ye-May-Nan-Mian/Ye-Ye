@@ -1,6 +1,5 @@
 import cv2
 import imutils
-import numpy as np
 from .utils import LEFT_FACE, RIGHT_FACE, NO_FACE
 
 predictor_path = 'haarcascade_profileface.xml'

@@ -63,6 +63,9 @@ def upload_pic(request):
     img = base64_to_image(encoded)
     result = CENTER_FACE
     if img is not None:
+        time1 = time.time()
         result = get_result(img)
+        time2 = time.time()
+        print(time2 - time1)
 
     return allow_acess(HttpResponse(str(result)))

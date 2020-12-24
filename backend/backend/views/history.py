@@ -1,5 +1,5 @@
 import pickle
-import os
+import os.path
 from .base import allow_acess, FrontendError
 from django.http import HttpResponse, JsonResponse
 

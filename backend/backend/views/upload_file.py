@@ -4,11 +4,9 @@ import os
 from .base import allow_acess, FrontendError
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
-import sys
 import fitz
 import pdb
 import base64
-import pickle
 from .history import read_hist, save_hist
 import random
 
